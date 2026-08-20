@@ -113,6 +113,40 @@ ul { list-style: none; }
   background: linear-gradient(#0a56b0, #1573d8 62%, #4ea3ee);
 }
 
+/* ------------------------------------------------------------ VOILE -- */
+
+/* Sans lui, le texte se perd dès qu'un nuage passe dessous. Il est accroché
+   au coin bas-gauche, là où vit le texte, et se dissipe avant le disque.
+   Une seule couche fixe : un voile par scène laissait une couture nette là
+   où deux blocs collants se croisent. */
+.veil {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(
+    115% 82% at 0% 108%,
+    rgba(3, 24, 62, 0.88) 0%,
+    rgba(3, 24, 62, 0.6) 34%,
+    rgba(3, 24, 62, 0) 72%
+  );
+}
+
+/* En écran étroit le texte occupe toute la largeur : le coin ne suffit plus,
+   il faut une remontée depuis le bas. */
+@media (max-width: 860px) {
+  .veil {
+    /* Il s'arrête assez bas pour ne pas grisailler le carton, le reste de
+       la lisibilité vient de l'ombre portée du texte. */
+    background: linear-gradient(
+      to top,
+      rgba(3, 24, 62, 0.92) 0%,
+      rgba(3, 24, 62, 0.68) 30%,
+      rgba(3, 24, 62, 0) 58%
+    );
+  }
+}
+
 /* ------------------------------------------------- GRILLE DE FILETS -- */
 
 /* Les rails verticaux traversent toute la fenêtre, en position fixe :
@@ -197,53 +231,40 @@ body.is-light .masthead {
   .masthead__nav .masthead__link:not(:last-child) { display: none; }
 }
 
-/* ------------------------------------------------------------ LIENS -- */
+/* ---------------------------------------------------- BADGES STORES -- */
 
-/* Bouton pear-like : pavé sombre, texte mono, flèche dans son carré. */
-.act {
-  display: inline-flex;
-  align-items: stretch;
-  gap: 0;
-  border: 1px solid #ffffff3d;
-  border-radius: 3px;
-  background: #0b0a09d9;
-  overflow: hidden;
-  transition: background 0.4s var(--ease), border-color 0.4s var(--ease);
+/* Les visuels officiels d'Apple et de Google. Leurs marges de protection
+   sont déjà dans les fichiers, d'où deux hauteurs différentes pour un même
+   poids optique. */
+.stores {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
 }
 
-.act:hover { background: var(--press); border-color: #ffffff80; }
-
-.act__label {
-  padding: 13px 16px 12px;
-  font: 400 11px / 1 var(--code);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  white-space: nowrap;
+.store {
+  display: block;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
 }
 
-.act__arrow {
-  display: grid;
-  place-items: center;
-  width: 38px;
-  border-left: 1px solid #ffffff2e;
+.store:hover {
+  opacity: 0.84;
+  transform: translateY(-1px);
 }
 
-.act__arrow svg {
-  width: 13px;
-  height: 13px;
-  transition: transform 0.4s var(--ease);
+.store img {
+  width: auto;
+  display: block;
 }
 
-.act:hover .act__arrow svg { transform: translateX(3px); }
+.store[data-store="ios"] img { height: 47px; }
+.store[data-store="android"] img { height: 68px; }
 
-.act--paper {
-  background: var(--paper);
-  border-color: #1d1c1933;
-  color: var(--ink);
+@media (max-width: 520px) {
+  .store[data-store="ios"] img { height: 42px; }
+  .store[data-store="android"] img { height: 61px; }
 }
-
-.act--paper:hover { background: #fff; border-color: #1d1c1966; }
-.act--paper .act__arrow { border-left-color: #1d1c1926; }
 
 /* --------------------------------------------------------- TITRAGE -- */
 
@@ -299,22 +320,6 @@ body.is-light .masthead {
            calc(var(--v1) + clamp(20px, 3vw, 40px));
 }
 
-/* Sans ce voile, le texte se perd dès qu'un nuage passe dessous. Il est
-   posé sur la scène, pas sur l'image : le disque reste net. */
-.scene__pin::before {
-  content: "";
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 64%;
-  background: linear-gradient(
-    to top,
-    rgba(3, 24, 62, 0.84) 0%,
-    rgba(3, 24, 62, 0.52) 34%,
-    rgba(3, 24, 62, 0) 100%
-  );
-  pointer-events: none;
-}
-
 .scene__copy {
   position: relative;
   z-index: 1;
@@ -322,17 +327,22 @@ body.is-light .masthead {
   justify-items: start;
   gap: 22px;
   max-width: 720px;
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  /* `--vis` est calculé au défilement, dans app.js. */
+  opacity: var(--vis, 0);
+  transform: translateY(calc((1 - var(--vis, 0)) * 18px));
 }
 
-.scene.is-lit .scene__copy { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .scene__copy { transform: none; }
+}
 
 .scene__copy .display { text-shadow: 0 2px 34px rgba(3, 20, 52, 0.55); }
 
 /* Sur l'image, le gris chaud des sections éditoriales ne tient pas. */
-.scene__copy .say--dim { color: rgba(255, 255, 255, 0.88); }
+.scene__copy .say--dim {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 16px rgba(3, 20, 52, 0.8);
+}
 
 /* Le filet horizontal qui ferme une scène, avec ses deux marques. */
 .seam {
@@ -488,48 +498,59 @@ body.is-light .masthead {
 
 .stack { display: grid; gap: 18px; justify-items: start; }
 
-/* --------------------------------------------------------- HORLOGE -- */
+/* -------------------------------------------------------- LE RELEVÉ -- */
 
-/* Le relevé d'heure du héros : chiffres en chasse fixe, tabulaires. */
-.meter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0;
-  border: 1px solid #ffffff33;
-  border-radius: 3px;
-  background: #0b0a0999;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  overflow: hidden;
-}
-
-.meter__cell {
+/* Reprend la présentation du disque dans l'application : les trois langues
+   empilées, le repère triangulaire, puis l'heure. */
+.readout {
   display: grid;
-  gap: 7px;
-  padding: 14px 22px 15px;
-  border-right: 1px solid #ffffff26;
+  justify-items: start;
+  gap: 12px;
+  padding: 20px 26px 22px;
+  border-left: 2px solid rgba(255, 255, 255, 0.55);
 }
 
-.meter__cell:last-child { border-right: 0; }
-
-.meter__key {
-  font: 400 10px / 1 var(--code);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--on-dark-dim);
+.readout__label {
+  display: grid;
+  font-size: clamp(0.84rem, 1.1vw, 0.98rem);
+  font-weight: 500;
+  line-height: 1.34;
+  color: rgba(255, 255, 255, 0.82);
 }
 
-.meter__val {
-  font: 400 clamp(1.5rem, 3vw, 2.1rem) / 1 var(--code);
+.readout__time {
+  position: relative;
+  padding-top: 22px;
+  font-family: var(--title);
+  font-size: clamp(2.8rem, 6.4vw, 5rem);
+  font-weight: 600;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.01em;
 }
 
-.meter__val--now { color: var(--on-dark-dim); }
+/* Le repère du disque, pointe en bas. */
+.readout__time::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 2px;
+  width: 22px;
+  height: 13px;
+  background: currentColor;
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+}
 
-/* L'heure à porter est la valeur qui compte : elle prend l'orange du
-   minuteur de l'application. */
-.meter__cell--key .meter__val { color: var(--amber); }
+.readout__foot {
+  font-size: clamp(0.86rem, 1.1vw, 0.98rem);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.readout__foot b {
+  font-weight: 600;
+  color: var(--amber);
+  font-variant-numeric: tabular-nums;
+}
 
 /* ---------------------------------------------------- AVERTISSEMENT -- */
 

@@ -33,6 +33,8 @@
 <!-- La scène : ciel et disque, en fond fixe de toute la page. -->
 <canvas id="stage" aria-hidden="true"></canvas>
 
+<div class="veil" aria-hidden="true"></div>
+
 <!-- Les rails de la grille, fixes eux aussi. -->
 <div class="frame" aria-hidden="true">
   <span class="frame__v frame__v--l"></span>
@@ -63,15 +65,19 @@
     <div class="scene__copy">
       <h1 class="display display--xl">Stationnez<br>l'esprit tranquille.</h1>
       <p class="say say--dim">
-        L'application calcule l'heure à porter sur votre disque, applique la règle
-        du pays où vous êtes, et vous prévient avant la fin du temps autorisé.
+        L'heure à porter sur votre disque, calculée pour vous. Et une alerte
+        avant la fin.
       </p>
-      <a class="act" href="#installer">
-        <span class="act__label">Installer l'application</span>
-        <span class="act__arrow" aria-hidden="true">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg>
-        </span>
-      </a>
+      <div class="stores">
+        <a class="store" data-store="ios" rel="noopener"
+           aria-label="Télécharger dans l'App Store">
+          <img src="assets/img/app-store-fr.svg" alt="Télécharger dans l'App Store" height="52">
+        </a>
+        <a class="store" data-store="android" rel="noopener"
+           aria-label="Disponible sur Google Play">
+          <img src="assets/img/google-play-fr.png" alt="Disponible sur Google Play" height="52">
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -80,25 +86,20 @@
 <section class="scene" style="--len: 2.4">
   <div class="scene__pin">
     <div class="scene__copy">
-      <h2 class="display display--l">Arrondi à la<br>demi-heure suivante.</h2>
-      <div class="meter">
-        <div class="meter__cell">
-          <span class="meter__key">Arrivée</span>
-          <span class="meter__val meter__val--now" data-clock-now>--:--</span>
-        </div>
-        <div class="meter__cell meter__cell--key">
-          <span class="meter__key">À porter sur le disque</span>
-          <span class="meter__val" data-clock-disc>--:--</span>
-        </div>
-        <div class="meter__cell">
-          <span class="meter__key">Tranquille jusqu'à</span>
-          <span class="meter__val" data-clock-until>--:--</span>
-        </div>
+      <h2 class="display display--l">Plus besoin<br>de calculer.</h2>
+      <div class="readout">
+        <p class="readout__label">
+          <span>Ankunftszeit</span>
+          <span>Heure d'arrivée</span>
+          <span>Ora d'arrivo</span>
+        </p>
+        <p class="readout__time" data-clock-disc>--:--</p>
+        <p class="readout__foot">
+          Stationnement jusqu'à <b data-clock-until>--:--</b>
+        </p>
       </div>
       <p class="say say--dim">
-        La durée court à partir de l'heure portée sur le disque, jamais de l'heure
-        d'arrivée. En Italie, pas d'arrondi du tout : l'art.&nbsp;157 al.&nbsp;6 impose
-        l'heure réelle. L'application change de règle en même temps que de pays.
+        La règle du pays où vous êtes s'applique toute seule.
       </p>
     </div>
   </div>
@@ -108,10 +109,9 @@
 <section class="scene" style="--len: 2.2">
   <div class="scene__pin">
     <div class="scene__copy">
-      <h2 class="display display--l">Dix minutes avant,<br>votre poche vibre.</h2>
+      <h2 class="display display--l">Fini<br>les amendes.</h2>
       <p class="say say--dim">
-        La notification est calée sur l'heure du disque, au bon fuseau horaire,
-        avec le délai que vous choisissez. Dix minutes par défaut.
+        Une alerte avant l'échéance, au délai que vous choisissez.
       </p>
     </div>
   </div>
@@ -129,66 +129,37 @@
     </header>
 
     <div class="rank" data-stagger>
-
       <article class="rank__row" data-lift>
         <span class="rank__num">01</span>
         <div>
-          <h3 class="rank__title">Calcul de l'heure à afficher</h3>
-          <p class="rank__note">
-            Arrondi à la demi-heure suivante en Suisse, en France, en Allemagne,
-            en Belgique et au Luxembourg. Heure réelle d'arrivée en Italie.
-          </p>
+          <h3 class="rank__title">L'heure à afficher</h3>
+          <p class="rank__note">Calculée selon la règle du pays, arrondi compris.</p>
         </div>
       </article>
 
       <article class="rank__row" data-lift>
         <span class="rank__num">02</span>
         <div>
-          <h3 class="rank__title">Les exceptions, gérées</h3>
-          <p class="rank__note">
-            Exception de midi suisse (11h30 à 13h30), suspension du temps pendant la
-            pause déjeuner française, deux plages réglementées dans la même journée,
-            périodes nocturnes. En Belgique, un véhicule arrivé avant l'ouverture voit
-            son disque réglé sur l'heure de reprise.
-          </p>
+          <h3 class="rank__title">Les exceptions</h3>
+          <p class="rank__note">Midi suisse, pause déjeuner, doubles plages, périodes nocturnes.</p>
         </div>
       </article>
 
       <article class="rank__row" data-lift>
         <span class="rank__num">03</span>
         <div>
-          <h3 class="rank__title">Jours fériés vérifiés à la main</h3>
-          <p class="rank__note">
-            Fêtes nationales et régionales, corrigées à la main là où les données
-            publiques sont fausses. En Italie le samedi est ouvrable, et la fête du
-            saint patron communal peut compter.
-          </p>
+          <h3 class="rank__title">Jours fériés</h3>
+          <p class="rank__note">Nationaux et régionaux, vérifiés à la main.</p>
         </div>
       </article>
 
       <article class="rank__row" data-lift>
         <span class="rank__num">04</span>
         <div>
-          <h3 class="rank__title">La signalisation prime</h3>
-          <p class="rank__note">
-            Horaires, durée et jours sont tous modifiables. En Belgique la règle
-            nationale n'est qu'un défaut. Au Luxembourg il n'existe ni durée ni
-            horaire national. Le panneau au sol a le dernier mot.
-          </p>
+          <h3 class="rank__title">Vous gardez la main</h3>
+          <p class="rank__note">Horaires, durée et jours restent modifiables. Le panneau au sol a le dernier mot.</p>
         </div>
       </article>
-
-      <article class="rank__row" data-lift>
-        <span class="rank__num">05</span>
-        <div>
-          <h3 class="rank__title">Quatre langues</h3>
-          <p class="rank__note">
-            Français, allemand, italien et anglais, jusqu'au nom de l'application,
-            qui devient <em>Blaue&nbsp;Parkscheibe</em>, <em>Disco&nbsp;Orario</em> ou <em>Blue&nbsp;Disc</em>.
-          </p>
-        </div>
-      </article>
-
     </div>
   </div>
 </section>
@@ -199,66 +170,38 @@
     <header class="leaf__head">
       <div>
         <h2 class="display display--m" data-lift>Une frontière,<br>une autre règle.</h2>
-        <p class="say say--dim" data-lift style="margin-top:20px">
-          Le même carton bleu ne se lit pas de la même façon des deux côtés d'une douane.
-          Voici ce que l'application applique dans chaque pays.
-        </p>
       </div>
     </header>
 
     <div class="rank" data-stagger>
       <article class="rank__row" data-lift>
         <span class="rank__num">Suisse</span>
-        <div><p class="rank__note">
-          Arrondi à la demi-heure suivante. Exception de midi : arrivée entre 11h30 et
-          13h30, le stationnement court jusqu'au lendemain matin de la plage réglementée.
-        </p></div>
-        <span class="rank__meta">Demi-heure suivante</span>
+        <div><p class="rank__note">Demi-heure suivante, avec l'exception de midi.</p></div>
+        <span class="rank__meta">11h30 à 13h30</span>
       </article>
-
       <article class="rank__row" data-lift>
         <span class="rank__num">France</span>
-        <div><p class="rank__note">
-          Arrondi à la demi-heure suivante, avec suspension du décompte pendant la pause
-          déjeuner lorsque la zone en prévoit une.
-        </p></div>
+        <div><p class="rank__note">Demi-heure suivante, pause déjeuner déduite.</p></div>
         <span class="rank__meta">Pause déjeuner</span>
       </article>
-
       <article class="rank__row" data-lift>
         <span class="rank__num">Allemagne</span>
-        <div><p class="rank__note">
-          Arrondi à la demi-heure suivante sur la <em>Parkscheibe</em>, avec les jours
-          fériés propres à chaque Land.
-        </p></div>
+        <div><p class="rank__note">Demi-heure suivante, jours fériés par Land.</p></div>
         <span class="rank__meta">Parkscheibe</span>
       </article>
-
       <article class="rank__row" data-lift>
         <span class="rank__num">Italie</span>
-        <div><p class="rank__note">
-          Pas d'arrondi : l'art.&nbsp;157 al.&nbsp;6 du Codice della Strada impose l'heure
-          réelle d'arrivée. Le samedi est ouvrable et la fête du saint patron peut compter.
-        </p></div>
+        <div><p class="rank__note">Heure réelle d'arrivée, sans arrondi.</p></div>
         <span class="rank__meta">Art. 157 al. 6</span>
       </article>
-
       <article class="rank__row" data-lift>
         <span class="rank__num">Belgique</span>
-        <div><p class="rank__note">
-          Seul le disque européen à une fenêtre est valable. Le défaut national va de
-          09:00 à 18:00, deux heures, du lundi au samedi. Chaque jour de la semaine
-          s'active séparément.
-        </p></div>
-        <span class="rank__meta">Disque européen</span>
+        <div><p class="rank__note">Disque européen, chaque jour réglable séparément.</p></div>
+        <span class="rank__meta">09:00 à 18:00</span>
       </article>
-
       <article class="rank__row" data-lift>
         <span class="rank__num">Luxembourg</span>
-        <div><p class="rank__note">
-          L'art.&nbsp;167bis impose un disque conforme au modèle réglementaire, lisible
-          depuis l'extérieur. Ni durée ni horaire national : tout vient de la signalisation.
-        </p></div>
+        <div><p class="rank__note">Ni durée ni horaire national, tout vient du panneau.</p></div>
         <span class="rank__meta">Art. 167bis</span>
       </article>
     </div>
@@ -278,20 +221,17 @@
       <div class="stack" data-lift>
         <h3 class="rank__title">Retrouver son véhicule</h3>
         <p class="say say--dim">
-          La position est mémorisée au moment où vous vous garez et reste ouvrable dans
-          Google&nbsp;Maps, Plans ou toute autre application de navigation installée.
-          Vous pouvez y ajouter, toujours facultativement, une photo de repère, un
-          niveau, un numéro de place et une note, utiles là où le GPS ne suffit pas.
-          La photo ne quitte jamais l'appareil.
+          La position est mémorisée quand vous vous garez, et s'ouvre dans votre
+          application de navigation. Photo de repère, niveau, numéro de place :
+          tout reste sur l'appareil.
         </p>
       </div>
 
       <div class="stack" data-lift style="--wait: 120ms">
         <h3 class="rank__title">Carte communautaire</h3>
         <p class="say say--dim">
-          Signalez une place disparue ou mal renseignée, proposez-en une nouvelle.
-          Après relecture, les signalements repartent vers OpenStreetMap : la correction
-          profite à tout le monde, pas seulement à l'application.
+          Signalez une place disparue ou mal renseignée. Après relecture, la
+          correction repart vers OpenStreetMap et profite à tout le monde.
         </p>
       </div>
     </div>
@@ -308,15 +248,9 @@
             L'application ne remplace pas le disque physique.
           </h2>
           <p class="say say--dim" data-lift>
-            C'est une aide au conducteur. En Suisse, vous devez apposer le disque bleu
-            officiel de manière visible derrière le pare-brise. L'application seule ne
-            constitue pas une preuve de stationnement valide.
-          </p>
-          <p class="say say--dim" data-lift>
-            Il en va de même à l'étranger. En Italie, l'art.&nbsp;157 du Codice della Strada
-            exige que l'heure de début du stationnement soit visible depuis l'extérieur du
-            véhicule. En Belgique, seul le disque européen à une fenêtre est valable.
-            Au Luxembourg, l'art.&nbsp;167bis impose un disque conforme au modèle réglementaire.
+            C'est une aide au conducteur. Le disque officiel doit rester apposé
+            derrière le pare-brise, visible depuis l'extérieur. C'est vrai en
+            Suisse comme dans les cinq autres pays couverts.
           </p>
         </div>
       </div>
@@ -329,23 +263,18 @@
   <div class="hold">
     <header class="leaf__head">
       <div>
-        <h2 class="display display--l" data-lift>Mettez la bonne heure.</h2>
+        <h2 class="display display--l" data-lift>Mettez<br>la bonne heure.</h2>
         <p class="say say--dim" data-lift style="margin-top:20px">
-          Gratuite, sans compte. Choisissez votre pays, appuyez sur
-          « Je me gare maintenant ». Le reste est déjà calculé.
+          Gratuite, sans compte. Six pays, quatre langues.
         </p>
-        <div class="split" data-lift style="margin-top:34px; max-width:640px">
-          <a class="act" data-store="ios" href="#" rel="noopener">
-            <span class="act__label">App Store</span>
-            <span class="act__arrow" aria-hidden="true">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg>
-            </span>
+        <div class="stores" data-lift style="margin-top:32px">
+          <a class="store" data-store="ios" rel="noopener"
+             aria-label="Télécharger dans l'App Store">
+            <img src="assets/img/app-store-fr.svg" alt="Télécharger dans l'App Store" height="52">
           </a>
-          <a class="act" data-store="android" href="#" rel="noopener">
-            <span class="act__label">Google Play</span>
-            <span class="act__arrow" aria-hidden="true">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg>
-            </span>
+          <a class="store" data-store="android" rel="noopener"
+             aria-label="Disponible sur Google Play">
+            <img src="assets/img/google-play-fr.png" alt="Disponible sur Google Play" height="52">
           </a>
         </div>
       </div>
@@ -391,7 +320,6 @@
     </div>
     <div class="foot__base">
       <span>© <span data-year>2026</span> Disque Bleu, licence MIT</span>
-      <span>Le disque physique reste obligatoire</span>
     </div>
   </div>
 </footer>

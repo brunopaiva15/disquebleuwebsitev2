@@ -34,8 +34,9 @@ uniform float uCamZ;    // recul de la caméra
 uniform float uAimY;    // hauteur visée : remonte le disque hors du cadre
 uniform float uFov;     // focale : plus bas = plus grand-angle, plus de fuite
 uniform float uRadius;  // rayon du disque blanc
-uniform float uCenterY; // hauteur du centre du disque : le carton est très
-                        // excentré, on vise la fenêtre et non le moyeu
+uniform float uCenterY; // position du moyeu. Le carton est très excentré,
+uniform float uPanX;    // on place donc le moyeu, pas la fenêtre, et on
+uniform float uPanZ;    // laisse le disque voyager dans le cadre.
 uniform float uHaze;    // densité des nuages
 
 const float PI = 3.14159265;
@@ -123,6 +124,10 @@ vec3 sky(vec3 rd, vec2 frag) {
   vec3 col = mix(horizon, middle, smoothstep(0.42, 0.66, h));
   col = mix(col, zenith, smoothstep(0.62, 1.0, h));
 
+  // Sous l'horizon, le ciel repartait vers le blanc et délavait le bas du
+  // cadre. On le rabat vers un bleu plus dense, le texte y tient mieux.
+  col = mix(col, vec3(0.180, 0.412, 0.706), smoothstep(0.50, 0.14, h) * 0.72);
+
   // Nappe de nuages projetée sur un plan haut. Le domaine est déformé par
   // un premier bruit : sans cela les amas ont l'air d'un tissu régulier.
   if (rd.y > 0.03) {
@@ -164,7 +169,7 @@ void main() {
   /* --- Intersection avec le carton --------------------------------- */
   // Le disque tourne autour de son centre, qui est hors du carton.
   mat3 R = rotX(0.5 * PI - uTilt);
-  vec3 lo = flipY(R * (ro - vec3(0.0, uCenterY, 0.0)));
+  vec3 lo = flipY(R * (ro - vec3(uPanX, uCenterY, uPanZ)));
   vec3 ld = flipY(R * rd);
 
   float Rd = uRadius;
@@ -328,7 +333,7 @@ export function mountScene(canvas) {
 
   const U = {};
   ['uRes', 'uTime', 'uDial', 'uSpin', 'uTilt', 'uCamY', 'uCamZ', 'uAimY', 'uFov',
-   'uRadius', 'uCenterY', 'uHaze']
+   'uRadius', 'uCenterY', 'uPanX', 'uPanZ', 'uHaze']
     .forEach((k) => (U[k] = gl.getUniformLocation(prog, k)));
   gl.uniform1i(U.uDial, 0);
 
@@ -338,7 +343,7 @@ export function mountScene(canvas) {
   const state = {
     uSpin: 0, uTilt: 1.02,
     uCamY: -1.45, uCamZ: 1.95, uAimY: 0.62, uFov: 0.92,
-    uRadius: 2.6, uCenterY: 1.55, uHaze: 1,
+    uRadius: 2.6, uCenterY: 1.55, uPanX: 0, uPanZ: 0, uHaze: 1,
   };
 
   const resize = () => {
@@ -373,6 +378,8 @@ export function mountScene(canvas) {
     gl.uniform1f(U.uFov, state.uFov);
     gl.uniform1f(U.uRadius, state.uRadius);
     gl.uniform1f(U.uCenterY, state.uCenterY);
+    gl.uniform1f(U.uPanX, state.uPanX);
+    gl.uniform1f(U.uPanZ, state.uPanZ);
     gl.uniform1f(U.uHaze, state.uHaze);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
     requestAnimationFrame(frame);
