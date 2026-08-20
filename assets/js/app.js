@@ -71,29 +71,27 @@ function spinFor(hour) {
   return -(((hour % 12) * 30 + 180) * Math.PI) / 180;
 }
 
-/* Angle sur lequel le cadran doit se caler pour montrer l'heure de
-   démonstration. On retient le tour qui laisse de la place à une révolution
-   avant lui, sinon le disque devrait tourner à l'envers pour l'atteindre. */
-let landing = 0;
+/* Le cadran passe sur l'heure de démonstration au milieu de la deuxième
+   scène. Sa vitesse reste ensuite identique : pas d'accélération brutale ni
+   d'arrêt pendant que l'utilisateur continue de défiler. */
+const DEMO_POSITION = 1.5;
+let spinRate = 0;
 
 function syncDisc(hour = DEMO_HOUR) {
   const want = spinFor(hour);
-  landing = want + TAU * Math.round((11.5 - want) / TAU);
+  // Retient un tour orienté vers l'avant qui laisse le cadran bien animé dès
+  // le départ, puis en déduit une vitesse constante sur toute la lecture.
+  const landing = want + TAU * Math.round((11.5 - want) / TAU);
+  spinRate = (landing - STOPS[0].spin) / DEMO_POSITION;
 }
 
 /**
  * Rotation du cadran le long de la lecture.
- *
- * Une simple interpolation entre arrêts laissait la deuxième scène sans
- * rotation du tout. Le cadran approche donc pendant la première scène,
- * achève son tour et se cale sur l'heure, la tient le temps qu'on la lise,
- * puis repart.
+ * Une distance de défilement donnée produit toujours le même angle. L'heure
+ * de démonstration passe sous le repère sans provoquer de pause artificielle.
  */
 function spinAt(u) {
-  if (u <= 1) return lerp(STOPS[0].spin, landing - TAU, ease(u));
-  if (u <= 1.3) return lerp(landing - TAU, landing, ease((u - 1) / 0.3));
-  if (u <= 1.7) return landing;                 // l'heure reste lisible
-  return landing + (u - 1.7) * 2.6;
+  return STOPS[0].spin + u * spinRate;
 }
 
 /* Le carton se tient autour de 0.71 R du côté opposé au moyeu : on en déduit
@@ -111,9 +109,20 @@ function mountCamera(scene) {
 
   let travel = 0;   // position sur la timeline, en numéro de scène fractionnaire
   let shown = 0;    // valeur lissée effectivement envoyée au shader
+  let lastFrame = 0;
 
   const measure = () => {
-    let t = 0;
+    /* La caméra suit une seule piste continue sur toute la séquence. L'ancien
+       calcul atteignait la fin d'une scène dès que son sticky se décrochait,
+       puis restait figé pendant encore un écran avant la scène suivante. */
+    const first = scenes[0].getBoundingClientRect();
+    const last = scenes[scenes.length - 1].getBoundingClientRect();
+    const sequenceTop = first.top + window.scrollY;
+    const sequenceBottom = last.bottom + window.scrollY;
+    const sequenceLength = Math.max(1, sequenceBottom - sequenceTop);
+    const sequenceProgress = clamp((window.scrollY - sequenceTop) / sequenceLength);
+    travel = sequenceProgress * (STOPS.length - 1);
+
     for (let i = 0; i < scenes.length; i++) {
       const el = scenes[i];
       const box = el.getBoundingClientRect();
@@ -124,11 +133,7 @@ function mountCamera(scene) {
       // ne se décroche, sinon il glisse sous le bandeau.
       const enter = i === 0 ? 1 : clamp(p / 0.08);
       el.style.setProperty('--vis', String(Math.min(enter, clamp((0.88 - p) / 0.1))));
-
-      if (box.top > 0) break;                 // scène pas encore atteinte
-      t = i + p;
     }
-    travel = t;
   };
 
   const sample = (u, key) => {
@@ -136,8 +141,13 @@ function mountCamera(scene) {
     return lerp(STOPS[i][key], STOPS[i + 1][key], ease(u - i));
   };
 
-  const frame = () => {
-    shown = reduced ? travel : lerp(shown, travel, 0.075);
+  const frame = (now) => {
+    const dt = lastFrame ? Math.min((now - lastFrame) / 1000, 0.1) : 0;
+    lastFrame = now;
+
+    // Même inertie quel que soit le taux de rafraîchissement de l'écran.
+    const follow = dt ? 1 - Math.exp(-4.7 * dt) : 1;
+    shown = reduced ? travel : lerp(shown, travel, follow);
 
     if (!scene) { requestAnimationFrame(frame); return; }
 
