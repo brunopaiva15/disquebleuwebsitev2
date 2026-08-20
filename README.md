@@ -1,5 +1,7 @@
 # Site de Disque Bleu
 
+En ligne : https://brunopaiva15.github.io/disquebleuwebsitev2/
+
 Site vitrine de l'application [Disque Bleu](https://github.com/brunopaiva15/disquebleu),
 l'aide au stationnement à durée limitée en Suisse, France, Allemagne, Italie,
 Belgique et Luxembourg.
@@ -58,10 +60,12 @@ Une seule ligne à changer si une fiche déménage.
 ## Publication
 
 Le workflow `.github/workflows/pages.yml` vérifie puis publie sur GitHub Pages
-à chaque poussée sur `main`.
+à chaque poussée sur `main`. Il contrôle d'abord que tous les fichiers
+référencés existent et que les modules se parsent, et ne publie qu'ensuite.
 
-Une fois seulement, dans les réglages du dépôt, régler
-**Settings → Pages → Source** sur **GitHub Actions**.
+Le dépôt est déjà réglé sur **Settings → Pages → Source : GitHub Actions**.
+C'est le seul réglage manuel nécessaire, à refaire uniquement sur un nouveau
+dépôt.
 
 ## Licence
 
