@@ -3,6 +3,7 @@
    =========================================================================== */
 
 import { mountScene } from './scene.js';
+import { mountCrests } from './crest.js';
 
 const root = document.documentElement;
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -45,40 +46,37 @@ const STOPS = [
   { tilt: 0.78, camY: -0.30, camZ: 2.75, aimY: -0.20, fov: 1.05,
     radius: 3.00, target: -1.05, panX: 1.70, panZ: -0.55, spin: 5.40, haze: 0.72 },
 
-  // Sortie de champ par la droite, presque à plat.
-  { tilt: 0.56, camY: -0.05, camZ: 2.60, aimY: -0.30, fov: 1.10,
-    radius: 3.80, target: -1.55, panX: 2.85, panZ: -0.40, spin: 8.10, haze: 0.56 },
+  // Il balaie le bas du cadre en s'ouvrant encore : toujours coupé, jamais
+  // réduit à un éclat dans un coin.
+  { tilt: 0.62, camY: -0.10, camZ: 2.20, aimY: -0.34, fov: 1.05,
+    radius: 3.60, target: -1.05, panX: 1.55, panZ: -0.10, spin: 8.10, haze: 0.58 },
 ];
 
 const TAU = Math.PI * 2;
 
-/** Heure à porter sur le disque : arrondi à la demi-heure suivante. */
-function discHour(now = new Date()) {
-  const d = new Date(now);
-  d.setSeconds(0, 0);
-  d.setMinutes(now.getMinutes() < 30 ? 30 : 60);
-  return d;
-}
+/* Heure de démonstration, la même que dans le relevé de la deuxième scène.
+   Une heure fixe et diurne vaut mieux que l'heure courante, qui donnait des
+   exemples absurdes le soir. */
+const DEMO_HOUR = 9;
 
 /**
- * Rotation qui amène cette heure sous le repère de la fenêtre.
+ * Rotation qui amène une heure sous le repère de la fenêtre.
  *
  * L'application tourne la carte de `(heure % 12) * 30° + 180°`
  * (parking_disc_painter.dart). Ici c'est la texture qui pivote sous une
  * fenêtre fixe : tourner les coordonnées de lecture de +A revient à tourner
  * le dessin de -A, d'où le signe.
  */
-function spinFor(date) {
-  const hour = date.getHours() + date.getMinutes() / 60;
+function spinFor(hour) {
   return -(((hour % 12) * 30 + 180) * Math.PI) / 180;
 }
 
-/* La deuxième scène montre l'heure réellement calculée et la garde affichée
-   sur toute sa traversée : le mouvement y vient de la caméra, pas du cadran.
-   On retient le tour le plus proche de la valeur prévue pour que le disque ne
-   se dévide pas d'un coup en y arrivant. */
-function syncDisc(date = discHour()) {
-  const want = spinFor(date);
+/* La deuxième scène affiche cette heure et la garde sur toute sa traversée :
+   le mouvement y vient de la caméra, pas du cadran. On retient le tour le
+   plus proche de la valeur prévue pour que le disque ne se dévide pas d'un
+   coup en y arrivant. */
+function syncDisc(hour = DEMO_HOUR) {
+  const want = spinFor(hour);
   const near = want + TAU * Math.round((STOPS[2].spin - want) / TAU);
   STOPS[1].spin = near;
   STOPS[2].spin = near;
@@ -132,14 +130,19 @@ function mountCamera(scene) {
 
     if (!scene) { requestAnimationFrame(frame); return; }
 
+    const span = fit();
     const tilt = sample(shown, 'tilt');
-    const radius = sample(shown, 'radius') * fit();
-    const target = sample(shown, 'target');
+    const radius = sample(shown, 'radius') * span;
+    // En portrait le texte occupe toute la largeur : le disque doit remonter
+    // pour lui laisser le bas du cadre. Le décalage suit le même facteur.
+    const target = sample(shown, 'target') + (1 - span) * 1.5;
 
     scene.set('uTilt', tilt);
     scene.set('uRadius', radius);
     scene.set('uCenterY', hub(tilt, radius, target));
-    scene.set('uPanX', sample(shown, 'panX'));
+    // Le déport latéral suit la même échelle que le rayon : sans cela le
+    // disque sort entièrement du cadre sur un écran étroit.
+    scene.set('uPanX', sample(shown, 'panX') * span);
     scene.set('uPanZ', sample(shown, 'panZ'));
     scene.set('uCamY', sample(shown, 'camY'));
     scene.set('uCamZ', sample(shown, 'camZ'));
@@ -211,35 +214,6 @@ function mountTone() {
   light.forEach((el) => io.observe(el));
 }
 
-/* ---------------------------------------------------------- HORLOGE -- */
-
-/**
- * Applique la règle suisse : l'heure portée sur le disque est arrondie à la
- * demi-heure suivante, et la durée court à partir de cette heure-là.
- */
-function mountClock() {
-  const now = [...document.querySelectorAll('[data-clock-now]')];
-  const disc = [...document.querySelectorAll('[data-clock-disc]')];
-  const until = [...document.querySelectorAll('[data-clock-until]')];
-  if (!now.length && !disc.length) return;
-
-  const fmt = (d) =>
-    `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
-  const write = (els, text) => els.forEach((el) => (el.textContent = text));
-
-  const tick = () => {
-    const t = new Date();
-    const d = discHour(t);                       // 14h02 donne 14h30, 14h41 donne 15h00
-    write(now, fmt(t));
-    write(disc, fmt(d));
-    write(until, fmt(new Date(d.getTime() + 3600000)));
-    syncDisc(d);
-  };
-
-  tick();
-  setInterval(tick, 10000);
-}
-
 /* ------------------------------------------------------------ DÉPART -- */
 
 function boot() {
@@ -258,7 +232,7 @@ function boot() {
 
   mountLifts();
   mountTone();
-  mountClock();
+  mountCrests();
 }
 
 if (document.readyState === 'loading') {

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Disque Bleu, l'heure juste sur votre disque de stationnement</title>
+<title>Stationnez l'esprit tranquille | Disque Bleu</title>
 <meta name="description" content="Disque Bleu calcule l'heure à porter sur votre disque de stationnement en Suisse, France, Allemagne, Italie, Belgique et Luxembourg, puis vous prévient avant l'échéance.">
 <meta name="theme-color" content="#0b60c4">
 <meta name="color-scheme" content="only light">
@@ -13,7 +13,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Disque Bleu">
-<meta property="og:title" content="Disque Bleu, l'heure juste sur votre disque de stationnement">
+<meta property="og:title" content="Stationnez l'esprit tranquille | Disque Bleu">
 <meta property="og:description" content="Six pays, six réglementations, un seul bouton. L'application calcule l'heure à afficher et vous prévient avant l'échéance.">
 <meta property="og:image" content="assets/img/app-icon.png">
 <meta property="og:locale" content="fr_CH">
@@ -43,16 +43,16 @@
 
 <header class="masthead">
   <a class="masthead__logo" href="#haut" aria-label="Disque Bleu, retour en haut">
-    <!-- La fenêtre en croissant du disque, réduite à son trait. -->
-    <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-      <circle cx="13" cy="9" r="11.2" stroke-opacity=".34"/>
-      <path d="M8.1 12.1a5 5 0 0 1 9.8 0l3.1 6.9a12 12 0 0 1-16 0z" stroke-linejoin="round"/>
+    <!-- Le croissant du disque, dans sa géométrie exacte (voir crest.js). -->
+    <svg viewBox="-74 25 148 80" fill="currentColor" aria-hidden="true">
+      <path d="M -30.21 29.18 A 42 42 0 0 0 30.21 29.18 L 69 72.38
+               A 100 100 0 0 1 -69 72.38 Z"/>
     </svg>
   </a>
   <nav class="masthead__nav" aria-label="Sections">
     <a class="masthead__link" href="#fonctions">Fonctions</a>
     <a class="masthead__link" href="#pays">Pays</a>
-    <a class="masthead__link" href="#terrain">Terrain</a>
+    <a class="masthead__link" href="#vehicule">Véhicule</a>
     <a class="masthead__link" href="#installer">Installer</a>
   </nav>
 </header>
@@ -64,10 +64,6 @@
   <div class="scene__pin">
     <div class="scene__copy">
       <h1 class="display display--xl">Stationnez<br>l'esprit tranquille.</h1>
-      <p class="say say--dim">
-        L'heure à porter sur votre disque, calculée pour vous. Et une alerte
-        avant la fin.
-      </p>
       <div class="stores">
         <a class="store" data-store="ios" rel="noopener"
            aria-label="Télécharger dans l'App Store">
@@ -93,9 +89,9 @@
           <span>Heure d'arrivée</span>
           <span>Ora d'arrivo</span>
         </p>
-        <p class="readout__time" data-clock-disc>--:--</p>
+        <p class="readout__time">09:00</p>
         <p class="readout__foot">
-          Stationnement jusqu'à <b data-clock-until>--:--</b>
+          Arrivée 08h47, stationnement jusqu'à <b>10:00</b>
         </p>
       </div>
       <p class="say say--dim">
@@ -169,47 +165,51 @@
   <div class="hold">
     <header class="leaf__head">
       <div>
-        <h2 class="display display--m" data-lift>Une frontière,<br>une autre règle.</h2>
+        <h2 class="display display--m" data-lift>Six pays,<br>une seule application.</h2>
+        <p class="say say--dim" data-lift style="margin-top:20px">
+          Horaires, arrondis, jours fériés : tout change à la frontière.
+          L'application aussi.
+        </p>
       </div>
     </header>
 
-    <div class="rank" data-stagger>
-      <article class="rank__row" data-lift>
-        <span class="rank__num">Suisse</span>
-        <div><p class="rank__note">Demi-heure suivante, avec l'exception de midi.</p></div>
-        <span class="rank__meta">11h30 à 13h30</span>
+    <div class="tiles" data-stagger>
+      <article class="tile" data-lift>
+        <div class="tile__art" data-crest="9"
+             data-crest-label="Disque de stationnement réglé sur 9 heures"></div>
+        <h3 class="tile__name">Suisse</h3>
       </article>
-      <article class="rank__row" data-lift>
-        <span class="rank__num">France</span>
-        <div><p class="rank__note">Demi-heure suivante, pause déjeuner déduite.</p></div>
-        <span class="rank__meta">Pause déjeuner</span>
+      <article class="tile" data-lift>
+        <div class="tile__art" data-crest="12"
+             data-crest-label="Disque de stationnement réglé sur 12 heures"></div>
+        <h3 class="tile__name">France</h3>
       </article>
-      <article class="rank__row" data-lift>
-        <span class="rank__num">Allemagne</span>
-        <div><p class="rank__note">Demi-heure suivante, jours fériés par Land.</p></div>
-        <span class="rank__meta">Parkscheibe</span>
+      <article class="tile" data-lift>
+        <div class="tile__art" data-crest="15"
+             data-crest-label="Disque de stationnement réglé sur 15 heures"></div>
+        <h3 class="tile__name">Allemagne</h3>
       </article>
-      <article class="rank__row" data-lift>
-        <span class="rank__num">Italie</span>
-        <div><p class="rank__note">Heure réelle d'arrivée, sans arrondi.</p></div>
-        <span class="rank__meta">Art. 157 al. 6</span>
+      <article class="tile" data-lift>
+        <div class="tile__art" data-crest="8"
+             data-crest-label="Disque de stationnement réglé sur 8 heures"></div>
+        <h3 class="tile__name">Italie</h3>
       </article>
-      <article class="rank__row" data-lift>
-        <span class="rank__num">Belgique</span>
-        <div><p class="rank__note">Disque européen, chaque jour réglable séparément.</p></div>
-        <span class="rank__meta">09:00 à 18:00</span>
+      <article class="tile" data-lift>
+        <div class="tile__art" data-crest="18"
+             data-crest-label="Disque de stationnement réglé sur 18 heures"></div>
+        <h3 class="tile__name">Belgique</h3>
       </article>
-      <article class="rank__row" data-lift>
-        <span class="rank__num">Luxembourg</span>
-        <div><p class="rank__note">Ni durée ni horaire national, tout vient du panneau.</p></div>
-        <span class="rank__meta">Art. 167bis</span>
+      <article class="tile" data-lift>
+        <div class="tile__art" data-crest="17"
+             data-crest-label="Disque de stationnement réglé sur 17 heures"></div>
+        <h3 class="tile__name">Luxembourg</h3>
       </article>
     </div>
   </div>
 </section>
 
 <!-- ====================================================== TERRAIN ===== -->
-<section class="leaf" id="terrain">
+<section class="leaf" id="vehicule">
   <div class="hold">
     <header class="leaf__head">
       <div>
@@ -298,16 +298,7 @@
         <ul>
           <li><a class="foot__link" href="#fonctions">Fonctions</a></li>
           <li><a class="foot__link" href="#pays">Pays couverts</a></li>
-          <li><a class="foot__link" href="#terrain">Sur le terrain</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Projet</h4>
-        <ul>
-          <li><a class="foot__link" href="https://github.com/brunopaiva15/disquebleu" rel="noopener">Code source</a></li>
-          <li><a class="foot__link" href="https://github.com/brunopaiva15/disquebleu/blob/main/docs/carte-communautaire.md" rel="noopener">Carte communautaire</a></li>
-          <li><a class="foot__link" href="https://github.com/brunopaiva15/disquebleu/blob/main/docs/jours-feries.md" rel="noopener">Jours fériés</a></li>
-          <li><a class="foot__link" href="https://www.openstreetmap.org/copyright" rel="noopener">Données OpenStreetMap</a></li>
+          <li><a class="foot__link" href="#vehicule">Votre véhicule</a></li>
         </ul>
       </div>
       <div>
@@ -319,7 +310,9 @@
       </div>
     </div>
     <div class="foot__base">
-      <span>© <span data-year>2026</span> Disque Bleu, licence MIT</span>
+      <span>© <span data-year>2026</span>
+        <a class="foot__link" href="https://vergasta.ch" rel="noopener">Vergasta Digital</a>
+      </span>
     </div>
   </div>
 </footer>

@@ -14,6 +14,7 @@
   /* Couleurs. Le bleu vient de l'application (#1565C0), remonté en
      luminosité pour tenir un ciel plein cadre. */
   --sky: #0b60c4;
+  --sky-flat: #1565c0;   /* le bleu à plat de l'application */
   --sky-deep: #04398a;
   --press: #0b0a09;
   --press-soft: #171614;
@@ -208,7 +209,7 @@ body.is-light .masthead {
   height: 34px;
 }
 
-.masthead__logo svg { width: 26px; height: 26px; }
+.masthead__logo svg { width: 32px; height: auto; }
 
 .masthead__nav {
   display: flex;
@@ -483,6 +484,61 @@ body.is-light .masthead {
   .rank__row { transition: background 0.45s var(--ease); }
   .rank__row:hover { background: #ffffff08; }
   .leaf--paper .rank__row:hover { background: #1d1c1908; }
+}
+
+/* --------------------------------------------------- TUILES PAYS ----- */
+
+/* Chaque pays est une carte bleue portant le croissant du disque réglé sur
+   une heure différente. Le rapport figure/fond est celui de l'application :
+   carton blanc sur bleu de marque. */
+.tiles {
+  display: grid;
+  gap: 2px;
+  grid-template-columns: 1fr;
+  background: var(--rule-dark);
+  border: 1px solid var(--rule-dark);
+}
+
+/* Six pays : deux rangées de trois, jamais de case orpheline. */
+@media (min-width: 620px) {
+  .tiles { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1000px) {
+  .tiles { grid-template-columns: repeat(3, 1fr); }
+}
+
+.tile {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  padding: 34px 26px 30px;
+  background: var(--sky-flat);
+  transition: background 0.45s var(--ease);
+}
+
+@media (hover: hover) {
+  .tile:hover { background: #1a6fd6; }
+}
+
+.tile__art {
+  margin-bottom: 14px;
+  filter: drop-shadow(0 8px 18px rgba(2, 20, 54, 0.34));
+}
+
+.tile__art svg {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+}
+
+.tile__name {
+  font-family: var(--title);
+  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #fff;
 }
 
 /* --------------------------------------------------- MISE EN COLONNE -- */
