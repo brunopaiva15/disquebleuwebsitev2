@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Disque Bleu, l'heure juste sur votre disque de stationnement</title>
+<meta name="description" content="Disque Bleu calcule l'heure à porter sur votre disque de stationnement en Suisse, France, Allemagne, Italie, Belgique et Luxembourg, puis vous prévient avant l'échéance.">
+<meta name="theme-color" content="#0b60c4">
+<meta name="color-scheme" content="only light">
+
+<link rel="icon" type="image/png" href="assets/img/app-icon.png">
+<link rel="apple-touch-icon" href="assets/img/app-icon-180.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Disque Bleu">
+<meta property="og:title" content="Disque Bleu, l'heure juste sur votre disque de stationnement">
+<meta property="og:description" content="Six pays, six réglementations, un seul bouton. L'application calcule l'heure à afficher et vous prévient avant l'échéance.">
+<meta property="og:image" content="assets/img/app-icon.png">
+<meta property="og:locale" content="fr_CH">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+
+<link rel="stylesheet" href="assets/css/app.css">
+<script type="module" src="assets/js/app.js"></script>
+</head>
+
+<body>
+<a class="sr-only" href="#lecture">Aller au contenu</a>
+
+<!-- La scène : ciel et disque, en fond fixe de toute la page. -->
+<canvas id="stage" aria-hidden="true"></canvas>
+
+<!-- Les rails de la grille, fixes eux aussi. -->
+<div class="frame" aria-hidden="true">
+  <span class="frame__v frame__v--l"></span>
+  <span class="frame__v frame__v--r"></span>
+</div>
+
+<header class="masthead">
+  <a class="masthead__logo" href="#haut" aria-label="Disque Bleu, retour en haut">
+    <!-- La fenêtre en croissant du disque, réduite à son trait. -->
+    <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+      <circle cx="13" cy="9" r="11.2" stroke-opacity=".34"/>
+      <path d="M8.1 12.1a5 5 0 0 1 9.8 0l3.1 6.9a12 12 0 0 1-16 0z" stroke-linejoin="round"/>
+    </svg>
+  </a>
+  <nav class="masthead__nav" aria-label="Sections">
+    <a class="masthead__link" href="#fonctions">Fonctions</a>
+    <a class="masthead__link" href="#pays">Pays</a>
+    <a class="masthead__link" href="#terrain">Terrain</a>
+    <a class="masthead__link" href="#installer">Installer</a>
+  </nav>
+</header>
+
+<main id="lecture">
+
+<!-- ====================================================== SCÈNE 01 ==== -->
+<section class="scene" id="haut" style="--len: 2.6">
+  <div class="scene__pin">
+    <div class="scene__copy">
+      <h1 class="display display--xl">Stationnez<br>l'esprit tranquille.</h1>
+      <p class="say say--dim">
+        L'application calcule l'heure à porter sur votre disque, applique la règle
+        du pays où vous êtes, et vous prévient avant la fin du temps autorisé.
+      </p>
+      <a class="act" href="#installer">
+        <span class="act__label">Installer l'application</span>
+        <span class="act__arrow" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== SCÈNE 02 ==== -->
+<section class="scene" style="--len: 2.4">
+  <div class="scene__pin">
+    <div class="scene__copy">
+      <h2 class="display display--l">Arrondi à la<br>demi-heure suivante.</h2>
+      <div class="meter">
+        <div class="meter__cell">
+          <span class="meter__key">Arrivée</span>
+          <span class="meter__val meter__val--now" data-clock-now>--:--</span>
+        </div>
+        <div class="meter__cell meter__cell--key">
+          <span class="meter__key">À porter sur le disque</span>
+          <span class="meter__val" data-clock-disc>--:--</span>
+        </div>
+        <div class="meter__cell">
+          <span class="meter__key">Tranquille jusqu'à</span>
+          <span class="meter__val" data-clock-until>--:--</span>
+        </div>
+      </div>
+      <p class="say say--dim">
+        La durée court à partir de l'heure portée sur le disque, jamais de l'heure
+        d'arrivée. En Italie, pas d'arrondi du tout : l'art.&nbsp;157 al.&nbsp;6 impose
+        l'heure réelle. L'application change de règle en même temps que de pays.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== SCÈNE 03 ==== -->
+<section class="scene" style="--len: 2.2">
+  <div class="scene__pin">
+    <div class="scene__copy">
+      <h2 class="display display--l">Dix minutes avant,<br>votre poche vibre.</h2>
+      <p class="say say--dim">
+        La notification est calée sur l'heure du disque, au bon fuseau horaire,
+        avec le délai que vous choisissez. Dix minutes par défaut.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="seam" aria-hidden="true"></div>
+
+<!-- ==================================================== FONCTIONS ===== -->
+<section class="leaf" id="fonctions">
+  <div class="hold">
+    <header class="leaf__head">
+      <div>
+        <h2 class="display display--m" data-lift>Tout tient derrière<br>un seul bouton.</h2>
+      </div>
+    </header>
+
+    <div class="rank" data-stagger>
+
+      <article class="rank__row" data-lift>
+        <span class="rank__num">01</span>
+        <div>
+          <h3 class="rank__title">Calcul de l'heure à afficher</h3>
+          <p class="rank__note">
+            Arrondi à la demi-heure suivante en Suisse, en France, en Allemagne,
+            en Belgique et au Luxembourg. Heure réelle d'arrivée en Italie.
+          </p>
+        </div>
+      </article>
+
+      <article class="rank__row" data-lift>
+        <span class="rank__num">02</span>
+        <div>
+          <h3 class="rank__title">Les exceptions, gérées</h3>
+          <p class="rank__note">
+            Exception de midi suisse (11h30 à 13h30), suspension du temps pendant la
+            pause déjeuner française, deux plages réglementées dans la même journée,
+            périodes nocturnes. En Belgique, un véhicule arrivé avant l'ouverture voit
+            son disque réglé sur l'heure de reprise.
+          </p>
+        </div>
+      </article>
+
+      <article class="rank__row" data-lift>
+        <span class="rank__num">03</span>
+        <div>
+          <h3 class="rank__title">Jours fériés vérifiés à la main</h3>
+          <p class="rank__note">
+            Fêtes nationales et régionales, corrigées à la main là où les données
+            publiques sont fausses. En Italie le samedi est ouvrable, et la fête du
+            saint patron communal peut compter.
+          </p>
+        </div>
+      </article>
+
+      <article class="rank__row" data-lift>
+        <span class="rank__num">04</span>
+        <div>
+          <h3 class="rank__title">La signalisation prime</h3>
+          <p class="rank__note">
+            Horaires, durée et jours sont tous modifiables. En Belgique la règle
+            nationale n'est qu'un défaut. Au Luxembourg il n'existe ni durée ni
+            horaire national. Le panneau au sol a le dernier mot.
+          </p>
+        </div>
+      </article>
+
+      <article class="rank__row" data-lift>
+        <span class="rank__num">05</span>
+        <div>
+          <h3 class="rank__title">Quatre langues</h3>
+          <p class="rank__note">
+            Français, allemand, italien et anglais, jusqu'au nom de l'application,
+            qui devient <em>Blaue&nbsp;Parkscheibe</em>, <em>Disco&nbsp;Orario</em> ou <em>Blue&nbsp;Disc</em>.
+          </p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================= PAYS ===== -->
+<section class="leaf" id="pays">
+  <div class="hold">
+    <header class="leaf__head">
+      <div>
+        <h2 class="display display--m" data-lift>Une frontière,<br>une autre règle.</h2>
+        <p class="say say--dim" data-lift style="margin-top:20px">
+          Le même carton bleu ne se lit pas de la même façon des deux côtés d'une douane.
+          Voici ce que l'application applique dans chaque pays.
+        </p>
+      </div>
+    </header>
+
+    <div class="rank" data-stagger>
+      <article class="rank__row" data-lift>
+        <span class="rank__num">Suisse</span>
+        <div><p class="rank__note">
+          Arrondi à la demi-heure suivante. Exception de midi : arrivée entre 11h30 et
+          13h30, le stationnement court jusqu'au lendemain matin de la plage réglementée.
+        </p></div>
+        <span class="rank__meta">Demi-heure suivante</span>
+      </article>
+
+      <article class="rank__row" data-lift>
+        <span class="rank__num">France</span>
+        <div><p class="rank__note">
+          Arrondi à la demi-heure suivante, avec suspension du décompte pendant la pause
+          déjeuner lorsque la zone en prévoit une.
+        </p></div>
+        <span class="rank__meta">Pause déjeuner</span>
+      </article>
+
+      <article class="rank__row" data-lift>
+        <span class="rank__num">Allemagne</span>
+        <div><p class="rank__note">
+          Arrondi à la demi-heure suivante sur la <em>Parkscheibe</em>, avec les jours
+          fériés propres à chaque Land.
+        </p></div>
+        <span class="rank__meta">Parkscheibe</span>
+      </article>
+
+      <article class="rank__row" data-lift>
+        <span class="rank__num">Italie</span>
+        <div><p class="rank__note">
+          Pas d'arrondi : l'art.&nbsp;157 al.&nbsp;6 du Codice della Strada impose l'heure
+          réelle d'arrivée. Le samedi est ouvrable et la fête du saint patron peut compter.
+        </p></div>
+        <span class="rank__meta">Art. 157 al. 6</span>
+      </article>
+
+      <article class="rank__row" data-lift>
+        <span class="rank__num">Belgique</span>
+        <div><p class="rank__note">
+          Seul le disque européen à une fenêtre est valable. Le défaut national va de
+          09:00 à 18:00, deux heures, du lundi au samedi. Chaque jour de la semaine
+          s'active séparément.
+        </p></div>
+        <span class="rank__meta">Disque européen</span>
+      </article>
+
+      <article class="rank__row" data-lift>
+        <span class="rank__num">Luxembourg</span>
+        <div><p class="rank__note">
+          L'art.&nbsp;167bis impose un disque conforme au modèle réglementaire, lisible
+          depuis l'extérieur. Ni durée ni horaire national : tout vient de la signalisation.
+        </p></div>
+        <span class="rank__meta">Art. 167bis</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================== TERRAIN ===== -->
+<section class="leaf" id="terrain">
+  <div class="hold">
+    <header class="leaf__head">
+      <div>
+        <h2 class="display display--m" data-lift>Retrouver la voiture,<br>corriger la carte.</h2>
+      </div>
+    </header>
+
+    <div class="split">
+      <div class="stack" data-lift>
+        <h3 class="rank__title">Retrouver son véhicule</h3>
+        <p class="say say--dim">
+          La position est mémorisée au moment où vous vous garez et reste ouvrable dans
+          Google&nbsp;Maps, Plans ou toute autre application de navigation installée.
+          Vous pouvez y ajouter, toujours facultativement, une photo de repère, un
+          niveau, un numéro de place et une note, utiles là où le GPS ne suffit pas.
+          La photo ne quitte jamais l'appareil.
+        </p>
+      </div>
+
+      <div class="stack" data-lift style="--wait: 120ms">
+        <h3 class="rank__title">Carte communautaire</h3>
+        <p class="say say--dim">
+          Signalez une place disparue ou mal renseignée, proposez-en une nouvelle.
+          Après relecture, les signalements repartent vers OpenStreetMap : la correction
+          profite à tout le monde, pas seulement à l'application.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================ AVERTISSEMENT ===== -->
+<section class="leaf leaf--paper">
+  <div class="hold">
+    <div class="notice">
+      <div class="notice__grid">
+        <div>
+          <h2 class="display display--s" data-lift style="margin-bottom:18px">
+            L'application ne remplace pas le disque physique.
+          </h2>
+          <p class="say say--dim" data-lift>
+            C'est une aide au conducteur. En Suisse, vous devez apposer le disque bleu
+            officiel de manière visible derrière le pare-brise. L'application seule ne
+            constitue pas une preuve de stationnement valide.
+          </p>
+          <p class="say say--dim" data-lift>
+            Il en va de même à l'étranger. En Italie, l'art.&nbsp;157 du Codice della Strada
+            exige que l'heure de début du stationnement soit visible depuis l'extérieur du
+            véhicule. En Belgique, seul le disque européen à une fenêtre est valable.
+            Au Luxembourg, l'art.&nbsp;167bis impose un disque conforme au modèle réglementaire.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================== INSTALLER ====== -->
+<section class="leaf" id="installer">
+  <div class="hold">
+    <header class="leaf__head">
+      <div>
+        <h2 class="display display--l" data-lift>Mettez la bonne heure.</h2>
+        <p class="say say--dim" data-lift style="margin-top:20px">
+          Gratuite, sans compte. Choisissez votre pays, appuyez sur
+          « Je me gare maintenant ». Le reste est déjà calculé.
+        </p>
+        <div class="split" data-lift style="margin-top:34px; max-width:640px">
+          <a class="act" data-store="ios" href="#" rel="noopener">
+            <span class="act__label">App Store</span>
+            <span class="act__arrow" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg>
+            </span>
+          </a>
+          <a class="act" data-store="android" href="#" rel="noopener">
+            <span class="act__label">Google Play</span>
+            <span class="act__arrow" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </header>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="hold">
+    <div class="foot__grid">
+      <div>
+        <h4>Disque Bleu</h4>
+        <p class="say say--dim" style="font-size:.9rem;max-width:30ch">
+          Aide au stationnement à durée limitée en Suisse, France, Allemagne,
+          Italie, Belgique et Luxembourg.
+        </p>
+      </div>
+      <div>
+        <h4>Le site</h4>
+        <ul>
+          <li><a class="foot__link" href="#fonctions">Fonctions</a></li>
+          <li><a class="foot__link" href="#pays">Pays couverts</a></li>
+          <li><a class="foot__link" href="#terrain">Sur le terrain</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Projet</h4>
+        <ul>
+          <li><a class="foot__link" href="https://github.com/brunopaiva15/disquebleu" rel="noopener">Code source</a></li>
+          <li><a class="foot__link" href="https://github.com/brunopaiva15/disquebleu/blob/main/docs/carte-communautaire.md" rel="noopener">Carte communautaire</a></li>
+          <li><a class="foot__link" href="https://github.com/brunopaiva15/disquebleu/blob/main/docs/jours-feries.md" rel="noopener">Jours fériés</a></li>
+          <li><a class="foot__link" href="https://www.openstreetmap.org/copyright" rel="noopener">Données OpenStreetMap</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Installer</h4>
+        <ul>
+          <li><a class="foot__link" data-store="ios" href="#" rel="noopener">App Store</a></li>
+          <li><a class="foot__link" data-store="android" href="#" rel="noopener">Google Play</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__base">
+      <span>© <span data-year>2026</span> Disque Bleu, licence MIT</span>
+      <span>Le disque physique reste obligatoire</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
