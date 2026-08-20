@@ -23,6 +23,7 @@
   --ink-soft: #55534c;
 
   --amber: #ff8a1e;   /* l'orange du compte à rebours */
+  --icon: #6aa9f0;    /* bleu clair des pictogrammes */
   --on-dark: #f7f5f0;
   --on-dark-dim: #b9b5ab;
 
@@ -229,7 +230,7 @@ body.is-light .masthead {
 
 @media (max-width: 860px) {
   .masthead { height: 62px; padding-inline: 14px 16px; }
-  .masthead__nav .masthead__link:not(:last-child) { display: none; }
+  .masthead__nav { display: none; }
 }
 
 /* ---------------------------------------------------- BADGES STORES -- */
@@ -439,19 +440,28 @@ body.is-light .masthead {
 
 @media (min-width: 960px) {
   .rank__row {
-    grid-template-columns: 210px minmax(0, 1fr) 190px;
-    align-items: baseline;
+    grid-template-columns: 210px minmax(0, 1fr);
+    align-items: start;
   }
 }
 
-.rank__num {
-  font: 400 11px / 1.6 var(--code);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--on-dark-dim);
+/* Une icône tient la colonne de gauche, à la place de la numérotation. */
+.rank__icon,
+.stack__icon {
+  display: block;
+  color: var(--icon);
 }
 
-.leaf--paper .rank__num { color: var(--ink-soft); }
+.rank__icon svg { width: 30px; height: 30px; }
+
+.stack__icon {
+  margin-bottom: 4px;
+}
+
+.stack__icon svg { width: 34px; height: 34px; }
+
+.leaf--paper .rank__icon,
+.leaf--paper .stack__icon { color: var(--sky-flat); }
 
 .rank__title {
   font-family: var(--title);
@@ -469,15 +479,6 @@ body.is-light .masthead {
 }
 
 .leaf--paper .rank__note { color: var(--ink-soft); }
-
-.rank__meta {
-  font: 400 11px / 1.6 var(--code);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--on-dark-dim);
-}
-
-.leaf--paper .rank__meta { color: var(--ink-soft); }
 
 /* Le rang s'éclaire au survol : un simple voile, pas d'effet. */
 @media (hover: hover) {
@@ -499,8 +500,9 @@ body.is-light .masthead {
   border: 1px solid var(--rule-dark);
 }
 
-/* Six pays : deux rangées de trois, jamais de case orpheline. */
-@media (min-width: 620px) {
+/* Six pays : jamais de case orpheline, donc deux ou trois colonnes. Une
+   seule colonne donnerait deux mille pixels pour six noms de pays. */
+@media (min-width: 360px) {
   .tiles { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -512,7 +514,7 @@ body.is-light .masthead {
   display: grid;
   align-content: start;
   gap: 4px;
-  padding: 34px 26px 30px;
+  padding: clamp(18px, 4vw, 32px) clamp(16px, 3vw, 26px) clamp(16px, 3.4vw, 28px);
   background: var(--sky-flat);
   transition: background 0.45s var(--ease);
 }
@@ -521,20 +523,27 @@ body.is-light .masthead {
   .tile:hover { background: #1a6fd6; }
 }
 
-.tile__art {
-  margin-bottom: 14px;
-  filter: drop-shadow(0 8px 18px rgba(2, 20, 54, 0.34));
+.tile__flag {
+  display: inline-block;
+  justify-self: start;
+  margin-bottom: clamp(12px, 2.4vw, 18px);
+  line-height: 0;
+  /* Le liseré empêche les bandes blanches de se fondre dans le bleu. */
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.22),
+    0 8px 18px rgba(2, 20, 54, 0.32);
 }
 
-.tile__art svg {
-  width: 100%;
-  max-width: 240px;
-  height: auto;
+/* Hauteur commune, largeurs libres : chaque drapeau garde ses proportions. */
+.tile__flag svg {
+  display: block;
+  height: clamp(38px, 6vw, 54px);
+  width: auto;
 }
 
 .tile__name {
   font-family: var(--title);
-  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+  font-size: clamp(1rem, 1.6vw, 1.45rem);
   font-weight: 700;
   letter-spacing: -0.03em;
   text-transform: uppercase;
@@ -622,12 +631,22 @@ body.is-light .masthead {
   gap: 26px;
 }
 
-@media (min-width: 960px) {
+/* L'illustration porte le message autant que le texte : elle prend sa
+   moitié, et le texte se cale à côté. */
+@media (min-width: 900px) {
   .notice__grid {
-    grid-template-columns: 210px minmax(0, 1fr);
-    gap: 0 40px;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 0 clamp(32px, 5vw, 72px);
   }
-  .notice__grid > :first-child { grid-column: 2; }
+}
+
+.notice__art { margin: 0; }
+
+.windshield {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
 }
 
 .notice p + p { margin-top: 14px; }

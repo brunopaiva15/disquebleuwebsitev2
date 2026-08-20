@@ -3,7 +3,6 @@
    =========================================================================== */
 
 import { mountScene } from './scene.js';
-import { mountCrests } from './crest.js';
 
 const root = document.documentElement;
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -35,21 +34,22 @@ function wireStores() {
 const STOPS = [
   // Au-dessus de la tête, énorme, coupé par le haut du cadre.
   { tilt: 1.30, camY: -1.60, camZ: 1.70, aimY: 0.15, fov: 0.95,
-    radius: 3.4, target: 0.15, panX: 0.00, panZ: 0.00, spin: 0.30, haze: 1.00 },
+    radius: 3.4, target: 0.15, panX: 0.00, panZ: 0.00, haze: 1.00,
+    spin: 0.30 },   // seul point de départ : la suite est donnée par spinAt
 
   // Il descend à droite et s'ouvre : la fenêtre devient lisible.
   { tilt: 1.02, camY: -0.75, camZ: 2.35, aimY: -0.05, fov: 1.00,
-    radius: 2.10, target: -0.30, panX: 1.05, panZ: -0.35, spin: 2.60, haze: 0.86 },
+    radius: 2.10, target: -0.30, panX: 1.05, panZ: -0.35, haze: 0.86 },
 
   // Il bascule vers le bas à droite. Il grandit en s'écartant : le cadre doit
   // continuer de le couper, on ne voit jamais le croissant en entier.
   { tilt: 0.78, camY: -0.30, camZ: 2.75, aimY: -0.20, fov: 1.05,
-    radius: 3.00, target: -1.05, panX: 1.70, panZ: -0.55, spin: 5.40, haze: 0.72 },
+    radius: 3.00, target: -1.05, panX: 1.70, panZ: -0.55, haze: 0.72 },
 
   // Il balaie le bas du cadre en s'ouvrant encore : toujours coupé, jamais
   // réduit à un éclat dans un coin.
   { tilt: 0.62, camY: -0.10, camZ: 2.20, aimY: -0.34, fov: 1.05,
-    radius: 3.60, target: -1.05, panX: 1.55, panZ: -0.10, spin: 8.10, haze: 0.58 },
+    radius: 3.60, target: -1.05, panX: 1.55, panZ: -0.10, haze: 0.58 },
 ];
 
 const TAU = Math.PI * 2;
@@ -71,16 +71,29 @@ function spinFor(hour) {
   return -(((hour % 12) * 30 + 180) * Math.PI) / 180;
 }
 
-/* La deuxième scène affiche cette heure et la garde sur toute sa traversée :
-   le mouvement y vient de la caméra, pas du cadran. On retient le tour le
-   plus proche de la valeur prévue pour que le disque ne se dévide pas d'un
-   coup en y arrivant. */
+/* Angle sur lequel le cadran doit se caler pour montrer l'heure de
+   démonstration. On retient le tour qui laisse de la place à une révolution
+   avant lui, sinon le disque devrait tourner à l'envers pour l'atteindre. */
+let landing = 0;
+
 function syncDisc(hour = DEMO_HOUR) {
   const want = spinFor(hour);
-  const near = want + TAU * Math.round((STOPS[2].spin - want) / TAU);
-  STOPS[1].spin = near;
-  STOPS[2].spin = near;
-  STOPS[3].spin = near + 2.7;
+  landing = want + TAU * Math.round((11.5 - want) / TAU);
+}
+
+/**
+ * Rotation du cadran le long de la lecture.
+ *
+ * Une simple interpolation entre arrêts laissait la deuxième scène sans
+ * rotation du tout. Le cadran approche donc pendant la première scène,
+ * achève son tour et se cale sur l'heure, la tient le temps qu'on la lise,
+ * puis repart.
+ */
+function spinAt(u) {
+  if (u <= 1) return lerp(STOPS[0].spin, landing - TAU, ease(u));
+  if (u <= 1.3) return lerp(landing - TAU, landing, ease((u - 1) / 0.3));
+  if (u <= 1.7) return landing;                 // l'heure reste lisible
+  return landing + (u - 1.7) * 2.6;
 }
 
 /* Le carton se tient autour de 0.71 R du côté opposé au moyeu : on en déduit
@@ -98,7 +111,6 @@ function mountCamera(scene) {
 
   let travel = 0;   // position sur la timeline, en numéro de scène fractionnaire
   let shown = 0;    // valeur lissée effectivement envoyée au shader
-  let drift = 0;
 
   const measure = () => {
     let t = 0;
@@ -126,7 +138,6 @@ function mountCamera(scene) {
 
   const frame = () => {
     shown = reduced ? travel : lerp(shown, travel, 0.075);
-    if (!reduced) drift += 0.0005;            // souffle, pas moteur
 
     if (!scene) { requestAnimationFrame(frame); return; }
 
@@ -149,7 +160,7 @@ function mountCamera(scene) {
     scene.set('uAimY', sample(shown, 'aimY'));
     scene.set('uFov', sample(shown, 'fov'));
     scene.set('uHaze', sample(shown, 'haze'));
-    scene.set('uSpin', sample(shown, 'spin') + drift);
+    scene.set('uSpin', spinAt(shown));
 
     requestAnimationFrame(frame);
   };
@@ -232,7 +243,6 @@ function boot() {
 
   mountLifts();
   mountTone();
-  mountCrests();
 }
 
 if (document.readyState === 'loading') {
