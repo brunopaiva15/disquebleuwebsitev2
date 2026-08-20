@@ -15,11 +15,8 @@ const ease = (t) => 0.5 - Math.cos(Math.PI * clamp(t)) / 2;
 /* ------------------------------------------------------- LIENS STORES -- */
 
 const STORES = {
-  /* Déduit de `applicationId` dans android/app/build.gradle.kts. */
+  ios: 'https://apps.apple.com/app/id6756579975',
   android: 'https://play.google.com/store/apps/details?id=ch.vergasta.disquebleusuisse',
-  /* TODO : remplacer par https://apps.apple.com/ch/app/id<IDENTIFIANT> une fois
-     la fiche App Store publiée. En attendant, la recherche évite un lien mort. */
-  ios: 'https://apps.apple.com/ch/search?term=disque%20bleu',
 };
 
 function wireStores() {

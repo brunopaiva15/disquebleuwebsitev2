@@ -51,11 +51,9 @@ reste entièrement lisible.
 
 ## Liens de téléchargement
 
-Ils sont regroupés dans la constante `STORES` en tête de `assets/js/app.js`.
-
-Le lien Google Play est déduit de l'`applicationId` du projet Android. Le lien
-App Store pointe pour l'instant sur une recherche : il reste à le remplacer par
-`https://apps.apple.com/ch/app/id<IDENTIFIANT>` une fois la fiche publiée.
+Ils sont regroupés dans la constante `STORES` en tête de `assets/js/app.js`,
+et appliqués aux éléments portant `data-store="ios"` ou `data-store="android"`.
+Une seule ligne à changer si une fiche déménage.
 
 ## Publication
 
