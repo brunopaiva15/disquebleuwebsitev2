@@ -38,7 +38,7 @@ uniform float uCenterY; // position du moyeu. Le carton est très excentré,
 uniform float uPanX;    // on place donc le moyeu, pas la fenêtre, et on
 uniform float uPanZ;    // laisse le disque voyager dans le cadre.
 uniform float uHaze;    // densité des nuages
-uniform float uBlackBackground; // fond noir uni pour la scène des fonctions
+uniform float uSolidBackground; // fond uni pour la scène des fonctions
 
 const float PI = 3.14159265;
 const float THICK = 0.038;   // demi-épaisseur du carton
@@ -165,7 +165,9 @@ void main() {
   vec3 up = cross(right, fwd);
   vec3 rd = normalize(uv.x * right + uv.y * up + uFov * fwd);
 
-  vec3 col = uBlackBackground > 0.5 ? vec3(0.0) : sky(rd, frag);
+  vec3 col = uSolidBackground > 0.5
+    ? vec3(11.0 / 255.0, 10.0 / 255.0, 9.0 / 255.0)
+    : sky(rd, frag);
 
   /* --- Intersection avec le carton --------------------------------- */
   // Le disque tourne autour de son centre, qui est hors du carton.
@@ -262,8 +264,8 @@ void main() {
         + vec3(0.60, 0.78, 1.0) * fres;
   }
 
-  // Trame fine sur le ciel et l'objet, mais pas sur le fond noir uni.
-  if (face != 0 || uBlackBackground < 0.5) {
+  // Trame fine sur le ciel et l'objet, mais pas sur le fond uni.
+  if (face != 0 || uSolidBackground < 0.5) {
     col += (bayer8(frag) - 0.5) / 220.0;
   }
 
@@ -290,7 +292,7 @@ function compile(gl, type, src) {
  *   maxDpr?:number,
  *   pixelBudget?:number,
  *   pauseWhenOffscreen?:boolean,
- *   blackBackground?:boolean
+ *   solidBackground?:boolean
  * }} options
  * @returns {{set:(k:string,v:number)=>void,repaintDial:()=>void}|null}
  */
@@ -348,7 +350,7 @@ export function mountScene(canvas, options = {}) {
 
   const U = {};
   ['uRes', 'uTime', 'uDial', 'uSpin', 'uTilt', 'uCamY', 'uCamZ', 'uAimY', 'uFov',
-   'uRadius', 'uCenterY', 'uPanX', 'uPanZ', 'uHaze', 'uBlackBackground']
+   'uRadius', 'uCenterY', 'uPanX', 'uPanZ', 'uHaze', 'uSolidBackground']
     .forEach((k) => (U[k] = gl.getUniformLocation(prog, k)));
   gl.uniform1i(U.uDial, 0);
 
@@ -359,7 +361,7 @@ export function mountScene(canvas, options = {}) {
     uSpin: 0, uTilt: 1.02,
     uCamY: -1.45, uCamZ: 1.95, uAimY: 0.62, uFov: 0.92,
     uRadius: 2.6, uCenterY: 1.55, uPanX: 0, uPanZ: 0, uHaze: 1,
-    uBlackBackground: options.blackBackground ? 1 : 0,
+    uSolidBackground: options.solidBackground ? 1 : 0,
   };
 
   const resize = () => {
@@ -410,7 +412,7 @@ export function mountScene(canvas, options = {}) {
       gl.uniform1f(U.uPanX, state.uPanX);
       gl.uniform1f(U.uPanZ, state.uPanZ);
       gl.uniform1f(U.uHaze, state.uHaze);
-      gl.uniform1f(U.uBlackBackground, state.uBlackBackground);
+      gl.uniform1f(U.uSolidBackground, state.uSolidBackground);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     }
     requestAnimationFrame(frame);

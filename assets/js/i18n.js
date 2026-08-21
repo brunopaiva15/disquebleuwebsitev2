@@ -32,7 +32,6 @@ export const TRANSLATIONS = {
       title: 'Plus besoin<br>de calculer.',
       arrivalLabel: "Heure d'arrivée",
       example: "Arrivée 08h47, stationnement jusqu'à",
-      note: "La règle du pays où vous êtes s'applique toute seule.",
     },
     alert: {
       title: 'Fini<br>les amendes.',
@@ -173,7 +172,7 @@ export const TRANSLATIONS = {
     },
     install: {
       title: 'Tout simplement.',
-      text: "L'app coûte 1 CHF. Une amende, 40x plus.",
+      text: "L'app coûte 1 CHF. Une amende, 40 fois plus.",
     },
     footer: {
       description: 'Aide au stationnement à durée limitée.',
@@ -209,7 +208,6 @@ export const TRANSLATIONS = {
       title: 'No more<br>calculations.',
       arrivalLabel: 'Arrival time',
       example: 'Arrived at 08:47, parking allowed until',
-      note: 'The rules of the country you are in are applied automatically.',
     },
     alert: {
       title: 'No more<br>fines.',
@@ -350,7 +348,7 @@ export const TRANSLATIONS = {
     },
     install: {
       title: 'Simple as that.',
-      text: 'The app costs CHF 1. A fine costs 40× more.',
+      text: 'The app costs CHF 1. A fine costs 40 times more.',
     },
     footer: {
       description: 'Assistance for time-limited parking.',
@@ -386,7 +384,6 @@ export const TRANSLATIONS = {
       title: 'Kein<br>Nachrechnen.',
       arrivalLabel: 'Ankunftszeit',
       example: 'Ankunft 08:47 Uhr, Parkzeit bis',
-      note: 'Die Regeln des ausgewählten Landes werden automatisch angewendet.',
     },
     alert: {
       title: 'Keine<br>Bussen mehr.',
@@ -563,7 +560,6 @@ export const TRANSLATIONS = {
       title: 'Niente più<br>calcoli.',
       arrivalLabel: "Ora d'arrivo",
       example: 'Arrivo alle 08:47, sosta consentita fino alle',
-      note: 'Le regole del paese selezionato vengono applicate automaticamente.',
     },
     alert: {
       title: 'Niente più<br>multe.',

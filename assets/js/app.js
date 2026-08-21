@@ -163,11 +163,13 @@ function mountCamera(scene) {
     if (!scene) { requestAnimationFrame(frame); return; }
 
     const span = fit();
+    const portrait = clamp((0.72 - span) / 0.28);
     const tilt = sample(shown, 'tilt');
-    const radius = sample(shown, 'radius') * span;
+    const radius = sample(shown, 'radius') * span * lerp(1, 0.92, portrait);
     // En portrait le texte occupe toute la largeur : le disque doit remonter
     // pour lui laisser le bas du cadre. Le décalage suit le même facteur.
-    const target = sample(shown, 'target') + (1 - span) * 1.5;
+    const target = sample(shown, 'target')
+      + (1 - span) * lerp(1.5, 1.85, portrait);
 
     scene.set('uTilt', tilt);
     scene.set('uRadius', radius);
@@ -357,7 +359,7 @@ function boot() {
     maxDpr: 1.35,
     pixelBudget: 7e5,
     pauseWhenOffscreen: true,
-    blackBackground: true,
+    solidBackground: true,
   });
   if (!featureScene) featureCanvas?.parentElement.classList.add('is-static');
   const featureDisc = mountFeatureDisc(featureScene, featureCanvas);

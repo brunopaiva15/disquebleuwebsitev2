@@ -138,13 +138,14 @@ ul { list-style: none; }
    il faut une remontée depuis le bas. */
 @media (max-width: 860px) {
   .veil {
-    /* Il s'arrête assez bas pour ne pas grisailler le carton, le reste de
-       la lisibilité vient de l'ombre portée du texte. */
+    /* En portrait, la transition commence plus haut afin de séparer le texte
+       du disque sans couvrir la partie supérieure de l'objet. */
     background: linear-gradient(
       to top,
-      rgba(3, 24, 62, 0.92) 0%,
-      rgba(3, 24, 62, 0.68) 30%,
-      rgba(3, 24, 62, 0) 58%
+      rgba(3, 24, 62, 0.94) 0%,
+      rgba(3, 24, 62, 0.78) 42%,
+      rgba(3, 24, 62, 0.32) 62%,
+      rgba(3, 24, 62, 0) 76%
     );
   }
 }
@@ -706,6 +707,36 @@ body.is-light .language-picker select { background: #ffffff3d; }
   font-variant-numeric: tabular-nums;
 }
 
+@media (max-width: 520px) {
+  .scene--calculation .scene__copy {
+    width: min(100%, 360px);
+    gap: 16px;
+  }
+
+  .scene--calculation .readout {
+    width: 100%;
+    gap: 8px;
+    padding: 14px 0 16px 18px;
+  }
+
+  .scene--calculation .readout__time {
+    padding-top: 17px;
+  }
+
+  .scene--calculation .readout__time::before {
+    width: 18px;
+    height: 10px;
+  }
+
+  .scene--calculation .readout__foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.15em 0.35em;
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+}
+
 /* ---------------------------------------------------- AVERTISSEMENT -- */
 
 /* La mention légale doit se lire, pas se décorer : fond papier, filets. */
@@ -758,7 +789,7 @@ body.is-light .language-picker select { background: #ffffff3d; }
   height: min(720px, calc(100svh - 96px));
   min-height: 480px;
   overflow: hidden;
-  background: #000;
+  background: #0b0a09;
   border-right: 1px solid var(--rule-dark);
 }
 
