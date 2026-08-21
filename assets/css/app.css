@@ -578,6 +578,30 @@ body.is-light .masthead {
 
 .stack { display: grid; gap: 18px; justify-items: start; }
 
+.stack__version {
+  display: inline-block;
+  padding: 6px 8px;
+  border: 1px solid currentColor;
+  font: 500 10px / 1 var(--code);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--icon);
+}
+
+.inline-link {
+  color: var(--on-dark);
+  text-decoration: underline;
+  text-decoration-color: var(--icon);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color 0.25s linear, text-decoration-color 0.25s linear;
+}
+
+.inline-link:hover {
+  color: var(--icon);
+  text-decoration-color: currentColor;
+}
+
 /* -------------------------------------------------------- LE RELEVÉ -- */
 
 /* Reprend la présentation du disque dans l'application : les trois langues
@@ -665,6 +689,65 @@ body.is-light .masthead {
 }
 
 .notice p + p { margin-top: 14px; }
+
+/* ----------------------------------------------------------- PRESSE -- */
+
+/* Les parutions reprennent le registre éditorial du site : des noms francs,
+   des filets et un lien direct vers chaque article, sans carte décorative. */
+.press-leaf {
+  padding-block: clamp(64px, 11vh, 112px);
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.press-title {
+  margin-bottom: clamp(28px, 5vh, 52px);
+  font: 500 11px / 1 var(--code);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--on-dark-dim);
+}
+
+.press-list {
+  border-top: 1px solid var(--rule-dark);
+}
+
+.press-source {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px 36px;
+  padding-block: clamp(22px, 3.4vh, 34px);
+  border-bottom: 1px solid var(--rule-dark);
+  transition: background 0.4s var(--ease);
+}
+
+.press-source__name {
+  font-family: var(--title);
+  font-size: clamp(1.35rem, 3vw, 2.35rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.press-source__action {
+  font: 500 10px / 1.4 var(--code);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--icon);
+  transition: transform 0.35s var(--ease), color 0.25s linear;
+}
+
+@media (hover: hover) {
+  .press-source:hover { background: #ffffff08; }
+  .press-source:hover .press-source__action {
+    color: var(--on-dark);
+    transform: translate(3px, -3px);
+  }
+}
+
+@media (max-width: 520px) {
+  .press-source { grid-template-columns: 1fr; }
+}
 
 /* ------------------------------------------------------- PIED DE PAGE -- */
 
