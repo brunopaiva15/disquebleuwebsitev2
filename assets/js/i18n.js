@@ -168,6 +168,7 @@ export const TRANSLATIONS = {
         "Lire l'article d'ArcInfo",
         "Lire l'article de Watson",
         "Lire l'article du Nouvelliste",
+        "Lire l'article de La Côte",
       ],
     },
     install: {
@@ -344,6 +345,7 @@ export const TRANSLATIONS = {
         'Read the ArcInfo article',
         'Read the Watson article',
         'Read the Nouvelliste article',
+        'Read the article from La Côte',
       ],
     },
     install: {
@@ -520,6 +522,7 @@ export const TRANSLATIONS = {
         'Artikel bei ArcInfo lesen',
         'Artikel bei Watson lesen',
         'Artikel im Nouvelliste lesen',
+        'Artikel von La Côte lesen',
       ],
     },
     install: {
@@ -696,6 +699,7 @@ export const TRANSLATIONS = {
         "Leggi l'articolo di ArcInfo",
         "Leggi l'articolo di Watson",
         "Leggi l'articolo del Nouvelliste",
+        "Leggi l'articolo pubblicato da La Côte",
       ],
     },
     install: {
