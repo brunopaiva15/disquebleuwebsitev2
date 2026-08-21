@@ -771,105 +771,25 @@ body.is-light .language-picker select { background: #ffffff3d; }
 
 .notice p + p { margin-top: 14px; }
 
-/* -------------------------------------- DISQUE DES FONCTIONNALITÉS -- */
+/* ----------------------------------------- LISTE DES FONCTIONNALITÉS -- */
 
 .feature-layout {
-  position: relative;
-  display: grid;
-  align-items: start;
   background: var(--press-soft);
   border-block: 1px solid var(--rule-dark);
 }
 
-.feature-visual {
-  position: sticky;
-  top: 74px;
-  align-self: start;
-  width: 100%;
-  height: min(720px, calc(100svh - 96px));
-  min-height: 480px;
-  overflow: hidden;
-  background: #0b0a09;
-  border-right: 1px solid var(--rule-dark);
-}
-
-.feature-visual::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border: 1px solid #ffffff1c;
-  pointer-events: none;
-}
-
-#feature-stage {
-  width: 100%;
-  height: 100%;
-  max-width: none;
-}
-
 .feature-list {
-  position: relative;
   min-width: 0;
   border-top: 0;
 }
 
 .feature-list .rank__row {
-  position: relative;
-  min-height: 154px;
   padding-inline: clamp(20px, 3.2vw, 34px);
-  transition: background 0.35s linear;
-}
-
-.feature-list .rank__row::before {
-  content: "";
-  position: absolute;
-  top: 22px;
-  bottom: 22px;
-  left: 0;
-  width: 2px;
-  background: var(--icon);
-  transform: scaleY(0);
-  transform-origin: center;
-  transition: transform 0.35s var(--ease);
-}
-
-.feature-list .rank__row.is-current {
-  background: #ffffff07;
-}
-
-.feature-list .rank__row.is-current::before {
-  transform: scaleY(1);
-}
-
-@media (min-width: 900px) {
-  .feature-layout {
-    grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
-  }
 }
 
 @media (min-width: 960px) {
   .feature-list .rank__row {
     grid-template-columns: 44px minmax(0, 1fr);
-  }
-}
-
-@media (max-width: 899px) {
-  .feature-visual {
-    z-index: 2;
-    top: 62px;
-    height: clamp(230px, 40svh, 310px);
-    min-height: 0;
-    border-right: 0;
-    border-bottom: 1px solid var(--rule-dark);
-  }
-
-  .feature-list {
-    z-index: 1;
-    background: var(--press-soft);
-  }
-
-  .feature-list .rank__row {
-    min-height: 184px;
   }
 }
 

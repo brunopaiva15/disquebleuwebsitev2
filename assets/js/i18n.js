@@ -42,55 +42,46 @@ export const TRANSLATIONS = {
       items: [
         {
           title: "Calcul de l'heure à afficher",
-          dial: ["Calcul de l'heure", 'à afficher'],
           version: 'Depuis 1.0.0',
           text: 'Calculée selon la règle du pays, arrondi compris.',
         },
         {
           title: 'Règles locales et exceptions',
-          dial: ['Règles locales', 'et exceptions'],
           version: 'Depuis 1.0.0',
           text: 'Midi suisse, pause déjeuner, doubles plages, périodes nocturnes.',
         },
         {
           title: 'Jours fériés',
-          dial: ['Jours fériés'],
           version: 'Mise à jour 2.0.3',
           text: 'Nationaux et régionaux, selon le canton, la région ou le Land sélectionné.',
         },
         {
           title: "Alerte avant l'échéance",
-          dial: ['Alerte avant', "l'échéance"],
           version: 'Depuis 1.0.0',
           text: 'Une notification est envoyée avant la fin du stationnement, au délai choisi.',
         },
         {
           title: 'Trouver un parking',
-          dial: ['Trouver', 'un parking'],
           version: 'Depuis 1.0.0',
           text: "Repérez les places à proximité, gardez vos favorites et lancez l'itinéraire dans votre application de navigation.",
         },
         {
           title: 'Compte à rebours en direct',
-          dial: ['Compte à rebours', 'en direct'],
           version: 'Depuis 2.0.0',
           text: "Sur iPhone, le temps restant s'affiche sur l'écran verrouillé, dans la Dynamic Island et via un widget.",
         },
         {
           title: 'Durée personnalisée',
-          dial: ['Durée', 'personnalisée'],
           version: 'Depuis 2.0.1',
           text: "La durée se règle de 5 minutes à 12 heures et 59 minutes. L'heure et le jour restent modifiables.",
         },
         {
           title: 'Mon véhicule',
-          dial: ['Mon véhicule'],
           version: 'Améliorée en 2.1.1',
           text: 'La position de votre véhicule est mémorisée quand vous vous garez. Vous pouvez également ajouter une photo de repère, le niveau, le numéro de place ou une note.',
         },
         {
           title: 'Carte communautaire',
-          dial: ['Carte', 'communautaire'],
           version: 'Depuis 2.1.1',
           beforeLink: 'Signalez une place disparue ou mal renseignée. Après relecture, la correction repart vers les',
           link: "contributeurs d'OpenStreetMap",
@@ -219,55 +210,46 @@ export const TRANSLATIONS = {
       items: [
         {
           title: 'Time to display',
-          dial: ['Time', 'to display'],
           version: 'Since 1.0.0',
           text: "Calculated according to the country's rules, including rounding.",
         },
         {
           title: 'Local rules and exceptions',
-          dial: ['Local rules', 'and exceptions'],
           version: 'Since 1.0.0',
           text: 'Swiss noon rule, lunch breaks, split time windows and overnight periods.',
         },
         {
           title: 'Public holidays',
-          dial: ['Public', 'holidays'],
           version: 'Updated in 2.0.3',
           text: 'National and regional holidays, based on the selected canton, region or German state.',
         },
         {
           title: 'Expiry alert',
-          dial: ['Expiry', 'alert'],
           version: 'Since 1.0.0',
           text: 'A notification is sent before parking expires, using the advance notice you choose.',
         },
         {
           title: 'Find parking',
-          dial: ['Find', 'parking'],
           version: 'Since 1.0.0',
           text: 'Find nearby spaces, save favourites and start directions in your navigation app.',
         },
         {
           title: 'Live countdown',
-          dial: ['Live', 'countdown'],
           version: 'Since 2.0.0',
           text: 'On iPhone, the remaining time appears on the Lock Screen, in the Dynamic Island and in a widget.',
         },
         {
           title: 'Custom duration',
-          dial: ['Custom', 'duration'],
           version: 'Since 2.0.1',
           text: 'Set the duration from 5 minutes to 12 hours 59 minutes. The time and day can also be changed.',
         },
         {
           title: 'My vehicle',
-          dial: ['My vehicle'],
           version: 'Improved in 2.1.1',
           text: "Your vehicle's location is saved when you park. You can also add a reference photo, level, space number or note.",
         },
         {
           title: 'Community map',
-          dial: ['Community', 'map'],
           version: 'Since 2.1.1',
           beforeLink: 'Report a space that no longer exists or has incorrect information. After review, the correction is sent to',
           link: 'OpenStreetMap contributors',
@@ -396,55 +378,46 @@ export const TRANSLATIONS = {
       items: [
         {
           title: 'Einzustellende Zeit berechnen',
-          dial: ['Zeit', 'berechnen'],
           version: 'Seit 1.0.0',
           text: 'Berechnung nach den Regeln des Landes, einschliesslich Rundung.',
         },
         {
           title: 'Lokale Regeln und Ausnahmen',
-          dial: ['Lokale Regeln', 'und Ausnahmen'],
           version: 'Seit 1.0.0',
           text: 'Schweizer Mittagsregel, Mittagspausen, geteilte Zeitfenster und Nachtzeiträume.',
         },
         {
           title: 'Feiertage',
-          dial: ['Feiertage'],
           version: 'Aktualisiert in 2.0.3',
           text: 'Nationale und regionale Feiertage, abhängig vom gewählten Kanton, der Region oder dem Bundesland.',
         },
         {
           title: 'Erinnerung vor Ablauf',
-          dial: ['Erinnerung', 'vor Ablauf'],
           version: 'Seit 1.0.0',
           text: 'Eine Benachrichtigung wird im festgelegten Abstand vor Ende der Parkzeit gesendet.',
         },
         {
           title: 'Parkplatz finden',
-          dial: ['Parkplatz', 'finden'],
           version: 'Seit 1.0.0',
           text: 'Finden Sie Plätze in der Nähe, speichern Sie Favoriten und starten Sie die Route in Ihrer Navigations-App.',
         },
         {
           title: 'Live-Countdown',
-          dial: ['Live-', 'Countdown'],
           version: 'Seit 2.0.0',
           text: 'Auf dem iPhone erscheint die verbleibende Zeit auf dem Sperrbildschirm, in der Dynamic Island und in einem Widget.',
         },
         {
           title: 'Benutzerdefinierte Dauer',
-          dial: ['Eigene', 'Dauer'],
           version: 'Seit 2.0.1',
           text: 'Die Dauer lässt sich von 5 Minuten bis 12 Stunden 59 Minuten einstellen. Uhrzeit und Tag können ebenfalls geändert werden.',
         },
         {
           title: 'Mein Fahrzeug',
-          dial: ['Mein Fahrzeug'],
           version: 'Verbessert in 2.1.1',
           text: 'Der Standort Ihres Fahrzeugs wird beim Parkieren gespeichert. Zusätzlich können Sie ein Orientierungsfoto, das Stockwerk, die Platznummer oder eine Notiz hinzufügen.',
         },
         {
           title: 'Community-Karte',
-          dial: ['Community-', 'Karte'],
           version: 'Seit 2.1.1',
           beforeLink: 'Melden Sie einen entfernten oder falsch erfassten Parkplatz. Nach der Prüfung wird die Korrektur an die',
           link: 'Mitwirkenden von OpenStreetMap',
@@ -573,55 +546,46 @@ export const TRANSLATIONS = {
       items: [
         {
           title: "Calcolo dell'ora da impostare",
-          dial: ["Calcolo dell'ora", 'da impostare'],
           version: 'Dalla 1.0.0',
           text: 'Calcolata secondo le regole del paese, arrotondamento compreso.',
         },
         {
           title: 'Regole locali ed eccezioni',
-          dial: ['Regole locali', 'ed eccezioni'],
           version: 'Dalla 1.0.0',
           text: 'Regola svizzera di mezzogiorno, pausa pranzo, doppie fasce orarie e periodi notturni.',
         },
         {
           title: 'Giorni festivi',
-          dial: ['Giorni', 'festivi'],
           version: 'Aggiornata nella 2.0.3',
           text: 'Nazionali e regionali, in base al cantone, alla regione o allo Stato federato tedesco selezionato.',
         },
         {
           title: 'Avviso prima della scadenza',
-          dial: ['Avviso prima', 'della scadenza'],
           version: 'Dalla 1.0.0',
           text: 'Una notifica viene inviata prima della fine della sosta, con il preavviso scelto.',
         },
         {
           title: 'Trova parcheggio',
-          dial: ['Trova', 'parcheggio'],
           version: 'Dalla 1.0.0',
           text: "Trova i posti nelle vicinanze, salva i preferiti e avvia l'itinerario nell'app di navigazione.",
         },
         {
           title: 'Conto alla rovescia in tempo reale',
-          dial: ['Conto alla', 'rovescia'],
           version: 'Dalla 2.0.0',
           text: 'Su iPhone, il tempo rimanente appare sulla schermata di blocco, nella Dynamic Island e in un widget.',
         },
         {
           title: 'Durata personalizzata',
-          dial: ['Durata', 'personalizzata'],
           version: 'Dalla 2.0.1',
           text: "La durata può essere impostata da 5 minuti a 12 ore e 59 minuti. Anche l'ora e il giorno restano modificabili.",
         },
         {
           title: 'Il mio veicolo',
-          dial: ['Il mio veicolo'],
           version: 'Migliorata nella 2.1.1',
           text: 'La posizione del veicolo viene memorizzata quando parcheggi. Puoi anche aggiungere una foto di riferimento, il piano, il numero del posto o una nota.',
         },
         {
           title: 'Mappa della comunità',
-          dial: ['Mappa della', 'comunità'],
           version: 'Dalla 2.1.1',
           beforeLink: 'Segnala un posto rimosso o con informazioni errate. Dopo la verifica, la correzione viene inviata ai',
           link: 'collaboratori di OpenStreetMap',
@@ -721,9 +685,6 @@ export const TRANSLATIONS = {
   },
 };
 
-let currentLanguage = 'fr';
-const listeners = new Set();
-
 function lookup(language, key) {
   return key.split('.').reduce((value, part) => value?.[part], TRANSLATIONS[language]);
 }
@@ -802,7 +763,6 @@ function reflectLanguageInUrl(language) {
 
 export function setLanguage(language, options = {}) {
   const next = normaliseLanguage(language);
-  currentLanguage = next;
   document.documentElement.lang = next;
   setTranslatedText(next);
 
@@ -818,7 +778,6 @@ export function setLanguage(language, options = {}) {
   }
   if (options.updateUrl !== false) reflectLanguageInUrl(next);
 
-  listeners.forEach((listener) => listener(next));
   document.dispatchEvent(new CustomEvent('languagechange', { detail: { language: next } }));
   return next;
 }
@@ -838,14 +797,3 @@ export function initI18n() {
   return setLanguage(initialLanguage(), { persist: false });
 }
 
-export function onLanguageChange(listener) {
-  listeners.add(listener);
-  return () => listeners.delete(listener);
-}
-
-export function getFeatureDialLabels(language = currentLanguage) {
-  return TRANSLATIONS[normaliseLanguage(language)].features.items.map((item) => ({
-    title: item.title,
-    lines: item.dial,
-  }));
-}
