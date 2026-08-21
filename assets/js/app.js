@@ -3,7 +3,7 @@
    =========================================================================== */
 
 import { mountScene } from './scene.js';
-import { paintVersionDial, VERSION_LABELS } from './version-dial.js';
+import { paintFeatureDial, FEATURE_LABELS } from './feature-dial.js';
 
 const root = document.documentElement;
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -191,18 +191,18 @@ function mountCamera(scene) {
   requestAnimationFrame(frame);
 }
 
-/* ----------------------------------------------- CADRAN DES VERSIONS -- */
+/* ----------------------------------------- CADRAN DES FONCTIONNALITÉS -- */
 
-/* La première version occupe le premier des douze repères du cadran. Chaque
-   ligne suivante fait avancer la texture d'une graduation de 30 degrés. */
-const VERSION_START_SPIN = -((30 + 180) * Math.PI) / 180;
-const VERSION_SPIN_STEP = TAU / VERSION_LABELS.length;
+/* Le premier titre occupe le premier repère du cadran. Chaque ligne suivante
+   fait avancer la texture d'une graduation, selon les neuf fonctions. */
+const FEATURE_SPIN_STEP = TAU / FEATURE_LABELS.length;
+const FEATURE_START_SPIN = -(FEATURE_SPIN_STEP + Math.PI);
 
-function mountVersionDisc(scene, canvas) {
+function mountFeatureDisc(scene, canvas) {
   if (!scene || !canvas) return;
 
-  const rows = [...document.querySelectorAll('[data-version-row]')];
-  const readout = document.querySelector('[data-version-current]');
+  const rows = [...document.querySelectorAll('[data-feature-row]')];
+  const readout = document.querySelector('[data-feature-current]');
   if (!rows.length) return;
 
   let target = 0;
@@ -233,7 +233,9 @@ function mountVersionDisc(scene, canvas) {
     if (index === active) return;
     active = index;
     rows.forEach((row, i) => row.classList.toggle('is-current', i === active));
-    if (readout) readout.textContent = rows[active].dataset.version;
+    const title = FEATURE_LABELS[active]?.title
+      || rows[active].querySelector('.rank__title')?.textContent;
+    if (readout && title) readout.textContent = title;
   };
 
   const measure = () => {
@@ -259,7 +261,7 @@ function mountVersionDisc(scene, canvas) {
     setActive(Math.round(target));
     if (reduced) {
       shown = target;
-      scene.set('uSpin', VERSION_START_SPIN - shown * VERSION_SPIN_STEP);
+      scene.set('uSpin', FEATURE_START_SPIN - shown * FEATURE_SPIN_STEP);
     }
   };
 
@@ -268,7 +270,7 @@ function mountVersionDisc(scene, canvas) {
     lastFrame = now;
     const follow = dt ? 1 - Math.exp(-7 * dt) : 1;
     shown = lerp(shown, target, follow);
-    scene.set('uSpin', VERSION_START_SPIN - shown * VERSION_SPIN_STEP);
+    scene.set('uSpin', FEATURE_START_SPIN - shown * FEATURE_SPIN_STEP);
     requestAnimationFrame(frame);
   };
 
@@ -353,15 +355,15 @@ function boot() {
   if (!scene) root.classList.add('no-webgl');
   mountCamera(scene);
 
-  const versionCanvas = document.getElementById('version-stage');
-  const versionScene = mountScene(versionCanvas, {
-    dialPainter: paintVersionDial,
+  const featureCanvas = document.getElementById('feature-stage');
+  const featureScene = mountScene(featureCanvas, {
+    dialPainter: paintFeatureDial,
     maxDpr: 1.35,
     pixelBudget: 7e5,
     pauseWhenOffscreen: true,
   });
-  if (!versionScene) versionCanvas?.parentElement.classList.add('is-static');
-  mountVersionDisc(versionScene, versionCanvas);
+  if (!featureScene) featureCanvas?.parentElement.classList.add('is-static');
+  mountFeatureDisc(featureScene, featureCanvas);
 
   mountLifts();
   mountTone();

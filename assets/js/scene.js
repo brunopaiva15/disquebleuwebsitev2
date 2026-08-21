@@ -357,8 +357,8 @@ export function mountScene(canvas, options = {}) {
     // Plafond en nombre de pixels : le shader est exact, pas gratuit.
     const dpr = Math.min(window.devicePixelRatio || 1, options.maxDpr || 2);
     const budget = options.pixelBudget || 2.4e6;
-    // La scène principale occupe la fenêtre ; la scène des versions vit dans
-    // un panneau. Les dimensions CSS du canvas couvrent les deux cas.
+    // La scène principale occupe la fenêtre ; la scène des fonctionnalités vit
+    // dans un panneau. Les dimensions CSS du canvas couvrent les deux cas.
     const w0 = Math.max(1, canvas.clientWidth || window.innerWidth);
     const h0 = Math.max(1, canvas.clientHeight || window.innerHeight);
     const s = Math.min(dpr, Math.sqrt(budget / (w0 * h0)));

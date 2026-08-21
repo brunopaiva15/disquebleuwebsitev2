@@ -20,6 +20,7 @@ index.html            la page
 assets/css/app.css    feuille de style unique
 assets/js/scene.js    la scène WebGL (ciel tramé, disque en volume)
 assets/js/dial.js     le cadran des heures, peint dans un canvas
+assets/js/feature-dial.js  le cadran des fonctionnalités
 assets/js/app.js      caméra au scroll, apparitions, horloge
 tools/check-assets.py contrôle des fichiers référencés
 ```
