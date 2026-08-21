@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Stationnez l'esprit tranquille | Disque Bleu</title>
-<meta name="description" content="Disque Bleu calcule l'heure à porter sur votre disque de stationnement en Suisse, France, Allemagne, Italie, Belgique et Luxembourg, puis vous prévient avant l'échéance.">
+<title data-i18n="meta.title">Stationnez l'esprit tranquille | Disque Bleu</title>
+<meta name="description" data-i18n-content="meta.description" content="Disque Bleu calcule l'heure à porter sur votre disque de stationnement en Suisse, France, Allemagne, Italie, Belgique et Luxembourg, puis vous prévient avant l'échéance.">
 <meta name="theme-color" content="#0b60c4">
 <meta name="color-scheme" content="only light">
 
@@ -13,10 +13,10 @@
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Disque Bleu">
-<meta property="og:title" content="Stationnez l'esprit tranquille | Disque Bleu">
-<meta property="og:description" content="Six pays, six réglementations, un seul bouton. L'application calcule l'heure à afficher et vous prévient avant l'échéance.">
+<meta property="og:title" data-i18n-content="meta.title" content="Stationnez l'esprit tranquille | Disque Bleu">
+<meta property="og:description" data-i18n-content="meta.socialDescription" content="Six pays, six réglementations, un seul bouton. L'application calcule l'heure à afficher et vous prévient avant l'échéance.">
 <meta property="og:image" content="assets/img/app-icon.png">
-<meta property="og:locale" content="fr_CH">
+<meta property="og:locale" data-i18n-content="meta.locale" content="fr_CH">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,7 @@
 </head>
 
 <body>
-<a class="sr-only" href="#lecture">Aller au contenu</a>
+<a class="sr-only" href="#lecture" data-i18n="accessibility.skip">Aller au contenu</a>
 
 <!-- La scène : ciel et disque, en fond fixe de toute la page. -->
 <canvas id="stage" aria-hidden="true"></canvas>
@@ -42,17 +42,28 @@
 </div>
 
 <header class="masthead">
-  <a class="masthead__logo" href="#haut" aria-label="Disque Bleu, retour en haut">
+  <a class="masthead__logo" href="#haut" aria-label="Disque Bleu, retour en haut" data-i18n-aria-label="accessibility.home">
     <!-- Le croissant du disque, dans la géométrie décrite en tête de scene.js. -->
     <svg viewBox="-74 25 148 80" fill="currentColor" aria-hidden="true">
       <path d="M -30.21 29.18 A 42 42 0 0 0 30.21 29.18 L 69 72.38
                A 100 100 0 0 1 -69 72.38 Z"/>
     </svg>
   </a>
-  <nav class="masthead__nav" aria-label="Sections">
-    <a class="masthead__link" href="#fonctions">Fonctions</a>
-    <a class="masthead__link" href="#pays">Pays</a>
-  </nav>
+  <div class="masthead__actions">
+    <nav class="masthead__nav" aria-label="Sections" data-i18n-aria-label="accessibility.sections">
+      <a class="masthead__link" href="#fonctions" data-i18n="nav.features">Fonctions</a>
+      <a class="masthead__link" href="#pays" data-i18n="nav.countries">Pays</a>
+    </nav>
+    <label class="language-picker">
+      <span class="sr-only" data-i18n="language.label">Langue</span>
+      <select id="language-select">
+        <option value="fr" lang="fr">FR</option>
+        <option value="en" lang="en">EN</option>
+        <option value="de" lang="de">DE</option>
+        <option value="it" lang="it">IT</option>
+      </select>
+    </label>
+  </div>
 </header>
 
 <main id="lecture">
@@ -61,15 +72,17 @@
 <section class="scene" id="haut" style="--len: 2.6">
   <div class="scene__pin">
     <div class="scene__copy">
-      <h1 class="display display--xl">Stationnez<br>l'esprit tranquille.</h1>
+      <h1 class="display display--xl" data-i18n-html="hero.title">Stationnez<br>l'esprit tranquille.</h1>
       <div class="stores">
         <a class="store" data-store="ios" rel="noopener"
-           aria-label="Télécharger dans l'App Store">
-          <img src="assets/img/app-store-fr.svg" alt="Télécharger dans l'App Store" height="52">
+           aria-label="Télécharger dans l'App Store" data-i18n-aria-label="stores.appleLabel">
+          <img src="assets/img/app-store-fr.svg" alt="Télécharger dans l'App Store" height="52"
+               data-i18n-src="stores.appleBadge" data-i18n-alt="stores.appleLabel">
         </a>
         <a class="store" data-store="android" rel="noopener"
-           aria-label="Disponible sur Google Play">
-          <img src="assets/img/google-play-fr.png" alt="Disponible sur Google Play" height="52">
+           aria-label="Disponible sur Google Play" data-i18n-aria-label="stores.googleLabel">
+          <img src="assets/img/google-play-fr.png" alt="Disponible sur Google Play" height="52"
+               data-i18n-src="stores.googleBadge" data-i18n-alt="stores.googleLabel">
         </a>
       </div>
     </div>
@@ -80,19 +93,15 @@
 <section class="scene" style="--len: 2.4">
   <div class="scene__pin">
     <div class="scene__copy">
-      <h2 class="display display--l">Plus besoin<br>de calculer.</h2>
+      <h2 class="display display--l" data-i18n-html="calculate.title">Plus besoin<br>de calculer.</h2>
       <div class="readout">
-        <p class="readout__label">
-          <span>Ankunftszeit</span>
-          <span>Heure d'arrivée</span>
-          <span>Ora d'arrivo</span>
-        </p>
+        <p class="readout__label" data-i18n="calculate.arrivalLabel">Heure d'arrivée</p>
         <p class="readout__time">09:00</p>
         <p class="readout__foot">
-          Arrivée 08h47, stationnement jusqu'à <b>10:00</b>
+          <span data-i18n="calculate.example">Arrivée 08h47, stationnement jusqu'à</span> <b>10:00</b>
         </p>
       </div>
-      <p class="say say--dim">
+      <p class="say say--dim" data-i18n="calculate.note">
         La règle du pays où vous êtes s'applique toute seule.
       </p>
     </div>
@@ -103,8 +112,8 @@
 <section class="scene" style="--len: 2.2">
   <div class="scene__pin">
     <div class="scene__copy">
-      <h2 class="display display--l">Fini<br>les amendes.</h2>
-      <p class="say say--dim">
+      <h2 class="display display--l" data-i18n-html="alert.title">Fini<br>les amendes.</h2>
+      <p class="say say--dim" data-i18n="alert.text">
         Vous recevez une alerte avant l'échéance de votre disque.
         Plus d'oubli possible !
       </p>
@@ -119,21 +128,13 @@
   <div class="hold">
     <header class="leaf__head">
       <div>
-        <p class="section-kicker" data-lift>L'application</p>
-        <h2 class="display display--m" id="fonctions-title" data-lift>Fonctionnalités</h2>
-        <p class="say say--dim" data-lift style="margin-top:20px">
-          Calcul du disque, alertes, stationnement et carte communautaire.
-        </p>
+        <h2 class="display display--m" id="fonctions-title" data-lift data-i18n="features.title">Fonctionnalités</h2>
       </div>
     </header>
 
     <div class="feature-layout">
       <div class="feature-visual" data-lift aria-hidden="true">
         <canvas id="feature-stage"></canvas>
-        <p class="feature-visual__readout">
-          <span>Fonction au repère</span>
-          <strong data-feature-current>Calcul de l'heure à afficher</strong>
-        </p>
       </div>
 
       <div class="rank feature-list" data-stagger>
@@ -141,10 +142,10 @@
         <span class="rank__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.2V12l3.5 2"/></svg></span>
         <div>
           <div class="rank__head">
-            <h3 class="rank__title">Calcul de l'heure à afficher</h3>
-            <span class="rank__version">Depuis 1.0.0</span>
+            <h3 class="rank__title" data-i18n="features.items.0.title">Calcul de l'heure à afficher</h3>
+            <span class="rank__version" data-i18n="features.items.0.version">Depuis 1.0.0</span>
           </div>
-          <p class="rank__note">Calculée selon la règle du pays, arrondi compris.</p>
+          <p class="rank__note" data-i18n="features.items.0.text">Calculée selon la règle du pays, arrondi compris.</p>
         </div>
       </article>
 
@@ -152,10 +153,10 @@
         <span class="rank__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.4" y="9.4" width="7.6" height="5.2" rx="1.7"/><rect x="14" y="9.4" width="7.6" height="5.2" rx="1.7"/></svg></span>
         <div>
           <div class="rank__head">
-            <h3 class="rank__title">Règles locales et exceptions</h3>
-            <span class="rank__version">Depuis 1.0.0</span>
+            <h3 class="rank__title" data-i18n="features.items.1.title">Règles locales et exceptions</h3>
+            <span class="rank__version" data-i18n="features.items.1.version">Depuis 1.0.0</span>
           </div>
-          <p class="rank__note">Midi suisse, pause déjeuner, doubles plages, périodes nocturnes.</p>
+          <p class="rank__note" data-i18n="features.items.1.text">Midi suisse, pause déjeuner, doubles plages, périodes nocturnes.</p>
         </div>
       </article>
 
@@ -163,10 +164,10 @@
         <span class="rank__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9.4 15.1 1.8 1.8 3.4-3.5"/></svg></span>
         <div>
           <div class="rank__head">
-            <h3 class="rank__title">Jours fériés</h3>
-            <span class="rank__version">Mise à jour 2.0.3</span>
+            <h3 class="rank__title" data-i18n="features.items.2.title">Jours fériés</h3>
+            <span class="rank__version" data-i18n="features.items.2.version">Mise à jour 2.0.3</span>
           </div>
-          <p class="rank__note">Nationaux et régionaux, selon le canton, la région ou le Land sélectionné.</p>
+          <p class="rank__note" data-i18n="features.items.2.text">Nationaux et régionaux, selon le canton, la région ou le Land sélectionné.</p>
         </div>
       </article>
 
@@ -174,10 +175,10 @@
         <span class="rank__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg></span>
         <div>
           <div class="rank__head">
-            <h3 class="rank__title">Alerte avant l'échéance</h3>
-            <span class="rank__version">Depuis 1.0.0</span>
+            <h3 class="rank__title" data-i18n="features.items.3.title">Alerte avant l'échéance</h3>
+            <span class="rank__version" data-i18n="features.items.3.version">Depuis 1.0.0</span>
           </div>
-          <p class="rank__note">Une notification est envoyée avant la fin du stationnement, au délai choisi.</p>
+          <p class="rank__note" data-i18n="features.items.3.text">Une notification est envoyée avant la fin du stationnement, au délai choisi.</p>
         </div>
       </article>
 
@@ -185,10 +186,10 @@
         <span class="rank__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
         <div>
           <div class="rank__head">
-            <h3 class="rank__title">Trouver un parking</h3>
-            <span class="rank__version">Depuis 1.0.0</span>
+            <h3 class="rank__title" data-i18n="features.items.4.title">Trouver un parking</h3>
+            <span class="rank__version" data-i18n="features.items.4.version">Depuis 1.0.0</span>
           </div>
-          <p class="rank__note">Repérez les places à proximité, gardez vos favorites et lancez l'itinéraire dans votre application de navigation.</p>
+          <p class="rank__note" data-i18n="features.items.4.text">Repérez les places à proximité, gardez vos favorites et lancez l'itinéraire dans votre application de navigation.</p>
         </div>
       </article>
 
@@ -196,10 +197,10 @@
         <span class="rank__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M9.5 5h5M10 18.5h4"/><path d="M9.5 12h5M12 9.5V12l1.6 1"/></svg></span>
         <div>
           <div class="rank__head">
-            <h3 class="rank__title">Compte à rebours en direct</h3>
-            <span class="rank__version">Depuis 2.0.0</span>
+            <h3 class="rank__title" data-i18n="features.items.5.title">Compte à rebours en direct</h3>
+            <span class="rank__version" data-i18n="features.items.5.version">Depuis 2.0.0</span>
           </div>
-          <p class="rank__note">Sur iPhone, le temps restant s'affiche sur l'écran verrouillé, dans la Dynamic Island et via un widget.</p>
+          <p class="rank__note" data-i18n="features.items.5.text">Sur iPhone, le temps restant s'affiche sur l'écran verrouillé, dans la Dynamic Island et via un widget.</p>
         </div>
       </article>
 
@@ -207,10 +208,10 @@
         <span class="rank__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7.5h8.5M17 7.5h3M4 16.5h3M11.5 16.5h8.5"/><circle cx="14.8" cy="7.5" r="2.3"/><circle cx="9.3" cy="16.5" r="2.3"/></svg></span>
         <div>
           <div class="rank__head">
-            <h3 class="rank__title">Durée personnalisée</h3>
-            <span class="rank__version">Depuis 2.0.1</span>
+            <h3 class="rank__title" data-i18n="features.items.6.title">Durée personnalisée</h3>
+            <span class="rank__version" data-i18n="features.items.6.version">Depuis 2.0.1</span>
           </div>
-          <p class="rank__note">La durée se règle de 5 minutes à 12 heures et 59 minutes. L'heure et le jour restent modifiables.</p>
+          <p class="rank__note" data-i18n="features.items.6.text">La durée se règle de 5 minutes à 12 heures et 59 minutes. L'heure et le jour restent modifiables.</p>
         </div>
       </article>
 
@@ -218,10 +219,10 @@
         <span class="rank__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.2 11.2 6.8 6.8A2 2 0 0 1 8.7 5.4h6.6a2 2 0 0 1 1.9 1.4l1.6 4.4"/><rect x="3.2" y="11.2" width="17.6" height="6" rx="1.8"/><path d="M6.6 14.2h.01M17.4 14.2h.01"/><path d="M6.4 17.2v1.4M17.6 17.2v1.4"/></svg></span>
         <div>
           <div class="rank__head">
-            <h3 class="rank__title">Mon véhicule</h3>
-            <span class="rank__version">Améliorée en 2.1.1</span>
+            <h3 class="rank__title" data-i18n="features.items.7.title">Mon véhicule</h3>
+            <span class="rank__version" data-i18n="features.items.7.version">Améliorée en 2.1.1</span>
           </div>
-          <p class="rank__note">
+          <p class="rank__note" data-i18n="features.items.7.text">
             La position de votre véhicule est mémorisée quand vous vous garez.
             Vous pouvez également ajouter une photo de repère, le niveau, le
             numéro de place ou une note.
@@ -233,14 +234,13 @@
         <span class="rank__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.4 9 4l6 2.4L21 4v13.6L15 20l-6-2.4L3 20z"/><path d="M9 4v13.6M15 6.4V20"/></svg></span>
         <div>
           <div class="rank__head">
-            <h3 class="rank__title">Carte communautaire</h3>
-            <span class="rank__version">Depuis 2.1.1</span>
+            <h3 class="rank__title" data-i18n="features.items.8.title">Carte communautaire</h3>
+            <span class="rank__version" data-i18n="features.items.8.version">Depuis 2.1.1</span>
           </div>
           <p class="rank__note">
-            Signalez une place disparue ou mal renseignée. Après relecture, la
-            correction repart vers les
-            <a class="inline-link" href="https://openstreetmap.org/" target="_blank" rel="noopener noreferrer">contributeurs d'OpenStreetMap</a>
-            et profite à tout le monde.
+            <span data-i18n="features.items.8.beforeLink">Signalez une place disparue ou mal renseignée. Après relecture, la correction repart vers les</span>
+            <a class="inline-link" href="https://openstreetmap.org/" target="_blank" rel="noopener noreferrer" data-i18n="features.items.8.link">contributeurs d'OpenStreetMap</a>
+            <span data-i18n="features.items.8.afterLink">et profite à tout le monde.</span>
           </p>
         </div>
       </article>
@@ -250,10 +250,8 @@
     <details class="feature-history">
       <summary class="feature-history__summary">
         <span class="feature-history__summary-title">
-          <span class="section-kicker">Historique des versions</span>
-          <strong id="versions-title">Voir le changelog complet</strong>
+          <strong id="versions-title" data-i18n="changelog.action">Voir le changelog complet</strong>
         </span>
-        <span class="feature-history__summary-meta">12 versions · de 1.0.0 à 2.1.1</span>
         <span class="feature-history__toggle" aria-hidden="true"></span>
       </summary>
 
@@ -262,11 +260,11 @@
           <article class="version-row is-current" data-version-row data-version="2.1.1" data-lift>
             <div class="version-row__meta">
               <strong>2.1.1</strong>
-              <time datetime="2026-08-20">20 août 2026</time>
+              <time datetime="2026-08-20" data-i18n-date>20 août 2026</time>
             </div>
             <div class="version-row__body">
-              <h4>Italie, Belgique, Luxembourg, carte communautaire et Mon véhicule</h4>
-              <p>
+              <h4 data-i18n="changelog.versions.0.title">Italie, Belgique, Luxembourg, carte communautaire et Mon véhicule</h4>
+              <p data-i18n="changelog.versions.0.text">
                 Ajout de l'Italie, de la Belgique et du Luxembourg, avec leurs
                 règles de stationnement et leurs jours fériés. Ajout de la
                 carte communautaire pour signaler ou proposer une place à
@@ -280,11 +278,11 @@
           <article class="version-row" data-version-row data-version="2.0.3" data-lift>
             <div class="version-row__meta">
               <strong>2.0.3</strong>
-              <time datetime="2026-08-19">19 août 2026</time>
+              <time datetime="2026-08-19" data-i18n-date>19 août 2026</time>
             </div>
             <div class="version-row__body">
-              <h4>Corrections des jours fériés</h4>
-              <p>
+              <h4 data-i18n="changelog.versions.1.title">Corrections des jours fériés</h4>
+              <p data-i18n="changelog.versions.1.text">
                 Vérification des 44 subdivisions alors couvertes, correction
                 des jours fériés dans onze cantons suisses et affichage des
                 prochains jours fériés au-delà de l'année en cours.
@@ -295,11 +293,11 @@
           <article class="version-row" data-version-row data-version="2.0.2" data-lift>
             <div class="version-row__meta">
               <strong>2.0.2</strong>
-              <time datetime="2026-08-17">17 août 2026</time>
+              <time datetime="2026-08-17" data-i18n-date>17 août 2026</time>
             </div>
             <div class="version-row__body">
-              <h4>Compatibilité iPhone et Android, navigation</h4>
-              <p>
+              <h4 data-i18n="changelog.versions.2.title">Compatibilité iPhone et Android, navigation</h4>
+              <p data-i18n="changelog.versions.2.text">
                 Présentation de Disque Bleu dans Mes Échéances sur iPhone,
                 mise à niveau de la compatibilité Android et amélioration de
                 l'ouverture des applications de navigation.
@@ -310,11 +308,11 @@
           <article class="version-row" data-version-row data-version="2.0.1" data-lift>
             <div class="version-row__meta">
               <strong>2.0.1</strong>
-              <time datetime="2026-07-30">30 juillet 2026</time>
+              <time datetime="2026-07-30" data-i18n-date>30 juillet 2026</time>
             </div>
             <div class="version-row__body">
-              <h4>Durée personnalisée</h4>
-              <p>
+              <h4 data-i18n="changelog.versions.3.title">Durée personnalisée</h4>
+              <p data-i18n="changelog.versions.3.text">
                 Ajout d'un sélecteur à deux roues pour définir librement la
                 durée du stationnement, de 5 minutes à 12 heures et 59 minutes.
               </p>
@@ -324,11 +322,11 @@
           <article class="version-row" data-version-row data-version="2.0.0" data-lift>
             <div class="version-row__meta">
               <strong>2.0.0</strong>
-              <time datetime="2026-06-09">9 juin 2026</time>
+              <time datetime="2026-06-09" data-i18n-date>9 juin 2026</time>
             </div>
             <div class="version-row__body">
-              <h4>Activités en direct et widget sur iPhone</h4>
-              <p>
+              <h4 data-i18n="changelog.versions.4.title">Activités en direct et widget sur iPhone</h4>
+              <p data-i18n="changelog.versions.4.text">
                 Ajout du temps restant sur l'écran verrouillé, dans la Dynamic
                 Island et dans un widget. Ces affichages sont disponibles dans
                 les quatre langues de l'application.
@@ -339,11 +337,11 @@
           <article class="version-row" data-version-row data-version="1.3.0" data-lift>
             <div class="version-row__meta">
               <strong>1.3.0</strong>
-              <time datetime="2026-05-04">4 mai 2026</time>
+              <time datetime="2026-05-04" data-i18n-date>4 mai 2026</time>
             </div>
             <div class="version-row__body">
-              <h4>Fin de la bêta allemande</h4>
-              <p>
+              <h4 data-i18n="changelog.versions.5.title">Fin de la bêta allemande</h4>
+              <p data-i18n="changelog.versions.5.text">
                 Fin de la bêta allemande. Ajout de la Brötchentaste pour les
                 arrêts de 30 minutes, suggestion du pays selon la position et
                 détection automatique des zones bleues à proximité.
@@ -354,11 +352,11 @@
           <article class="version-row" data-version-row data-version="1.2.1" data-lift>
             <div class="version-row__meta">
               <strong>1.2.1</strong>
-              <time datetime="2026-02-24">24 février 2026</time>
+              <time datetime="2026-02-24" data-i18n-date>24 février 2026</time>
             </div>
             <div class="version-row__body">
-              <h4>Changement de nom et traductions allemandes</h4>
-              <p>
+              <h4 data-i18n="changelog.versions.6.title">Changement de nom et traductions allemandes</h4>
+              <p data-i18n="changelog.versions.6.text">
                 L'application « Disque Bleu Suisse » devient « Disque Bleu ».
                 Ajout d'un parcours d'accueil en allemand et traduction complète
                 des noms des Länder.
@@ -369,11 +367,11 @@
           <article class="version-row" data-version-row data-version="1.2.0" data-lift>
             <div class="version-row__meta">
               <strong>1.2.0</strong>
-              <time datetime="2026-02-20">20 février 2026</time>
+              <time datetime="2026-02-20" data-i18n-date>20 février 2026</time>
             </div>
             <div class="version-row__body">
-              <h4>Ajout de l'Allemagne en bêta</h4>
-              <p>
+              <h4 data-i18n="changelog.versions.7.title">Ajout de l'Allemagne en bêta</h4>
+              <p data-i18n="changelog.versions.7.text">
                 Ajout des règles allemandes, des seize Länder et de leurs jours
                 fériés régionaux. Cette prise en charge est initialement proposée
                 en bêta.
@@ -384,11 +382,11 @@
           <article class="version-row" data-version-row data-version="1.1.1" data-lift>
             <div class="version-row__meta">
               <strong>1.1.1</strong>
-              <time datetime="2026-02-19">19 février 2026</time>
+              <time datetime="2026-02-19" data-i18n-date>19 février 2026</time>
             </div>
             <div class="version-row__body">
-              <h4>Fin de la bêta française</h4>
-              <p>
+              <h4 data-i18n="changelog.versions.8.title">Fin de la bêta française</h4>
+              <p data-i18n="changelog.versions.8.text">
                 Fin de la bêta française, ajout des jours fériés spécifiques à
                 l'Alsace-Moselle, localisation des noms et adaptation de
                 l'interface aux petits écrans.
@@ -399,11 +397,11 @@
           <article class="version-row" data-version-row data-version="1.1.0" data-lift>
             <div class="version-row__meta">
               <strong>1.1.0</strong>
-              <time datetime="2026-02-13">13 février 2026</time>
+              <time datetime="2026-02-13" data-i18n-date>13 février 2026</time>
             </div>
             <div class="version-row__body">
-              <h4>Ajout de la France en bêta</h4>
-              <p>
+              <h4 data-i18n="changelog.versions.9.title">Ajout de la France en bêta</h4>
+              <p data-i18n="changelog.versions.9.text">
                 Ajout des règles françaises, de la pause déjeuner, des jours
                 fériés et du cas particulier de l'Alsace-Moselle.
               </p>
@@ -413,11 +411,11 @@
           <article class="version-row" data-version-row data-version="1.0.1" data-lift>
             <div class="version-row__meta">
               <strong>1.0.1</strong>
-              <time datetime="2026-01-31">31 janvier 2026</time>
+              <time datetime="2026-01-31" data-i18n-date>31 janvier 2026</time>
             </div>
             <div class="version-row__body">
-              <h4>Position du véhicule et avertissement</h4>
-              <p>
+              <h4 data-i18n="changelog.versions.10.title">Position du véhicule et avertissement</h4>
+              <p data-i18n="changelog.versions.10.text">
                 La position du véhicule reste disponible après l'expiration du
                 disque et le redémarrage de l'application. Ajout d'un rappel
                 indiquant que l'application ne remplace pas le disque physique.
@@ -428,11 +426,11 @@
           <article class="version-row" data-version-row data-version="1.0.0" data-lift>
             <div class="version-row__meta">
               <strong>1.0.0</strong>
-              <time datetime="2025-12-15">15 décembre 2025</time>
+              <time datetime="2025-12-15" data-i18n-date>15 décembre 2025</time>
             </div>
             <div class="version-row__body">
-              <h4>Première version</h4>
-              <p>
+              <h4 data-i18n="changelog.versions.11.title">Première version</h4>
+              <p data-i18n="changelog.versions.11.text">
                 Calcul des règles suisses, compte à rebours, alertes, quatre
                 langues, cantons et jours fériés, mémorisation de la position
                 du véhicule et recherche de zones bleues à proximité.
@@ -450,8 +448,8 @@
   <div class="hold">
     <header class="leaf__head">
       <div>
-        <h2 class="display display--m" data-lift>Six pays,<br>une seule application.</h2>
-        <p class="say say--dim" data-lift style="margin-top:20px">
+        <h2 class="display display--m" data-lift data-i18n-html="countries.title">Six pays,<br>une seule application.</h2>
+        <p class="say say--dim" data-lift style="margin-top:20px" data-i18n="countries.text">
           Les horaires, arrondis et jours fériés s'adaptent automatiquement
           selon le pays sélectionné.
         </p>
@@ -460,37 +458,37 @@
 
     <div class="countries" data-stagger>
       <article class="country" data-lift>
-        <h3 class="country__name">Suisse</h3>
+        <h3 class="country__name" data-i18n="countries.names.0">Suisse</h3>
         <span class="country__flag" aria-hidden="true">
           <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="32" fill="#d52b1e"/><rect x="13" y="6" width="6" height="20" fill="#fff"/><rect x="6" y="13" width="20" height="6" fill="#fff"/></svg>
         </span>
       </article>
       <article class="country" data-lift>
-        <h3 class="country__name">France</h3>
+        <h3 class="country__name" data-i18n="countries.names.1">France</h3>
         <span class="country__flag" aria-hidden="true">
           <svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg"><rect width="12" height="24" fill="#002395"/><rect x="12" width="12" height="24" fill="#fff"/><rect x="24" width="12" height="24" fill="#ed2939"/></svg>
         </span>
       </article>
       <article class="country" data-lift>
-        <h3 class="country__name">Allemagne</h3>
+        <h3 class="country__name" data-i18n="countries.names.2">Allemagne</h3>
         <span class="country__flag" aria-hidden="true">
           <svg viewBox="0 0 40 24" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="8" fill="#000"/><rect y="8" width="40" height="8" fill="#dd0000"/><rect y="16" width="40" height="8" fill="#ffce00"/></svg>
         </span>
       </article>
       <article class="country" data-lift>
-        <h3 class="country__name">Italie</h3>
+        <h3 class="country__name" data-i18n="countries.names.3">Italie</h3>
         <span class="country__flag" aria-hidden="true">
           <svg viewBox="0 0 36 24" xmlns="http://www.w3.org/2000/svg"><rect width="12" height="24" fill="#009246"/><rect x="12" width="12" height="24" fill="#f1f2f1"/><rect x="24" width="12" height="24" fill="#ce2b37"/></svg>
         </span>
       </article>
       <article class="country" data-lift>
-        <h3 class="country__name">Belgique</h3>
+        <h3 class="country__name" data-i18n="countries.names.4">Belgique</h3>
         <span class="country__flag" aria-hidden="true">
           <svg viewBox="0 0 30 26" xmlns="http://www.w3.org/2000/svg"><rect width="10" height="26" fill="#000"/><rect x="10" width="10" height="26" fill="#fae042"/><rect x="20" width="10" height="26" fill="#ed2939"/></svg>
         </span>
       </article>
       <article class="country" data-lift>
-        <h3 class="country__name">Luxembourg</h3>
+        <h3 class="country__name" data-i18n="countries.names.5">Luxembourg</h3>
         <span class="country__flag" aria-hidden="true">
           <svg viewBox="0 0 40 24" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="8" fill="#ed2939"/><rect y="8" width="40" height="8" fill="#fff"/><rect y="16" width="40" height="8" fill="#00a1de"/></svg>
         </span>
@@ -507,6 +505,7 @@
         <figure class="notice__art" data-lift>
 <svg class="windshield" viewBox="0 0 460 300" role="img"
      aria-label="Une voiture vue de face avec un disque de stationnement posé derrière le pare-brise"
+     data-i18n-aria-label="accessibility.windshield"
      xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="vitre" x1="0" y1="0" x2="1" y2="1">
@@ -605,10 +604,10 @@
 </svg>
         </figure>
         <div>
-          <h2 class="display display--s" data-lift style="margin-bottom:18px">
+          <h2 class="display display--s" data-lift style="margin-bottom:18px" data-i18n="notice.title">
             L'application ne remplace pas le disque physique.
           </h2>
-          <p class="say say--dim" data-lift>
+          <p class="say say--dim" data-lift data-i18n="notice.text">
             C'est une aide au conducteur. Le disque officiel doit rester apposé
             derrière le pare-brise, visible depuis l'extérieur.
           </p>
@@ -621,23 +620,23 @@
 <!-- ======================================================= PRESSE ===== -->
 <section class="leaf press-leaf" aria-labelledby="presse-title">
   <div class="hold">
-    <h2 class="press-title" id="presse-title" data-lift>Apparu sur</h2>
+    <h2 class="press-title" id="presse-title" data-lift data-i18n="press.title">Apparu sur</h2>
     <div class="press-list" data-stagger>
-      <a class="press-source" href="https://www.lejdj.ch/articles/a-saint-imier-il-oublie-son-disque-bleu-et-cree-une-application-pour-eviter-les-amendes-100885" target="_blank" rel="noopener noreferrer" aria-label="Lire l'article du Journal du Jura" data-lift>
+      <a class="press-source" href="https://www.lejdj.ch/articles/a-saint-imier-il-oublie-son-disque-bleu-et-cree-une-application-pour-eviter-les-amendes-100885" target="_blank" rel="noopener noreferrer" aria-label="Lire l'article du Journal du Jura" data-i18n-aria-label="press.sources.0" data-lift>
         <img class="press-source__logo press-source__logo--jdj" src="assets/img/press/le-journal-du-jura.svg" width="1243" height="200" alt="Le Journal du Jura">
-        <span class="press-source__action">Lire l'article ↗</span>
+        <span class="press-source__action" data-i18n="press.action">Lire l'article ↗</span>
       </a>
-      <a class="press-source" href="https://www.arcinfo.ch/neuchatel-canton/montagnes/la-chaux-de-fonds/un-ex-chaux-de-fonnier-installe-a-saint-imier-oublie-son-disque-il-cree-une-application-pour-eviter-les-amendes-1510801" target="_blank" rel="noopener noreferrer" aria-label="Lire l'article d'ArcInfo" data-lift>
+      <a class="press-source" href="https://www.arcinfo.ch/neuchatel-canton/montagnes/la-chaux-de-fonds/un-ex-chaux-de-fonnier-installe-a-saint-imier-oublie-son-disque-il-cree-une-application-pour-eviter-les-amendes-1510801" target="_blank" rel="noopener noreferrer" aria-label="Lire l'article d'ArcInfo" data-i18n-aria-label="press.sources.1" data-lift>
         <img class="press-source__logo press-source__logo--arcinfo" src="assets/img/press/arcinfo.svg" width="135" height="32" alt="ArcInfo">
-        <span class="press-source__action">Lire l'article ↗</span>
+        <span class="press-source__action" data-i18n="press.action">Lire l'article ↗</span>
       </a>
-      <a class="press-source" href="https://www.watson.ch/fr/suisse/transports/633299012-l-application-disque-bleu-ravira-les-automobilistes-suisses" target="_blank" rel="noopener noreferrer" aria-label="Lire l'article de Watson" data-lift>
+      <a class="press-source" href="https://www.watson.ch/fr/suisse/transports/633299012-l-application-disque-bleu-ravira-les-automobilistes-suisses" target="_blank" rel="noopener noreferrer" aria-label="Lire l'article de Watson" data-i18n-aria-label="press.sources.2" data-lift>
         <img class="press-source__logo press-source__logo--watson" src="assets/img/press/watson.svg" width="454" height="143" alt="Watson">
-        <span class="press-source__action">Lire l'article ↗</span>
+        <span class="press-source__action" data-i18n="press.action">Lire l'article ↗</span>
       </a>
-      <a class="press-source" href="https://www.lenouvelliste.ch/suisse/vous-oubliez-souvent-de-tourner-votre-disque-ce-romand-a-cree-une-application-pour-eviter-les-amendes-1511033" target="_blank" rel="noopener noreferrer" aria-label="Lire l'article du Nouvelliste" data-lift>
+      <a class="press-source" href="https://www.lenouvelliste.ch/suisse/vous-oubliez-souvent-de-tourner-votre-disque-ce-romand-a-cree-une-application-pour-eviter-les-amendes-1511033" target="_blank" rel="noopener noreferrer" aria-label="Lire l'article du Nouvelliste" data-i18n-aria-label="press.sources.3" data-lift>
         <img class="press-source__logo press-source__logo--nouvelliste" src="assets/img/press/le-nouvelliste.svg" width="217" height="32" alt="Le Nouvelliste">
-        <span class="press-source__action">Lire l'article ↗</span>
+        <span class="press-source__action" data-i18n="press.action">Lire l'article ↗</span>
       </a>
     </div>
   </div>
@@ -648,18 +647,20 @@
   <div class="hold">
     <header class="leaf__head">
       <div>
-        <h2 class="display display--l" data-lift>Tout simplement.</h2>
-        <p class="say say--dim" data-lift style="margin-top:20px">
+        <h2 class="display display--l" data-lift data-i18n="install.title">Tout simplement.</h2>
+        <p class="say say--dim" data-lift style="margin-top:20px" data-i18n="install.text">
           L’app coûte 1 CHF. Une amende, 40x plus.
         </p>
         <div class="stores" data-lift style="margin-top:32px">
           <a class="store" data-store="ios" rel="noopener"
-             aria-label="Télécharger dans l'App Store">
-            <img src="assets/img/app-store-fr.svg" alt="Télécharger dans l'App Store" height="52">
+             aria-label="Télécharger dans l'App Store" data-i18n-aria-label="stores.appleLabel">
+            <img src="assets/img/app-store-fr.svg" alt="Télécharger dans l'App Store" height="52"
+                 data-i18n-src="stores.appleBadge" data-i18n-alt="stores.appleLabel">
           </a>
           <a class="store" data-store="android" rel="noopener"
-             aria-label="Disponible sur Google Play">
-            <img src="assets/img/google-play-fr.png" alt="Disponible sur Google Play" height="52">
+             aria-label="Disponible sur Google Play" data-i18n-aria-label="stores.googleLabel">
+            <img src="assets/img/google-play-fr.png" alt="Disponible sur Google Play" height="52"
+                 data-i18n-src="stores.googleBadge" data-i18n-alt="stores.googleLabel">
           </a>
         </div>
       </div>
@@ -673,20 +674,17 @@
     <div class="foot__grid">
       <div>
         <h4>Disque Bleu</h4>
-        <p class="say say--dim" style="font-size:.9rem;max-width:30ch">
-          Aide au stationnement à durée limitée en Suisse, France, Allemagne,
-          Italie, Belgique et Luxembourg.
-        </p>
+        <p class="say say--dim" style="font-size:.9rem;max-width:30ch" data-i18n="footer.description">Aide au stationnement à durée limitée.</p>
       </div>
       <div>
-        <h4>Le site</h4>
+        <h4 data-i18n="footer.site">Le site</h4>
         <ul>
-          <li><a class="foot__link" href="#fonctions">Fonctions</a></li>
-          <li><a class="foot__link" href="#pays">Pays couverts</a></li>
+          <li><a class="foot__link" href="#fonctions" data-i18n="nav.features">Fonctions</a></li>
+          <li><a class="foot__link" href="#pays" data-i18n="footer.countries">Pays couverts</a></li>
         </ul>
       </div>
       <div>
-        <h4>Installer</h4>
+        <h4 data-i18n="footer.install">Installer</h4>
         <ul>
           <li><a class="foot__link" data-store="ios" href="#" rel="noopener">App Store</a></li>
           <li><a class="foot__link" data-store="android" href="#" rel="noopener">Google Play</a></li>

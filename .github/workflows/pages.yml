@@ -31,6 +31,9 @@ jobs:
             node --check "$f" || exit 1
           done
 
+      - name: Traductions complètes
+        run: node tools/check-i18n.mjs
+
   deployer:
     name: Déploiement
     needs: verifier

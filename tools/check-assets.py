@@ -15,7 +15,9 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 # href/src/import pointant vers un chemin relatif (ni http(s), ni //, ni data:,
 # ni ancre interne).
 PATTERNS = [
-    re.compile(r"""(?:href|src)\s*=\s*["']([^"'#]+)["']"""),
+    # Le préfixe exclut notamment data-i18n-src, qui contient une clé de
+    # traduction et non un chemin de fichier.
+    re.compile(r"""(?<![\w-])(?:href|src)\s*=\s*["']([^"'#]+)["']"""),
     re.compile(r"""(?:from|import)\s+["'](\./[^"']+)["']"""),
 ]
 

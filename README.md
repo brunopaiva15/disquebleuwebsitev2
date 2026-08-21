@@ -21,9 +21,15 @@ assets/css/app.css    feuille de style unique
 assets/js/scene.js    la scène WebGL (ciel tramé, disque en volume)
 assets/js/dial.js     le cadran des heures, peint dans un canvas
 assets/js/feature-dial.js  le cadran des fonctionnalités
+assets/js/i18n.js     les textes français, anglais, allemands et italiens
 assets/js/app.js      caméra au scroll, apparitions, horloge
 tools/check-assets.py contrôle des fichiers référencés
+tools/check-i18n.mjs  contrôle la parité entre les quatre langues
 ```
+
+La langue suit le choix enregistré ou celle du navigateur. Elle peut être
+changée depuis le bandeau ; le paramètre `?lang=fr|en|de|it` permet de partager
+directement une version linguistique.
 
 ## Le disque
 

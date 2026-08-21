@@ -3,7 +3,8 @@
    =========================================================================== */
 
 import { mountScene } from './scene.js';
-import { paintFeatureDial, FEATURE_LABELS } from './feature-dial.js';
+import { paintFeatureDial } from './feature-dial.js';
+import { getFeatureDialLabels, initI18n, onLanguageChange } from './i18n.js';
 
 const root = document.documentElement;
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -193,17 +194,13 @@ function mountCamera(scene) {
 
 /* ----------------------------------------- CADRAN DES FONCTIONNALITÉS -- */
 
-/* Le premier titre occupe le premier repère du cadran. Chaque ligne suivante
-   fait avancer la texture d'une graduation, selon les neuf fonctions. */
-const FEATURE_SPIN_STEP = TAU / FEATURE_LABELS.length;
-const FEATURE_START_SPIN = -(FEATURE_SPIN_STEP + Math.PI);
-
 function mountFeatureDisc(scene, canvas) {
-  if (!scene || !canvas) return;
+  if (!scene || !canvas) return null;
 
   const rows = [...document.querySelectorAll('[data-feature-row]')];
-  const readout = document.querySelector('[data-feature-current]');
-  if (!rows.length) return;
+  if (!rows.length) return null;
+  const spinStep = TAU / rows.length;
+  const startSpin = -(spinStep + Math.PI);
 
   let target = 0;
   let shown = 0;
@@ -233,9 +230,6 @@ function mountFeatureDisc(scene, canvas) {
     if (index === active) return;
     active = index;
     rows.forEach((row, i) => row.classList.toggle('is-current', i === active));
-    const title = FEATURE_LABELS[active]?.title
-      || rows[active].querySelector('.rank__title')?.textContent;
-    if (readout && title) readout.textContent = title;
   };
 
   const measure = () => {
@@ -261,7 +255,7 @@ function mountFeatureDisc(scene, canvas) {
     setActive(Math.round(target));
     if (reduced) {
       shown = target;
-      scene.set('uSpin', FEATURE_START_SPIN - shown * FEATURE_SPIN_STEP);
+      scene.set('uSpin', startSpin - shown * spinStep);
     }
   };
 
@@ -270,7 +264,7 @@ function mountFeatureDisc(scene, canvas) {
     lastFrame = now;
     const follow = dt ? 1 - Math.exp(-7 * dt) : 1;
     shown = lerp(shown, target, follow);
-    scene.set('uSpin', FEATURE_START_SPIN - shown * FEATURE_SPIN_STEP);
+    scene.set('uSpin', startSpin - shown * spinStep);
     requestAnimationFrame(frame);
   };
 
@@ -283,6 +277,7 @@ function mountFeatureDisc(scene, canvas) {
   configure();
   measure();
   if (!reduced) requestAnimationFrame(frame);
+  return { refresh: measure };
 }
 
 /* --------------------------------------------------- TEXTE DES SCÈNES -- */
@@ -342,6 +337,7 @@ function mountTone() {
 /* ------------------------------------------------------------ DÉPART -- */
 
 function boot() {
+  initI18n();
   wireStores();
   document.querySelectorAll('[data-year]').forEach((el) => {
     el.textContent = String(new Date().getFullYear());
@@ -357,13 +353,18 @@ function boot() {
 
   const featureCanvas = document.getElementById('feature-stage');
   const featureScene = mountScene(featureCanvas, {
-    dialPainter: paintFeatureDial,
+    dialPainter: (canvas, size) => paintFeatureDial(canvas, size, getFeatureDialLabels()),
     maxDpr: 1.35,
     pixelBudget: 7e5,
     pauseWhenOffscreen: true,
+    blackBackground: true,
   });
   if (!featureScene) featureCanvas?.parentElement.classList.add('is-static');
-  mountFeatureDisc(featureScene, featureCanvas);
+  const featureDisc = mountFeatureDisc(featureScene, featureCanvas);
+  onLanguageChange(() => {
+    featureScene?.repaintDial();
+    featureDisc?.refresh();
+  });
 
   mountLifts();
   mountTone();
