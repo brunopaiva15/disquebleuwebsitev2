@@ -692,8 +692,8 @@ body.is-light .masthead {
 
 /* ----------------------------------------------------------- PRESSE -- */
 
-/* Les parutions reprennent le registre éditorial du site : des noms francs,
-   des filets et un lien direct vers chaque article, sans carte décorative. */
+/* Les parutions reprennent le registre éditorial du site : les signatures des
+   médias, des filets et un lien direct vers chaque article. */
 .press-leaf {
   padding-block: clamp(64px, 11vh, 112px);
   border-bottom: 1px solid var(--rule-dark);
@@ -716,18 +716,27 @@ body.is-light .masthead {
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 16px 36px;
+  min-height: clamp(92px, 12vh, 124px);
   padding-block: clamp(22px, 3.4vh, 34px);
   border-bottom: 1px solid var(--rule-dark);
   transition: background 0.4s var(--ease);
 }
 
-.press-source__name {
-  font-family: var(--title);
-  font-size: clamp(1.35rem, 3vw, 2.35rem);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.04em;
+.press-source__logo {
+  width: auto;
+  height: auto;
+  max-width: min(62vw, 360px);
+  max-height: 58px;
+  object-fit: contain;
+  object-position: left center;
+  opacity: 0.88;
+  transition: opacity 0.35s linear, transform 0.4s var(--ease);
 }
+
+.press-source__logo--jdj { width: min(100%, 360px); }
+.press-source__logo--arcinfo { width: min(100%, 190px); filter: invert(1); }
+.press-source__logo--watson { width: min(100%, 180px); }
+.press-source__logo--nouvelliste { width: min(100%, 250px); }
 
 .press-source__action {
   font: 500 10px / 1.4 var(--code);
@@ -739,6 +748,10 @@ body.is-light .masthead {
 
 @media (hover: hover) {
   .press-source:hover { background: #ffffff08; }
+  .press-source:hover .press-source__logo {
+    opacity: 1;
+    transform: translateX(4px);
+  }
   .press-source:hover .press-source__action {
     color: var(--on-dark);
     transform: translate(3px, -3px);
@@ -746,7 +759,11 @@ body.is-light .masthead {
 }
 
 @media (max-width: 520px) {
-  .press-source { grid-template-columns: 1fr; }
+  .press-source {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .press-source__logo { max-width: min(78vw, 320px); }
 }
 
 /* ------------------------------------------------------- PIED DE PAGE -- */
