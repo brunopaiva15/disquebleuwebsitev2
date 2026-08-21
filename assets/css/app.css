@@ -690,6 +690,139 @@ body.is-light .masthead {
 
 .notice p + p { margin-top: 14px; }
 
+/* ------------------------------------------------------- CHANGELOG -- */
+
+/* L'historique reprend le système de rangs du site : une version et une date
+   dans la colonne technique, le récit de la mise à jour dans la colonne de
+   lecture. Aucun bloc flottant, seulement des filets et une progression. */
+.changelog-leaf {
+  background: var(--press-soft);
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.changelog-kicker {
+  margin-bottom: 18px;
+  font: 500 10px / 1 var(--code);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--icon);
+}
+
+.release-list {
+  border-top: 1px solid var(--rule-dark);
+}
+
+.release {
+  position: relative;
+  display: grid;
+  gap: 18px 40px;
+  padding-block: clamp(26px, 4.4vh, 44px);
+  border-bottom: 1px solid var(--rule-dark);
+}
+
+.release__meta {
+  position: relative;
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 9px;
+  padding-left: 24px;
+}
+
+/* La flèche est celle du repère de lecture du disque, réduite à un jalon. */
+.release__meta::before {
+  content: "";
+  position: absolute;
+  top: 0.46rem;
+  left: 0;
+  width: 12px;
+  height: 8px;
+  background: var(--icon);
+  clip-path: polygon(50% 100%, 0 0, 100% 0);
+  opacity: 0.72;
+}
+
+.release__version {
+  font: 500 clamp(1.5rem, 2.6vw, 2.2rem) / 1 var(--code);
+  letter-spacing: -0.05em;
+  color: var(--on-dark);
+  font-variant-numeric: tabular-nums;
+}
+
+.release__date {
+  font: 400 10px / 1.4 var(--code);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--on-dark-dim);
+}
+
+.release__body {
+  display: grid;
+  justify-items: start;
+  align-content: start;
+  gap: 12px;
+}
+
+.release__status {
+  display: inline-block;
+  padding: 6px 8px;
+  border: 1px solid currentColor;
+  font: 500 9px / 1 var(--code);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--icon);
+}
+
+.release__title {
+  font-family: var(--title);
+  font-size: clamp(1.24rem, 2vw, 1.72rem);
+  font-weight: 500;
+  line-height: 1.16;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.release__copy {
+  max-width: 68ch;
+  color: var(--on-dark-dim);
+  font-size: clamp(0.92rem, 0.88rem + 0.18vw, 1.02rem);
+  line-height: 1.62;
+  text-wrap: pretty;
+}
+
+.release--latest .release__version,
+.release--latest .release__title,
+.release--major .release__version {
+  color: var(--icon);
+}
+
+.release--origin .release__meta::before {
+  background: var(--on-dark);
+}
+
+@media (min-width: 960px) {
+  .release {
+    grid-template-columns: 210px minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+@media (hover: hover) {
+  .release { transition: background 0.45s var(--ease); }
+  .release:hover { background: #ffffff07; }
+  .release:hover .release__meta::before { opacity: 1; }
+}
+
+@media (max-width: 520px) {
+  .release__meta {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: baseline;
+    gap: 8px 14px;
+  }
+
+  .release__date { justify-self: end; text-align: right; }
+}
+
 /* ----------------------------------------------------------- PRESSE -- */
 
 /* Les parutions reprennent le registre éditorial du site : les signatures des
