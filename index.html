@@ -252,28 +252,43 @@
       <div class="notice__grid">
         <figure class="notice__art" data-lift>
 <svg class="windshield" viewBox="0 0 460 300" role="img"
-     aria-label="Le disque de stationnement posé derrière le pare-brise, lisible depuis l'extérieur"
+     aria-label="Une voiture vue de face avec un disque de stationnement posé derrière le pare-brise"
      xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="vitre" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#ffffff" stop-opacity=".92"/>
-      <stop offset="1" stop-color="#dfe7f2" stop-opacity=".78"/>
+      <stop offset="0" stop-color="#f8fbff"/>
+      <stop offset="1" stop-color="#cdd8e5"/>
     </linearGradient>
+    <clipPath id="pare-brise">
+      <path d="M78 38h304c12 0 21 8 24 20l29 148c3 13-7 24-20 24H45c-13 0-23-11-20-24L54 58c3-12 12-20 24-20z"/>
+    </clipPath>
   </defs>
 
-  <!-- La vitre, vue de l'extérieur. -->
-  <path d="M44 34h372a14 14 0 0 1 13.6 10.7L452 222a10 10 0 0 1-9.7 12.3H17.7A10 10 0 0 1 8 222L18.4 44.7A14 14 0 0 1 32 34z"
-        fill="url(#vitre)" stroke="#1d1c19" stroke-width="3"/>
+  <!-- La carrosserie rend immédiatement lisible la vue extérieure. -->
+  <path d="M77 17C113 5 347 5 383 17c18 6 31 20 37 42l29 146c5 25 0 50-14 66-9 10-23 15-42 15H67c-19 0-33-5-42-15-14-16-19-41-14-66L40 59c6-22 19-36 37-42z"
+        fill="#d9dde1" stroke="#1d1c19" stroke-width="3"/>
+  <path d="M46 112 18 119c-9 2-14 10-13 19l2 13 35-5zM414 112l28 7c9 2 14 10 13 19l-2 13-35-5z"
+        fill="#d9dde1" stroke="#1d1c19" stroke-width="3" stroke-linejoin="round"/>
 
-  <!-- Reflet, pour qu'on lise « vitre » et non « cadre ». -->
-  <path d="M300 34 190 234h58L358 34z" fill="#fff" opacity=".5"/>
-  <path d="M392 34 282 234h22L414 34z" fill="#fff" opacity=".35"/>
+  <!-- Le pare-brise laisse voir l'habitacle. -->
+  <path d="M78 38h304c12 0 21 8 24 20l29 148c3 13-7 24-20 24H45c-13 0-23-11-20-24L54 58c3-12 12-20 24-20z"
+        fill="url(#vitre)"/>
+  <g clip-path="url(#pare-brise)">
+    <!-- Siège conducteur et volant, visibles à travers la vitre. -->
+    <path d="M302 178c0-38 18-61 48-61s48 23 48 61v60h-96z"
+          fill="#6d747b" opacity=".2"/>
+    <g fill="none" stroke="#1d1c19" stroke-linecap="round" opacity=".42">
+      <circle cx="350" cy="179" r="35" stroke-width="8"/>
+      <circle cx="350" cy="179" r="8" stroke-width="5"/>
+      <path d="m350 171-22-20m22 20 23-20m-23 36v24" stroke-width="5"/>
+    </g>
 
-  <!-- Le rétroviseur, en haut au centre. -->
-  <rect x="196" y="34" width="68" height="21" rx="7" fill="#1d1c19"/>
+    <!-- La planche de bord, derrière la vitre et sous le disque. -->
+    <path d="M8 219c91-24 353-24 444 0v35H8z" fill="#1d1c19"/>
+    <path d="M28 219c86-14 318-14 404 0" fill="none" stroke="#686761" stroke-width="2"/>
 
-  <!-- Le disque, posé contre la vitre côté conducteur. -->
-  <g transform="translate(52 58) rotate(-4)">
+    <!-- Le disque est posé au bas du pare-brise, côté passager. -->
+    <g transform="translate(70 92) rotate(-4) scale(.76)">
     <g id="disque">
       <rect x="0" y="0" width="132.0" height="172.0" rx="7" fill="#1565c0"/>
       <!-- Le bord dentelé du grattoir, à gauche. -->
@@ -306,11 +321,33 @@
       <text x="66.0" y="152" text-anchor="middle" fill="#fff"
             font-family="Inter, Arial, sans-serif" font-size="33" font-weight="700">P</text>
     </g>
+    </g>
   </g>
 
-  <!-- La planche de bord ferme le bas. -->
-  <path d="M17.7 234.3h424.6L452 262a10 10 0 0 1-9.9 8.6H17.9A10 10 0 0 1 8 262z"
-        fill="#1d1c19"/>
+  <!-- Reflets au-dessus du disque : il est bien derrière la vitre. -->
+  <g clip-path="url(#pare-brise)" fill="#fff">
+    <path d="M105 38h64L76 230H31z" opacity=".22"/>
+    <path d="M260 38h46l-93 192h-46z" opacity=".3"/>
+    <path d="M347 38h24l-93 192h-24z" opacity=".2"/>
+  </g>
+
+  <!-- Encadrement, rétroviseur et essuie-glaces ferment la lecture « voiture ». -->
+  <path d="M78 38h304c12 0 21 8 24 20l29 148c3 13-7 24-20 24H45c-13 0-23-11-20-24L54 58c3-12 12-20 24-20z"
+        fill="none" stroke="#1d1c19" stroke-width="4"/>
+  <path d="M230 38v12" stroke="#1d1c19" stroke-width="5"/>
+  <rect x="196" y="46" width="68" height="24" rx="8" fill="#1d1c19"/>
+  <g fill="none" stroke="#1d1c19" stroke-linecap="round">
+    <path d="M167 225 76 203" stroke-width="5"/>
+    <path d="m167 225 70-8" stroke-width="3"/>
+    <path d="M293 225 384 203" stroke-width="5"/>
+    <path d="m293 225-70-8" stroke-width="3"/>
+  </g>
+
+  <!-- Capot et optiques : la vitre appartient sans ambiguïté à une voiture. -->
+  <path d="M25 251c75-15 335-15 410 0" fill="none" stroke="#1d1c19" stroke-width="2" opacity=".42"/>
+  <path d="M37 259h72l-12 15H50zM351 259h72l-13 15h-47z"
+        fill="#f2f1ed" stroke="#1d1c19" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M186 271h88" stroke="#1d1c19" stroke-width="5" stroke-linecap="round"/>
 </svg>
         </figure>
         <div>
@@ -319,8 +356,7 @@
           </h2>
           <p class="say say--dim" data-lift>
             C'est une aide au conducteur. Le disque officiel doit rester apposé
-            derrière le pare-brise, visible depuis l'extérieur. C'est vrai en
-            Suisse comme dans les cinq autres pays couverts.
+            derrière le pare-brise, visible depuis l'extérieur.
           </p>
         </div>
       </div>
