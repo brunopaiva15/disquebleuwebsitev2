@@ -1098,6 +1098,7 @@ body.is-light .language-picker select { background: #ffffff3d; }
 .press-source__logo--arcinfo { width: min(100%, 190px); filter: invert(1); }
 .press-source__logo--watson { width: min(100%, 180px); }
 .press-source__logo--nouvelliste { width: min(100%, 250px); }
+.press-source__logo--lacote { width: min(100%, 190px); }
 
 .press-source__action {
   font: 500 10px / 1.4 var(--code);
