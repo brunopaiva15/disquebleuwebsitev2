@@ -3,6 +3,7 @@
    =========================================================================== */
 
 import { mountScene } from './scene.js';
+import { paintVersionDial, VERSION_LABELS } from './version-dial.js';
 
 const root = document.documentElement;
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -190,6 +191,98 @@ function mountCamera(scene) {
   requestAnimationFrame(frame);
 }
 
+/* ----------------------------------------------- CADRAN DES VERSIONS -- */
+
+/* La première version occupe le premier des douze repères du cadran. Chaque
+   ligne suivante fait avancer la texture d'une graduation de 30 degrés. */
+const VERSION_START_SPIN = -((30 + 180) * Math.PI) / 180;
+const VERSION_SPIN_STEP = TAU / VERSION_LABELS.length;
+
+function mountVersionDisc(scene, canvas) {
+  if (!scene || !canvas) return;
+
+  const rows = [...document.querySelectorAll('[data-version-row]')];
+  const readout = document.querySelector('[data-version-current]');
+  if (!rows.length) return;
+
+  let target = 0;
+  let shown = 0;
+  let active = -1;
+  let lastFrame = 0;
+
+  const configure = () => {
+    const aspect = canvas.clientWidth / Math.max(1, canvas.clientHeight);
+    const span = clamp(aspect / 1.05, 0.58, 1);
+    const tilt = 1.02;
+    const radius = 2.25 * span;
+    const targetY = -0.12 + (1 - span) * 1.05;
+
+    scene.set('uTilt', tilt);
+    scene.set('uRadius', radius);
+    scene.set('uCenterY', hub(tilt, radius, targetY));
+    scene.set('uPanX', 0.08 * span);
+    scene.set('uPanZ', -0.22);
+    scene.set('uCamY', -0.72);
+    scene.set('uCamZ', 2.32);
+    scene.set('uAimY', -0.04);
+    scene.set('uFov', 1.0);
+    scene.set('uHaze', 0.72);
+  };
+
+  const setActive = (index) => {
+    if (index === active) return;
+    active = index;
+    rows.forEach((row, i) => row.classList.toggle('is-current', i === active));
+    if (readout) readout.textContent = rows[active].dataset.version;
+  };
+
+  const measure = () => {
+    const marker = window.innerHeight * (window.innerWidth < 860 ? 0.72 : 0.52);
+    const centers = rows.map((row) => {
+      const box = row.getBoundingClientRect();
+      return box.top + box.height / 2;
+    });
+
+    if (marker <= centers[0]) {
+      target = 0;
+    } else if (marker >= centers[centers.length - 1]) {
+      target = centers.length - 1;
+    } else {
+      for (let i = 0; i < centers.length - 1; i++) {
+        if (marker < centers[i] || marker > centers[i + 1]) continue;
+        const span = Math.max(1, centers[i + 1] - centers[i]);
+        target = i + (marker - centers[i]) / span;
+        break;
+      }
+    }
+
+    setActive(Math.round(target));
+    if (reduced) {
+      shown = target;
+      scene.set('uSpin', VERSION_START_SPIN - shown * VERSION_SPIN_STEP);
+    }
+  };
+
+  const frame = (now) => {
+    const dt = lastFrame ? Math.min((now - lastFrame) / 1000, 0.1) : 0;
+    lastFrame = now;
+    const follow = dt ? 1 - Math.exp(-7 * dt) : 1;
+    shown = lerp(shown, target, follow);
+    scene.set('uSpin', VERSION_START_SPIN - shown * VERSION_SPIN_STEP);
+    requestAnimationFrame(frame);
+  };
+
+  window.addEventListener('scroll', measure, { passive: true });
+  window.addEventListener('resize', () => {
+    configure();
+    measure();
+  }, { passive: true });
+
+  configure();
+  measure();
+  if (!reduced) requestAnimationFrame(frame);
+}
+
 /* --------------------------------------------------- TEXTE DES SCÈNES -- */
 
 /* ------------------------------------------------------- APPARITIONS -- */
@@ -259,6 +352,16 @@ function boot() {
   const scene = mountScene(document.getElementById('stage'));
   if (!scene) root.classList.add('no-webgl');
   mountCamera(scene);
+
+  const versionCanvas = document.getElementById('version-stage');
+  const versionScene = mountScene(versionCanvas, {
+    dialPainter: paintVersionDial,
+    maxDpr: 1.35,
+    pixelBudget: 7e5,
+    pauseWhenOffscreen: true,
+  });
+  if (!versionScene) versionCanvas?.parentElement.classList.add('is-static');
+  mountVersionDisc(versionScene, versionCanvas);
 
   mountLifts();
   mountTone();

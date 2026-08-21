@@ -282,9 +282,15 @@ function compile(gl, type, src) {
 /**
  * Monte la scène.
  * @param {HTMLCanvasElement} canvas
+ * @param {{
+ *   dialPainter?:(canvas:HTMLCanvasElement,size:number)=>HTMLCanvasElement,
+ *   maxDpr?:number,
+ *   pixelBudget?:number,
+ *   pauseWhenOffscreen?:boolean
+ * }} options
  * @returns {{set:(k:string,v:number)=>void}|null}
  */
-export function mountScene(canvas) {
+export function mountScene(canvas, options = {}) {
   if (!canvas) return null;
   const gl = canvas.getContext('webgl', { antialias: false, alpha: false, depth: false });
   if (!gl) return null;
@@ -311,7 +317,8 @@ export function mountScene(canvas) {
   gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
 
   /* --- Texture du cadran ------------------------------------------- */
-  const dial = paintDial(document.createElement('canvas'), 1024);
+  const dialPainter = options.dialPainter || paintDial;
+  const dial = dialPainter(document.createElement('canvas'), 1024);
   const tex = gl.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, tex);
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
@@ -348,10 +355,12 @@ export function mountScene(canvas) {
 
   const resize = () => {
     // Plafond en nombre de pixels : le shader est exact, pas gratuit.
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const budget = 2.4e6;
-    const w0 = window.innerWidth;
-    const h0 = window.innerHeight;
+    const dpr = Math.min(window.devicePixelRatio || 1, options.maxDpr || 2);
+    const budget = options.pixelBudget || 2.4e6;
+    // La scène principale occupe la fenêtre ; la scène des versions vit dans
+    // un panneau. Les dimensions CSS du canvas couvrent les deux cas.
+    const w0 = Math.max(1, canvas.clientWidth || window.innerWidth);
+    const h0 = Math.max(1, canvas.clientHeight || window.innerHeight);
     const s = Math.min(dpr, Math.sqrt(budget / (w0 * h0)));
     const w = Math.max(2, Math.round(w0 * s));
     const h = Math.max(2, Math.round(h0 * s));
@@ -362,26 +371,38 @@ export function mountScene(canvas) {
   };
   resize();
   window.addEventListener('resize', resize, { passive: true });
+  if ('ResizeObserver' in window) new ResizeObserver(resize).observe(canvas);
 
   const t0 = performance.now();
   let alive = true;
+  let inView = !options.pauseWhenOffscreen;
+
+  if (options.pauseWhenOffscreen && 'IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      inView = entries.some((entry) => entry.isIntersecting);
+    }, { rootMargin: '25% 0px' }).observe(canvas);
+  } else {
+    inView = true;
+  }
 
   const frame = (now) => {
     if (!alive) return;
-    gl.uniform2f(U.uRes, canvas.width, canvas.height);
-    gl.uniform1f(U.uTime, (now - t0) / 1000);
-    gl.uniform1f(U.uSpin, state.uSpin);
-    gl.uniform1f(U.uTilt, state.uTilt);
-    gl.uniform1f(U.uCamY, state.uCamY);
-    gl.uniform1f(U.uCamZ, state.uCamZ);
-    gl.uniform1f(U.uAimY, state.uAimY);
-    gl.uniform1f(U.uFov, state.uFov);
-    gl.uniform1f(U.uRadius, state.uRadius);
-    gl.uniform1f(U.uCenterY, state.uCenterY);
-    gl.uniform1f(U.uPanX, state.uPanX);
-    gl.uniform1f(U.uPanZ, state.uPanZ);
-    gl.uniform1f(U.uHaze, state.uHaze);
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    if (inView) {
+      gl.uniform2f(U.uRes, canvas.width, canvas.height);
+      gl.uniform1f(U.uTime, (now - t0) / 1000);
+      gl.uniform1f(U.uSpin, state.uSpin);
+      gl.uniform1f(U.uTilt, state.uTilt);
+      gl.uniform1f(U.uCamY, state.uCamY);
+      gl.uniform1f(U.uCamZ, state.uCamZ);
+      gl.uniform1f(U.uAimY, state.uAimY);
+      gl.uniform1f(U.uFov, state.uFov);
+      gl.uniform1f(U.uRadius, state.uRadius);
+      gl.uniform1f(U.uCenterY, state.uCenterY);
+      gl.uniform1f(U.uPanX, state.uPanX);
+      gl.uniform1f(U.uPanZ, state.uPanZ);
+      gl.uniform1f(U.uHaze, state.uHaze);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
     requestAnimationFrame(frame);
   };
   requestAnimationFrame(frame);

@@ -52,8 +52,6 @@
   <nav class="masthead__nav" aria-label="Sections">
     <a class="masthead__link" href="#fonctions">Fonctions</a>
     <a class="masthead__link" href="#pays">Pays</a>
-    <a class="masthead__link" href="#vehicule">Véhicule</a>
-    <a class="masthead__link" href="#versions">Versions</a>
   </nav>
 </header>
 
@@ -117,11 +115,15 @@
 <div class="seam" aria-hidden="true"></div>
 
 <!-- ==================================================== FONCTIONS ===== -->
-<section class="leaf" id="fonctions">
+<section class="leaf" id="fonctions" aria-labelledby="fonctions-title">
   <div class="hold">
     <header class="leaf__head">
       <div>
-        <h2 class="display display--m" data-lift>Tout tient derrière<br>un seul bouton.</h2>
+        <p class="section-kicker" data-lift>L'application</p>
+        <h2 class="display display--m" id="fonctions-title" data-lift>Fonctionnalités</h2>
+        <p class="say say--dim" data-lift style="margin-top:20px">
+          Calcul du disque, alertes, stationnement et carte communautaire.
+        </p>
       </div>
     </header>
 
@@ -129,7 +131,10 @@
       <article class="rank__row" data-lift>
         <span class="rank__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.2V12l3.5 2"/></svg></span>
         <div>
-          <h3 class="rank__title">L'heure à afficher</h3>
+          <div class="rank__head">
+            <h3 class="rank__title">Calcul de l'heure à afficher</h3>
+            <span class="rank__version">Depuis 1.0.0</span>
+          </div>
           <p class="rank__note">Calculée selon la règle du pays, arrondi compris.</p>
         </div>
       </article>
@@ -137,7 +142,10 @@
       <article class="rank__row" data-lift>
         <span class="rank__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.4" y="9.4" width="7.6" height="5.2" rx="1.7"/><rect x="14" y="9.4" width="7.6" height="5.2" rx="1.7"/></svg></span>
         <div>
-          <h3 class="rank__title">Les exceptions</h3>
+          <div class="rank__head">
+            <h3 class="rank__title">Règles locales et exceptions</h3>
+            <span class="rank__version">Depuis 1.0.0</span>
+          </div>
           <p class="rank__note">Midi suisse, pause déjeuner, doubles plages, périodes nocturnes.</p>
         </div>
       </article>
@@ -145,15 +153,32 @@
       <article class="rank__row" data-lift>
         <span class="rank__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9.4 15.1 1.8 1.8 3.4-3.5"/></svg></span>
         <div>
-          <h3 class="rank__title">Jours fériés</h3>
-          <p class="rank__note">Nationaux et régionaux, vérifiés à la main.</p>
+          <div class="rank__head">
+            <h3 class="rank__title">Jours fériés</h3>
+            <span class="rank__version">Mise à jour 2.0.3</span>
+          </div>
+          <p class="rank__note">Nationaux et régionaux, selon le canton, la région ou le Land sélectionné.</p>
+        </div>
+      </article>
+
+      <article class="rank__row" data-lift>
+        <span class="rank__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg></span>
+        <div>
+          <div class="rank__head">
+            <h3 class="rank__title">Alerte avant l'échéance</h3>
+            <span class="rank__version">Depuis 1.0.0</span>
+          </div>
+          <p class="rank__note">Une notification est envoyée avant la fin du stationnement, au délai choisi.</p>
         </div>
       </article>
 
       <article class="rank__row" data-lift>
         <span class="rank__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
         <div>
-          <h3 class="rank__title">Trouver un parking</h3>
+          <div class="rank__head">
+            <h3 class="rank__title">Trouver un parking</h3>
+            <span class="rank__version">Depuis 1.0.0</span>
+          </div>
           <p class="rank__note">Repérez les places à proximité, gardez vos favorites et lancez l'itinéraire dans votre application de navigation.</p>
         </div>
       </article>
@@ -161,7 +186,10 @@
       <article class="rank__row" data-lift>
         <span class="rank__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M9.5 5h5M10 18.5h4"/><path d="M9.5 12h5M12 9.5V12l1.6 1"/></svg></span>
         <div>
-          <h3 class="rank__title">Compte à rebours en direct</h3>
+          <div class="rank__head">
+            <h3 class="rank__title">Compte à rebours en direct</h3>
+            <span class="rank__version">Depuis 2.0.0</span>
+          </div>
           <p class="rank__note">Sur iPhone, le temps restant s'affiche sur l'écran verrouillé, dans la Dynamic Island et via un widget.</p>
         </div>
       </article>
@@ -169,10 +197,249 @@
       <article class="rank__row" data-lift>
         <span class="rank__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7.5h8.5M17 7.5h3M4 16.5h3M11.5 16.5h8.5"/><circle cx="14.8" cy="7.5" r="2.3"/><circle cx="9.3" cy="16.5" r="2.3"/></svg></span>
         <div>
-          <h3 class="rank__title">Vous gardez la main</h3>
-          <p class="rank__note">Horaires, durée et jours restent modifiables. Le panneau au sol a le dernier mot.</p>
+          <div class="rank__head">
+            <h3 class="rank__title">Durée personnalisée</h3>
+            <span class="rank__version">Depuis 2.0.1</span>
+          </div>
+          <p class="rank__note">La durée se règle de 5 minutes à 12 heures et 59 minutes. L'heure et le jour restent modifiables.</p>
         </div>
       </article>
+
+      <article class="rank__row" data-lift>
+        <span class="rank__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.2 11.2 6.8 6.8A2 2 0 0 1 8.7 5.4h6.6a2 2 0 0 1 1.9 1.4l1.6 4.4"/><rect x="3.2" y="11.2" width="17.6" height="6" rx="1.8"/><path d="M6.6 14.2h.01M17.4 14.2h.01"/><path d="M6.4 17.2v1.4M17.6 17.2v1.4"/></svg></span>
+        <div>
+          <div class="rank__head">
+            <h3 class="rank__title">Mon véhicule</h3>
+            <span class="rank__version">Améliorée en 2.1.1</span>
+          </div>
+          <p class="rank__note">
+            La position de votre véhicule est mémorisée quand vous vous garez.
+            Vous pouvez également ajouter une photo de repère, le niveau, le
+            numéro de place ou une note.
+          </p>
+        </div>
+      </article>
+
+      <article class="rank__row" data-lift>
+        <span class="rank__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.4 9 4l6 2.4L21 4v13.6L15 20l-6-2.4L3 20z"/><path d="M9 4v13.6M15 6.4V20"/></svg></span>
+        <div>
+          <div class="rank__head">
+            <h3 class="rank__title">Carte communautaire</h3>
+            <span class="rank__version">Depuis 2.1.1</span>
+          </div>
+          <p class="rank__note">
+            Signalez une place disparue ou mal renseignée. Après relecture, la
+            correction repart vers les
+            <a class="inline-link" href="https://openstreetmap.org/" target="_blank" rel="noopener noreferrer">contributeurs d'OpenStreetMap</a>
+            et profite à tout le monde.
+          </p>
+        </div>
+      </article>
+    </div>
+
+    <div class="feature-history" aria-labelledby="versions-title">
+      <header class="feature-history__head">
+        <div>
+          <p class="section-kicker" data-lift>Historique des versions</p>
+          <h3 class="display display--s" id="versions-title" data-lift>Évolution de l'application</h3>
+        </div>
+        <p class="feature-history__intro" data-lift>
+          Fonctions ajoutées et corrections principales depuis la version 1.0.0.
+        </p>
+      </header>
+
+      <div class="version-layout">
+        <div class="version-visual" data-lift aria-hidden="true">
+          <canvas id="version-stage"></canvas>
+          <p class="version-visual__readout">
+            <span>Version au repère</span>
+            <strong data-version-current>2.1.1</strong>
+          </p>
+        </div>
+
+        <div class="version-list" data-stagger>
+          <article class="version-row is-current" data-version-row data-version="2.1.1" data-lift>
+            <div class="version-row__meta">
+              <strong>2.1.1</strong>
+              <time datetime="2026-08-20">20 août 2026</time>
+            </div>
+            <div class="version-row__body">
+              <h4>Italie, Belgique, Luxembourg, carte communautaire et Mon véhicule</h4>
+              <p>
+                Ajout de l'Italie, de la Belgique et du Luxembourg, avec leurs
+                règles de stationnement et leurs jours fériés. Ajout de la
+                carte communautaire pour signaler ou proposer une place à
+                destination d'OpenStreetMap. « Mon véhicule » permet désormais
+                d'ajouter une photo de repère, le niveau, le numéro de place et
+                une note, conservés sur l'appareil.
+              </p>
+            </div>
+          </article>
+
+          <article class="version-row" data-version-row data-version="2.0.3" data-lift>
+            <div class="version-row__meta">
+              <strong>2.0.3</strong>
+              <time datetime="2026-08-19">19 août 2026</time>
+            </div>
+            <div class="version-row__body">
+              <h4>Corrections des jours fériés</h4>
+              <p>
+                Vérification des 44 subdivisions alors couvertes, correction
+                des jours fériés dans onze cantons suisses et affichage des
+                prochains jours fériés au-delà de l'année en cours.
+              </p>
+            </div>
+          </article>
+
+          <article class="version-row" data-version-row data-version="2.0.2" data-lift>
+            <div class="version-row__meta">
+              <strong>2.0.2</strong>
+              <time datetime="2026-08-17">17 août 2026</time>
+            </div>
+            <div class="version-row__body">
+              <h4>Compatibilité iPhone et Android, navigation</h4>
+              <p>
+                Présentation de Disque Bleu dans Mes Échéances sur iPhone,
+                mise à niveau de la compatibilité Android et amélioration de
+                l'ouverture des applications de navigation.
+              </p>
+            </div>
+          </article>
+
+          <article class="version-row" data-version-row data-version="2.0.1" data-lift>
+            <div class="version-row__meta">
+              <strong>2.0.1</strong>
+              <time datetime="2026-07-30">30 juillet 2026</time>
+            </div>
+            <div class="version-row__body">
+              <h4>Durée personnalisée</h4>
+              <p>
+                Ajout d'un sélecteur à deux roues pour définir librement la
+                durée du stationnement, de 5 minutes à 12 heures et 59 minutes.
+              </p>
+            </div>
+          </article>
+
+          <article class="version-row" data-version-row data-version="2.0.0" data-lift>
+            <div class="version-row__meta">
+              <strong>2.0.0</strong>
+              <time datetime="2026-06-09">9 juin 2026</time>
+            </div>
+            <div class="version-row__body">
+              <h4>Activités en direct et widget sur iPhone</h4>
+              <p>
+                Ajout du temps restant sur l'écran verrouillé, dans la Dynamic
+                Island et dans un widget. Ces affichages sont disponibles dans
+                les quatre langues de l'application.
+              </p>
+            </div>
+          </article>
+
+          <article class="version-row" data-version-row data-version="1.3.0" data-lift>
+            <div class="version-row__meta">
+              <strong>1.3.0</strong>
+              <time datetime="2026-05-04">4 mai 2026</time>
+            </div>
+            <div class="version-row__body">
+              <h4>Fin de la bêta allemande</h4>
+              <p>
+                Fin de la bêta allemande. Ajout de la Brötchentaste pour les
+                arrêts de 30 minutes, suggestion du pays selon la position et
+                détection automatique des zones bleues à proximité.
+              </p>
+            </div>
+          </article>
+
+          <article class="version-row" data-version-row data-version="1.2.1" data-lift>
+            <div class="version-row__meta">
+              <strong>1.2.1</strong>
+              <time datetime="2026-02-24">24 février 2026</time>
+            </div>
+            <div class="version-row__body">
+              <h4>Changement de nom et traductions allemandes</h4>
+              <p>
+                L'application « Disque Bleu Suisse » devient « Disque Bleu ».
+                Ajout d'un parcours d'accueil en allemand et traduction complète
+                des noms des Länder.
+              </p>
+            </div>
+          </article>
+
+          <article class="version-row" data-version-row data-version="1.2.0" data-lift>
+            <div class="version-row__meta">
+              <strong>1.2.0</strong>
+              <time datetime="2026-02-20">20 février 2026</time>
+            </div>
+            <div class="version-row__body">
+              <h4>Ajout de l'Allemagne en bêta</h4>
+              <p>
+                Ajout des règles allemandes, des seize Länder et de leurs jours
+                fériés régionaux. Cette prise en charge est initialement proposée
+                en bêta.
+              </p>
+            </div>
+          </article>
+
+          <article class="version-row" data-version-row data-version="1.1.1" data-lift>
+            <div class="version-row__meta">
+              <strong>1.1.1</strong>
+              <time datetime="2026-02-19">19 février 2026</time>
+            </div>
+            <div class="version-row__body">
+              <h4>Fin de la bêta française</h4>
+              <p>
+                Fin de la bêta française, ajout des jours fériés spécifiques à
+                l'Alsace-Moselle, localisation des noms et adaptation de
+                l'interface aux petits écrans.
+              </p>
+            </div>
+          </article>
+
+          <article class="version-row" data-version-row data-version="1.1.0" data-lift>
+            <div class="version-row__meta">
+              <strong>1.1.0</strong>
+              <time datetime="2026-02-13">13 février 2026</time>
+            </div>
+            <div class="version-row__body">
+              <h4>Ajout de la France en bêta</h4>
+              <p>
+                Ajout des règles françaises, de la pause déjeuner, des jours
+                fériés et du cas particulier de l'Alsace-Moselle.
+              </p>
+            </div>
+          </article>
+
+          <article class="version-row" data-version-row data-version="1.0.1" data-lift>
+            <div class="version-row__meta">
+              <strong>1.0.1</strong>
+              <time datetime="2026-01-31">31 janvier 2026</time>
+            </div>
+            <div class="version-row__body">
+              <h4>Position du véhicule et avertissement</h4>
+              <p>
+                La position du véhicule reste disponible après l'expiration du
+                disque et le redémarrage de l'application. Ajout d'un rappel
+                indiquant que l'application ne remplace pas le disque physique.
+              </p>
+            </div>
+          </article>
+
+          <article class="version-row" data-version-row data-version="1.0.0" data-lift>
+            <div class="version-row__meta">
+              <strong>1.0.0</strong>
+              <time datetime="2025-12-15">15 décembre 2025</time>
+            </div>
+            <div class="version-row__body">
+              <h4>Première version</h4>
+              <p>
+                Calcul des règles suisses, compte à rebours, alertes, quatre
+                langues, cantons et jours fériés, mémorisation de la position
+                du véhicule et recherche de zones bleues à proximité.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -227,42 +494,6 @@
           <svg viewBox="0 0 40 24" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="8" fill="#ed2939"/><rect y="8" width="40" height="8" fill="#fff"/><rect y="16" width="40" height="8" fill="#00a1de"/></svg>
         </span>
       </article>
-    </div>
-  </div>
-</section>
-
-<!-- ====================================================== TERRAIN ===== -->
-<section class="leaf" id="vehicule">
-  <div class="hold">
-    <header class="leaf__head">
-      <div>
-        <h2 class="display display--m" data-lift>Retrouver la voiture,<br>corriger la carte.</h2>
-      </div>
-    </header>
-
-    <div class="split">
-      <div class="stack" data-lift>
-        <span class="stack__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.2 11.2 6.8 6.8A2 2 0 0 1 8.7 5.4h6.6a2 2 0 0 1 1.9 1.4l1.6 4.4"/><rect x="3.2" y="11.2" width="17.6" height="6" rx="1.8"/><path d="M6.6 14.2h.01M17.4 14.2h.01"/><path d="M6.4 17.2v1.4M17.6 17.2v1.4"/></svg></span>
-        <span class="stack__version">Améliorée en 2.1</span>
-        <h3 class="rank__title">Mon véhicule</h3>
-        <p class="say say--dim">
-          La position de votre véhicule est mémorisée quand vous vous garez.
-          Vous pouvez également ajouter une photo de repère, le niveau, ou
-          encore le numéro de place.
-        </p>
-      </div>
-
-      <div class="stack" data-lift style="--wait: 120ms">
-        <span class="stack__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.4 9 4l6 2.4L21 4v13.6L15 20l-6-2.4L3 20z"/><path d="M9 4v13.6M15 6.4V20"/></svg></span>
-        <span class="stack__version">Nouveauté 2.1</span>
-        <h3 class="rank__title">Carte communautaire</h3>
-        <p class="say say--dim">
-          Signalez une place disparue ou mal renseignée. Après relecture, la
-          correction repart vers les
-          <a class="inline-link" href="https://openstreetmap.org/" target="_blank" rel="noopener noreferrer">contributeurs d'OpenStreetMap</a>
-          et profite à tout le monde.
-        </p>
-      </div>
     </div>
   </div>
 </section>
@@ -386,203 +617,6 @@
   </div>
 </section>
 
-<!-- ===================================================== VERSIONS ===== -->
-<section class="leaf changelog-leaf" id="versions" aria-labelledby="versions-title">
-  <div class="hold">
-    <header class="leaf__head">
-      <div>
-        <p class="changelog-kicker" data-lift>Historique des versions</p>
-        <h2 class="display display--m" id="versions-title" data-lift>
-          Du premier disque<br>à aujourd'hui.
-        </h2>
-        <p class="say say--dim" data-lift style="margin-top:20px">
-          Les grandes étapes qui ont fait évoluer Disque Bleu depuis son lancement.
-        </p>
-      </div>
-    </header>
-
-    <div class="release-list" data-stagger>
-      <article class="release release--latest" data-lift>
-        <div class="release__meta">
-          <span class="release__version">2.1.1</span>
-          <time class="release__date" datetime="2026-08-20">20 août 2026</time>
-        </div>
-        <div class="release__body">
-          <span class="release__status">Version actuelle</span>
-          <h3 class="release__title">Six pays, une carte communautaire.</h3>
-          <p class="release__copy">
-            L'Italie, la Belgique et le Luxembourg rejoignent l'application.
-            La carte permet désormais de signaler ou proposer une place pour
-            OpenStreetMap. « Mon véhicule » gagne une photo de repère, un
-            niveau, un numéro de place et une note, conservés sur l'appareil.
-          </p>
-        </div>
-      </article>
-
-      <article class="release" data-lift>
-        <div class="release__meta">
-          <span class="release__version">2.0.3</span>
-          <time class="release__date" datetime="2026-08-19">19 août 2026</time>
-        </div>
-        <div class="release__body">
-          <h3 class="release__title">Les jours fériés passés au crible.</h3>
-          <p class="release__copy">
-            Audit des 44 subdivisions alors couvertes, correction de onze
-            cantons suisses et affichage des prochains jours fériés au-delà
-            de l'année en cours.
-          </p>
-        </div>
-      </article>
-
-      <article class="release" data-lift>
-        <div class="release__meta">
-          <span class="release__version">2.0.2</span>
-          <time class="release__date" datetime="2026-08-17">17 août 2026</time>
-        </div>
-        <div class="release__body">
-          <h3 class="release__title">Une mise à jour sous le capot.</h3>
-          <p class="release__copy">
-            Présentation de Mes Échéances sur iPhone, mise à niveau de la
-            compatibilité Android et amélioration de l'ouverture des
-            applications de navigation.
-          </p>
-        </div>
-      </article>
-
-      <article class="release" data-lift>
-        <div class="release__meta">
-          <span class="release__version">2.0.1</span>
-          <time class="release__date" datetime="2026-07-30">30 juillet 2026</time>
-        </div>
-        <div class="release__body">
-          <h3 class="release__title">Une durée vraiment sur mesure.</h3>
-          <p class="release__copy">
-            Un nouveau sélecteur à deux roues permet de composer librement la
-            durée du stationnement, de 5 minutes à 12 heures et 59 minutes.
-          </p>
-        </div>
-      </article>
-
-      <article class="release release--major" data-lift>
-        <div class="release__meta">
-          <span class="release__version">2.0.0</span>
-          <time class="release__date" datetime="2026-06-09">9 juin 2026</time>
-        </div>
-        <div class="release__body">
-          <h3 class="release__title">Le compte à rebours sort de l'application.</h3>
-          <p class="release__copy">
-            Sur iPhone, le temps restant arrive sur l'écran verrouillé, dans
-            la Dynamic Island et dans un widget, le tout dans les quatre
-            langues de Disque Bleu.
-          </p>
-        </div>
-      </article>
-
-      <article class="release" data-lift>
-        <div class="release__meta">
-          <span class="release__version">1.3.0</span>
-          <time class="release__date" datetime="2026-05-04">4 mai 2026</time>
-        </div>
-        <div class="release__body">
-          <h3 class="release__title">L'Allemagne sort de bêta.</h3>
-          <p class="release__copy">
-            Arrivée de la Brötchentaste pour les arrêts de 30 minutes,
-            suggestion du pays selon la position et détection automatique des
-            zones bleues à proximité.
-          </p>
-        </div>
-      </article>
-
-      <article class="release" data-lift>
-        <div class="release__meta">
-          <span class="release__version">1.2.1</span>
-          <time class="release__date" datetime="2026-02-24">24 février 2026</time>
-        </div>
-        <div class="release__body">
-          <h3 class="release__title">Disque Bleu Suisse devient Disque Bleu.</h3>
-          <p class="release__copy">
-            Le nouveau nom accompagne désormais les trois pays couverts, avec
-            un onboarding allemand et les noms des Länder entièrement traduits.
-          </p>
-        </div>
-      </article>
-
-      <article class="release" data-lift>
-        <div class="release__meta">
-          <span class="release__version">1.2.0</span>
-          <time class="release__date" datetime="2026-02-20">20 février 2026</time>
-        </div>
-        <div class="release__body">
-          <h3 class="release__title">L'Allemagne rejoint la route.</h3>
-          <p class="release__copy">
-            Les règles allemandes, les seize Länder et leurs jours fériés
-            régionaux font leur entrée dans l'application, d'abord en bêta.
-          </p>
-        </div>
-      </article>
-
-      <article class="release" data-lift>
-        <div class="release__meta">
-          <span class="release__version">1.1.1</span>
-          <time class="release__date" datetime="2026-02-19">19 février 2026</time>
-        </div>
-        <div class="release__body">
-          <h3 class="release__title">La France passe à la vitesse supérieure.</h3>
-          <p class="release__copy">
-            Fin de la bêta française, jours fériés d'Alsace-Moselle, noms
-            localisés et interface plus compacte sur les petits écrans.
-          </p>
-        </div>
-      </article>
-
-      <article class="release" data-lift>
-        <div class="release__meta">
-          <span class="release__version">1.1.0</span>
-          <time class="release__date" datetime="2026-02-13">13 février 2026</time>
-        </div>
-        <div class="release__body">
-          <h3 class="release__title">Première frontière franchie.</h3>
-          <p class="release__copy">
-            La France devient le deuxième pays pris en charge, avec ses règles,
-            sa pause déjeuner, ses jours fériés et le cas de l'Alsace-Moselle.
-          </p>
-        </div>
-      </article>
-
-      <article class="release" data-lift>
-        <div class="release__meta">
-          <span class="release__version">1.0.1</span>
-          <time class="release__date" datetime="2026-01-31">31 janvier 2026</time>
-        </div>
-        <div class="release__body">
-          <h3 class="release__title">La voiture reste retrouvable.</h3>
-          <p class="release__copy">
-            Sa position demeure mémorisée après l'expiration du disque et le
-            redémarrage de l'application. Un avertissement rappelle aussi que
-            l'application ne remplace pas le disque physique.
-          </p>
-        </div>
-      </article>
-
-      <article class="release release--origin" data-lift>
-        <div class="release__meta">
-          <span class="release__version">1.0.0</span>
-          <time class="release__date" datetime="2025-12-15">15 décembre 2025</time>
-        </div>
-        <div class="release__body">
-          <span class="release__status">Première version</span>
-          <h3 class="release__title">Le premier disque.</h3>
-          <p class="release__copy">
-            Calcul des règles suisses, compte à rebours, alertes, quatre
-            langues, cantons et jours fériés, position du véhicule et recherche
-            de zones bleues : les fondations de Disque Bleu sont posées.
-          </p>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
 <!-- ======================================================= PRESSE ===== -->
 <section class="leaf press-leaf" aria-labelledby="presse-title">
   <div class="hold">
@@ -648,8 +682,6 @@
         <ul>
           <li><a class="foot__link" href="#fonctions">Fonctions</a></li>
           <li><a class="foot__link" href="#pays">Pays couverts</a></li>
-          <li><a class="foot__link" href="#vehicule">Votre véhicule</a></li>
-          <li><a class="foot__link" href="#versions">Historique des versions</a></li>
         </ul>
       </div>
       <div>
