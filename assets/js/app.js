@@ -53,6 +53,9 @@ const STOPS = [
 ];
 
 const TAU = Math.PI * 2;
+/* Une révolution en huit minutes : assez pour donner vie au disque dès
+   l'arrivée, sans concurrencer la rotation pilotée par le défilement. */
+const IDLE_SPIN_RATE = TAU / (8 * 60);
 
 /* Heure de démonstration, la même que dans le relevé de la deuxième scène.
    Une heure fixe et diurne vaut mieux que l'heure courante, qui donnait des
@@ -109,6 +112,7 @@ function mountCamera(scene) {
 
   let travel = 0;   // position sur la timeline, en numéro de scène fractionnaire
   let shown = 0;    // valeur lissée effectivement envoyée au shader
+  let idleSpin = 0; // dérive autonome, indépendante de la distance parcourue
   let lastFrame = 0;
 
   const measure = () => {
@@ -145,6 +149,11 @@ function mountCamera(scene) {
     const dt = lastFrame ? Math.min((now - lastFrame) / 1000, 0.1) : 0;
     lastFrame = now;
 
+    // requestAnimationFrame se met en pause dans un onglet masqué ; le dt
+    // plafonné évite donc tout saut au retour. Le mouvement est désactivé si
+    // l'utilisateur préfère réduire les animations.
+    if (!reduced) idleSpin = (idleSpin + dt * IDLE_SPIN_RATE) % TAU;
+
     // Même inertie quel que soit le taux de rafraîchissement de l'écran.
     const follow = dt ? 1 - Math.exp(-4.7 * dt) : 1;
     shown = reduced ? travel : lerp(shown, travel, follow);
@@ -170,7 +179,7 @@ function mountCamera(scene) {
     scene.set('uAimY', sample(shown, 'aimY'));
     scene.set('uFov', sample(shown, 'fov'));
     scene.set('uHaze', sample(shown, 'haze'));
-    scene.set('uSpin', spinAt(shown));
+    scene.set('uSpin', spinAt(shown) + idleSpin);
 
     requestAnimationFrame(frame);
   };
