@@ -1,6 +1,6 @@
 # Site de Disque Bleu
 
-En ligne : https://brunopaiva15.github.io/disquebleuwebsitev2/
+En ligne : https://disquebleusuisse.ch/
 
 Site vitrine de l'application [Disque Bleu](https://github.com/brunopaiva15/disquebleu),
 l'aide au stationnement à durée limitée en Suisse, France, Allemagne, Italie,
@@ -99,9 +99,27 @@ Le workflow `.github/workflows/pages.yml` vérifie puis publie sur GitHub Pages
 référencés existent, que les modules se parsent, que les quatre langues sont
 complètes et que les données structurées sont à jour, et ne publie qu'ensuite.
 
-Le dépôt est déjà réglé sur **Settings → Pages → Source : GitHub Actions**.
-C'est le seul réglage manuel nécessaire, à refaire uniquement sur un nouveau
-dépôt.
+Le dépôt est réglé sur **Settings → Pages → Source : GitHub Actions**, et sur
+le domaine **disquebleusuisse.ch**. Ce sont les deux seuls réglages manuels,
+à refaire uniquement sur un nouveau dépôt.
+
+Le fichier `CNAME` à la racine porte le même domaine. Avec la source « GitHub
+Actions », c'est le réglage de Settings qui fait foi ; le fichier ne coûte rien
+et couvre le cas où la publication repasserait par une branche.
+
+## Changer d'adresse
+
+L'adresse vit dans `SITE_URL`, en tête de `assets/js/seo.js`. Elle est reprise
+telle quelle dans `index.html` (canonique, `hreflang`, `og:`, `twitter:`,
+JSON-LD), dans `sitemap.xml` et dans `robots.txt`. Après un déménagement :
+
+```bash
+node tools/check-structured-data.mjs --write   # régénère le bloc JSON-LD
+node tools/check-structured-data.mjs           # et vérifie tout le reste
+```
+
+Le contrôle échoue si une seule adresse est restée en arrière, y compris dans
+un bloc du plan du site où les quatre autres seraient justes.
 
 ## Licence
 

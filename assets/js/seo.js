@@ -15,7 +15,7 @@
    =========================================================================== */
 
 /** Adresse de publication. Une seule ligne à changer en cas de déménagement. */
-export const SITE_URL = 'https://brunopaiva15.github.io/disquebleuwebsitev2/';
+export const SITE_URL = 'https://disquebleusuisse.ch/';
 
 /** Fiches des magasins, partagées avec les liens de téléchargement. */
 export const STORES = {

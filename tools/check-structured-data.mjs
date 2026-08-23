@@ -76,12 +76,55 @@ if (!html.includes(`<link rel="canonical" href="${SITE_URL}">`)) {
   errors.push('adresse canonique absente ou différente de SITE_URL');
 }
 
-// Le plan du site couvre exactement les mêmes adresses.
+// Partage et image sociale : des adresses absolues, sur notre domaine.
+[['meta[property="og:url"]', /<meta property="og:url" content="([^"]+)"/],
+ ['meta[property="og:image"]', /<meta property="og:image" content="([^"]+)"/],
+ ['meta[name="twitter:image"]', /<meta name="twitter:image" content="([^"]+)"/]]
+  .forEach(([nom, motif]) => {
+    const trouvé = html.match(motif);
+    if (!trouvé) errors.push(`${nom} absent`);
+    else if (!trouvé[1].startsWith(SITE_URL)) {
+      errors.push(`${nom} pointe hors du site : ${trouvé[1]}`);
+    }
+  });
+
+// Le plan du site couvre exactement les mêmes adresses, et aucune autre.
+// Un `includes` ne suffit pas : chaque bloc répète les cinq alternates, si
+// bien qu'une adresse restée sur l'ancien domaine passait inaperçue.
 const sitemap = await readFile(new URL('sitemap.xml', ROOT), 'utf8');
+const attendues = new Map([
+  ...SUPPORTED_LANGUAGES.map((language) => [language, languageUrl(language)]),
+  ['x-default', SITE_URL],
+]);
+
+const blocs = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => m[1]);
+const adresses = blocs.map((bloc) => bloc.match(/<loc>([^<]+)<\/loc>/)?.[1]);
+
 SUPPORTED_LANGUAGES.forEach((language) => {
-  if (!sitemap.includes(`hreflang="${language}" href="${languageUrl(language)}"`)) {
-    errors.push(`sitemap.xml : alternate ${language} absent`);
+  if (!adresses.includes(languageUrl(language))) {
+    errors.push(`sitemap.xml : ${languageUrl(language)} absente des <loc>`);
   }
+});
+adresses.forEach((adresse) => {
+  if (![...attendues.values()].includes(adresse)) {
+    errors.push(`sitemap.xml : <loc> inattendue ${adresse}`);
+  }
+});
+
+blocs.forEach((bloc, index) => {
+  const liens = [...bloc.matchAll(/hreflang="([^"]+)" href="([^"]+)"/g)];
+  if (liens.length !== attendues.size) {
+    errors.push(`sitemap.xml : ${liens.length} alternates au lieu de `
+      + `${attendues.size} dans le bloc ${index + 1} (${adresses[index]})`);
+  }
+  liens.forEach(([, langue, adresse]) => {
+    if (!attendues.has(langue)) {
+      errors.push(`sitemap.xml : hreflang inconnu ${langue}`);
+    } else if (attendues.get(langue) !== adresse) {
+      errors.push(`sitemap.xml : bloc ${index + 1}, ${langue} pointe sur `
+        + `${adresse} au lieu de ${attendues.get(langue)}`);
+    }
+  });
 });
 
 if (errors.length) {

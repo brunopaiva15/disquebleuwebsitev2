@@ -4,42 +4,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://brunopaiva15.github.io/disquebleuwebsitev2/</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://brunopaiva15.github.io/disquebleuwebsitev2/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://brunopaiva15.github.io/disquebleuwebsitev2/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://brunopaiva15.github.io/disquebleuwebsitev2/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://brunopaiva15.github.io/disquebleuwebsitev2/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://brunopaiva15.github.io/disquebleuwebsitev2/"/>
+    <loc>https://disquebleusuisse.ch/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://disquebleusuisse.ch/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://disquebleusuisse.ch/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://disquebleusuisse.ch/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://disquebleusuisse.ch/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://disquebleusuisse.ch/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://brunopaiva15.github.io/disquebleuwebsitev2/?lang=en</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://brunopaiva15.github.io/disquebleuwebsitev2/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://brunopaiva15.github.io/disquebleuwebsitev2/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://brunopaiva15.github.io/disquebleuwebsitev2/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://brunopaiva15.github.io/disquebleuwebsitev2/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://brunopaiva15.github.io/disquebleuwebsitev2/"/>
+    <loc>https://disquebleusuisse.ch/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://disquebleusuisse.ch/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://disquebleusuisse.ch/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://disquebleusuisse.ch/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://disquebleusuisse.ch/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://disquebleusuisse.ch/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://brunopaiva15.github.io/disquebleuwebsitev2/?lang=de</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://brunopaiva15.github.io/disquebleuwebsitev2/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://brunopaiva15.github.io/disquebleuwebsitev2/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://brunopaiva15.github.io/disquebleuwebsitev2/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://brunopaiva15.github.io/disquebleuwebsitev2/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://brunopaiva15.github.io/disquebleuwebsitev2/"/>
+    <loc>https://disquebleusuisse.ch/?lang=de</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://disquebleusuisse.ch/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://disquebleusuisse.ch/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://disquebleusuisse.ch/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://disquebleusuisse.ch/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://disquebleusuisse.ch/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://brunopaiva15.github.io/disquebleuwebsitev2/?lang=it</loc>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://brunopaiva15.github.io/disquebleuwebsitev2/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://brunopaiva15.github.io/disquebleuwebsitev2/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://brunopaiva15.github.io/disquebleuwebsitev2/?lang=de"/>
-    <xhtml:link rel="alternate" hreflang="it" href="https://brunopaiva15.github.io/disquebleuwebsitev2/?lang=it"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://brunopaiva15.github.io/disquebleuwebsitev2/"/>
+    <loc>https://disquebleusuisse.ch/?lang=it</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://disquebleusuisse.ch/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://disquebleusuisse.ch/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://disquebleusuisse.ch/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://disquebleusuisse.ch/?lang=it"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://disquebleusuisse.ch/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

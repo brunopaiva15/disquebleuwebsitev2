@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://brunopaiva15.github.io/disquebleuwebsitev2/sitemap.xml
+Sitemap: https://disquebleusuisse.ch/sitemap.xml
