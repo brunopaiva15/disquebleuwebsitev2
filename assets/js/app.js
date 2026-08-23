@@ -4,6 +4,7 @@
 
 import { mountScene } from './scene.js';
 import { initI18n } from './i18n.js';
+import { STORES } from './seo.js';
 
 const root = document.documentElement;
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -15,11 +16,8 @@ const ease = (t) => 0.5 - Math.cos(Math.PI * clamp(t)) / 2;
 
 /* ------------------------------------------------------- LIENS STORES -- */
 
-const STORES = {
-  ios: 'https://apps.apple.com/app/id6756579975',
-  android: 'https://play.google.com/store/apps/details?id=ch.vergasta.disquebleusuisse',
-};
-
+/* Les adresses des fiches vivent dans seo.js : les liens de la page et les
+   données structurées ne peuvent plus diverger. */
 function wireStores() {
   document.querySelectorAll('[data-store]').forEach((el) => {
     const url = STORES[el.dataset.store];

@@ -2,11 +2,10 @@
 
 import { readFile } from 'node:fs/promises';
 
-const root = new URL('../', import.meta.url);
+import { loadSiteModule, ROOT as root } from './load-module.mjs';
+
 const html = await readFile(new URL('index.html', root), 'utf8');
-const source = await readFile(new URL('assets/js/i18n.js', root), 'utf8');
-const moduleUrl = `data:text/javascript;base64,${Buffer.from(source).toString('base64')}`;
-const { SUPPORTED_LANGUAGES, TRANSLATIONS } = await import(moduleUrl);
+const { SUPPORTED_LANGUAGES, TRANSLATIONS } = await loadSiteModule('assets/js/i18n.js');
 
 const errors = [];
 
@@ -30,8 +29,7 @@ const htmlKeys = new Set(
     .map((match) => match[1]),
 );
 
-const isStructuralPath = (path) => !/\.dial\.\d+$/.test(path);
-const reference = new Set([...leafPaths(TRANSLATIONS.fr)].filter(isStructuralPath));
+const reference = new Set(leafPaths(TRANSLATIONS.fr));
 SUPPORTED_LANGUAGES.forEach((language) => {
   const catalog = TRANSLATIONS[language];
   if (!catalog) {
@@ -39,7 +37,7 @@ SUPPORTED_LANGUAGES.forEach((language) => {
     return;
   }
 
-  const paths = new Set([...leafPaths(catalog)].filter(isStructuralPath));
+  const paths = new Set(leafPaths(catalog));
   [...reference].filter((path) => !paths.has(path)).forEach((path) => {
     errors.push(`${language}: traduction absente pour ${path}`);
   });
@@ -58,11 +56,12 @@ SUPPORTED_LANGUAGES.forEach((language) => {
   if (catalog.changelog.versions.length !== 12) {
     errors.push(`${language}: 12 versions attendues`);
   }
-  catalog.features.items.forEach((feature, index) => {
-    if (!Array.isArray(feature.dial) || !feature.dial.length) {
-      errors.push(`${language}: texte du cadran absent pour la fonctionnalité ${index + 1}`);
-    }
-  });
+  if (catalog.countries.names.length !== 6) {
+    errors.push(`${language}: 6 pays attendus`);
+  }
+  if (catalog.faq.items.length !== 9) {
+    errors.push(`${language}: 9 questions fréquentes attendues`);
+  }
 });
 
 const dateCount = (html.match(/data-i18n-date/g) || []).length;

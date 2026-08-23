@@ -3,21 +3,54 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-i18n="meta.title">Stationnez l'esprit tranquille | Disque Bleu</title>
-<meta name="description" data-i18n-content="meta.description" content="Disque Bleu calcule l'heure à porter sur votre disque de stationnement en Suisse, France, Allemagne, Italie, Belgique et Luxembourg, puis vous prévient avant l'échéance.">
+
+<!-- Les apparitions sont pilotées au défilement. Sans JavaScript, la page doit
+     rester lisible : cette classe conditionne les états masqués de la feuille
+     de style, posée avant le premier rendu pour éviter tout clignotement. -->
+<script>document.documentElement.className += " js";</script>
+
+<title data-i18n="meta.title">Disque Bleu, l'application du disque de stationnement en zone bleue</title>
+<meta name="description" data-i18n-content="meta.description" content="Disque Bleu calcule l'heure à afficher sur votre disque de stationnement en zone bleue et vous prévient avant l'échéance. Suisse, France, Allemagne, Italie, Belgique et Luxembourg, avec les règles locales et les jours fériés.">
 <meta name="theme-color" content="#0b60c4">
 <meta name="color-scheme" content="only light">
+<meta name="author" content="Vergasta Digital">
+<meta name="application-name" content="Disque Bleu">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 
-<link rel="icon" type="image/png" href="assets/img/app-icon.png">
+<!-- Une seule page sert les quatre langues, distinguées par ?lang=. Chacune
+     porte sa propre adresse canonique, tenue à jour par i18n.js. -->
+<link rel="canonical" href="https://brunopaiva15.github.io/disquebleuwebsitev2/">
+<link rel="alternate" hreflang="fr" href="https://brunopaiva15.github.io/disquebleuwebsitev2/">
+<link rel="alternate" hreflang="en" href="https://brunopaiva15.github.io/disquebleuwebsitev2/?lang=en">
+<link rel="alternate" hreflang="de" href="https://brunopaiva15.github.io/disquebleuwebsitev2/?lang=de">
+<link rel="alternate" hreflang="it" href="https://brunopaiva15.github.io/disquebleuwebsitev2/?lang=it">
+<link rel="alternate" hreflang="x-default" href="https://brunopaiva15.github.io/disquebleuwebsitev2/">
+
+<!-- L'icône de 1024 px pesait 111 ko pour un onglet de 16 px : on sert celle
+     de 180, qui suffit partout et se met en cache une fois pour toutes. -->
+<link rel="icon" type="image/png" sizes="180x180" href="assets/img/app-icon-180.png">
 <link rel="apple-touch-icon" href="assets/img/app-icon-180.png">
+<link rel="manifest" href="site.webmanifest">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Disque Bleu">
-<meta property="og:title" data-i18n-content="meta.title" content="Stationnez l'esprit tranquille | Disque Bleu">
-<meta property="og:description" data-i18n-content="meta.socialDescription" content="Six pays, six réglementations, un seul bouton. L'application calcule l'heure à afficher et vous prévient avant l'échéance.">
-<meta property="og:image" content="assets/img/app-icon.png">
+<meta property="og:url" content="https://brunopaiva15.github.io/disquebleuwebsitev2/">
+<meta property="og:title" data-i18n-content="meta.title" content="Disque Bleu, l'application du disque de stationnement en zone bleue">
+<meta property="og:description" data-i18n-content="meta.socialDescription" content="Six pays, six réglementations, un seul bouton. L'application calcule l'heure à afficher sur votre disque et vous prévient avant l'échéance.">
+<meta property="og:image" content="https://brunopaiva15.github.io/disquebleuwebsitev2/assets/img/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" data-i18n-content="meta.socialImageAlt" content="Un disque de stationnement bleu devant un ciel, avec le nom Disque Bleu">
 <meta property="og:locale" data-i18n-content="meta.locale" content="fr_CH">
+<meta property="og:locale:alternate" content="en_GB">
+<meta property="og:locale:alternate" content="de_CH">
+<meta property="og:locale:alternate" content="it_CH">
+
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" data-i18n-content="meta.title" content="Disque Bleu, l'application du disque de stationnement en zone bleue">
+<meta name="twitter:description" data-i18n-content="meta.socialDescription" content="Six pays, six réglementations, un seul bouton. L'application calcule l'heure à afficher sur votre disque et vous prévient avant l'échéance.">
+<meta name="twitter:image" content="https://brunopaiva15.github.io/disquebleuwebsitev2/assets/img/og-cover.png">
+<meta name="twitter:image:alt" data-i18n-content="meta.socialImageAlt" content="Un disque de stationnement bleu devant un ciel, avec le nom Disque Bleu">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,10 +58,189 @@
 
 <link rel="stylesheet" href="assets/css/app.css">
 <script type="module" src="assets/js/app.js"></script>
+
+<!-- Données structurées. i18n.js les réécrit au changement de langue ; la
+     version française reste servie telle quelle dans le HTML. -->
+<script type="application/ld+json" data-structured-data>
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://brunopaiva15.github.io/disquebleuwebsitev2/#site",
+      "url": "https://brunopaiva15.github.io/disquebleuwebsitev2/",
+      "name": "Disque Bleu",
+      "description": "Calculez l'heure à afficher sur votre disque de stationnement et recevez une alerte avant l'échéance. Suisse, France, Allemagne, Italie, Belgique, Luxembourg.",
+      "inLanguage": [
+        "fr",
+        "en",
+        "de",
+        "it"
+      ],
+      "publisher": {
+        "@id": "https://brunopaiva15.github.io/disquebleuwebsitev2/#publisher"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://brunopaiva15.github.io/disquebleuwebsitev2/#publisher",
+      "name": "Vergasta Digital",
+      "url": "https://vergasta.ch",
+      "logo": "https://brunopaiva15.github.io/disquebleuwebsitev2/assets/img/app-icon.png"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://brunopaiva15.github.io/disquebleuwebsitev2/#page",
+      "url": "https://brunopaiva15.github.io/disquebleuwebsitev2/",
+      "name": "Disque Bleu, l'application du disque de stationnement en zone bleue",
+      "description": "Calculez l'heure à afficher sur votre disque de stationnement et recevez une alerte avant l'échéance. Suisse, France, Allemagne, Italie, Belgique, Luxembourg.",
+      "inLanguage": "fr",
+      "isPartOf": {
+        "@id": "https://brunopaiva15.github.io/disquebleuwebsitev2/#site"
+      },
+      "about": {
+        "@id": "https://brunopaiva15.github.io/disquebleuwebsitev2/#application"
+      },
+      "primaryImageOfPage": "https://brunopaiva15.github.io/disquebleuwebsitev2/assets/img/og-cover.png"
+    },
+    {
+      "@type": "MobileApplication",
+      "@id": "https://brunopaiva15.github.io/disquebleuwebsitev2/#application",
+      "name": "Disque Bleu",
+      "description": "Calculez l'heure à afficher sur votre disque de stationnement et recevez une alerte avant l'échéance. Suisse, France, Allemagne, Italie, Belgique, Luxembourg.",
+      "url": "https://brunopaiva15.github.io/disquebleuwebsitev2/",
+      "image": "https://brunopaiva15.github.io/disquebleuwebsitev2/assets/img/og-cover.png",
+      "applicationCategory": "TravelApplication",
+      "applicationSubCategory": "Parking",
+      "operatingSystem": "iOS, Android",
+      "softwareVersion": "2.1.1",
+      "datePublished": "2025-12-15",
+      "dateModified": "2026-08-20",
+      "inLanguage": [
+        "fr",
+        "en",
+        "de",
+        "it"
+      ],
+      "countriesSupported": "CH, FR, DE, IT, BE, LU",
+      "downloadUrl": [
+        "https://apps.apple.com/app/id6756579975",
+        "https://play.google.com/store/apps/details?id=ch.vergasta.disquebleusuisse"
+      ],
+      "featureList": [
+        "Calcul de l'heure à afficher",
+        "Règles locales et exceptions",
+        "Jours fériés",
+        "Alerte avant l'échéance",
+        "Trouver un parking",
+        "Compte à rebours en direct",
+        "Durée personnalisée",
+        "Mon véhicule",
+        "Carte communautaire"
+      ],
+      "author": {
+        "@id": "https://brunopaiva15.github.io/disquebleuwebsitev2/#publisher"
+      },
+      "publisher": {
+        "@id": "https://brunopaiva15.github.io/disquebleuwebsitev2/#publisher"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "1.00",
+        "priceCurrency": "CHF",
+        "availability": "https://schema.org/InStock",
+        "url": "https://brunopaiva15.github.io/disquebleuwebsitev2/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://brunopaiva15.github.io/disquebleuwebsitev2/#faq",
+      "inLanguage": "fr",
+      "isPartOf": {
+        "@id": "https://brunopaiva15.github.io/disquebleuwebsitev2/#page"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Qu'est-ce que Disque Bleu ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Disque Bleu est une application iPhone et Android qui calcule l'heure à afficher sur votre disque de stationnement, lance un compte à rebours et vous prévient avant l'échéance. Elle couvre la Suisse, la France, l'Allemagne, l'Italie, la Belgique et le Luxembourg."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment l'heure à afficher est-elle calculée ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "L'application arrondit votre heure d'arrivée selon la règle du pays sélectionné. En Suisse, une arrivée à 08h47 se note 09:00 sur le disque, et le stationnement court jusqu'à 10:00 dans une zone d'une heure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "L'application remplace-t-elle le disque physique ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non. C'est une aide au conducteur : le disque officiel doit rester apposé derrière le pare-brise, visible depuis l'extérieur. Disque Bleu vous évite l'erreur de calcul et l'oubli, pas l'obligation légale."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment la règle de midi suisse est-elle traitée ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dans une zone bleue suisse, un véhicule garé pendant la pause de midi peut rester plus longtemps que la durée affichée. L'application applique cette règle automatiquement, comme la pause déjeuner française et les autres plages particulières."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Les jours fériés sont-ils pris en compte ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui. Disque Bleu connaît les jours fériés nationaux et régionaux du canton, de la région ou du Land sélectionné, y compris les cas particuliers comme l'Alsace-Moselle. Le stationnement est prolongé lorsque la réglementation le prévoit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Qu'est-ce que la Brötchentaste en Allemagne ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "C'est l'arrêt court gratuit, d'une trentaine de minutes, proposé dans certaines communes allemandes. L'application propose ce réglage lorsque l'Allemagne est le pays sélectionné."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment suis-je prévenu avant la fin du stationnement ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Une notification part au délai que vous avez choisi. Sur iPhone, le temps restant s'affiche également sur l'écran verrouillé, dans la Dynamic Island et dans un widget."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Combien coûte l'application ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Disque Bleu coûte 1 CHF sur l'App Store et sur Google Play. Une amende de stationnement coûte environ quarante fois plus."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "L'application aide-t-elle à retrouver ma voiture et une place ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui. La position du véhicule est mémorisée au moment où vous vous garez, avec une photo de repère, le niveau ou le numéro de place si vous le souhaitez. La carte indique les places à proximité et vous pouvez signaler une erreur, qui repart vers les contributeurs d'OpenStreetMap."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 
 <body>
-<a class="sr-only" href="#lecture" data-i18n="accessibility.skip">Aller au contenu</a>
+<a class="skip-link" href="#lecture" data-i18n="accessibility.skip">Aller au contenu</a>
 
 <!-- La scène : ciel et disque, en fond fixe de toute la page. -->
 <canvas id="stage" aria-hidden="true"></canvas>
@@ -53,6 +265,7 @@
     <nav class="masthead__nav" aria-label="Sections" data-i18n-aria-label="accessibility.sections">
       <a class="masthead__link" href="#fonctions" data-i18n="nav.features">Fonctions</a>
       <a class="masthead__link" href="#pays" data-i18n="nav.countries">Pays</a>
+      <a class="masthead__link" href="#questions" data-i18n="nav.faq">Questions</a>
     </nav>
     <label class="language-picker">
       <span class="sr-only" data-i18n="language.label">Langue</span>
@@ -66,7 +279,7 @@
   </div>
 </header>
 
-<main id="lecture">
+<main id="lecture" tabindex="-1">
 
 <!-- ====================================================== SCÈNE 01 ==== -->
 <section class="scene" id="haut" style="--len: 2.6">
@@ -76,12 +289,14 @@
       <div class="stores">
         <a class="store" data-store="ios" rel="noopener"
            aria-label="Télécharger dans l'App Store" data-i18n-aria-label="stores.appleLabel">
-          <img src="assets/img/app-store-fr.svg" alt="Télécharger dans l'App Store" height="52"
+          <img src="assets/img/app-store-fr.svg" alt="Télécharger dans l'App Store"
+               width="165" height="52" decoding="async"
                data-i18n-src="stores.appleBadge" data-i18n-alt="stores.appleLabel">
         </a>
         <a class="store" data-store="android" rel="noopener"
            aria-label="Disponible sur Google Play" data-i18n-aria-label="stores.googleLabel">
-          <img src="assets/img/google-play-fr.png" alt="Disponible sur Google Play" height="52"
+          <img src="assets/img/google-play-fr.png" alt="Disponible sur Google Play"
+               width="134" height="52" decoding="async"
                data-i18n-src="stores.googleBadge" data-i18n-alt="stores.googleLabel">
         </a>
       </div>
@@ -437,11 +652,11 @@
 </section>
 
 <!-- ========================================================= PAYS ===== -->
-<section class="leaf" id="pays">
+<section class="leaf" id="pays" aria-labelledby="pays-title">
   <div class="hold">
     <header class="leaf__head">
       <div>
-        <h2 class="display display--m" data-lift data-i18n-html="countries.title">Six pays,<br>une seule application.</h2>
+        <h2 class="display display--m" id="pays-title" data-lift data-i18n-html="countries.title">Six pays,<br>une seule application.</h2>
         <p class="say say--dim" data-lift style="margin-top:20px" data-i18n="countries.text">
           Les horaires, arrondis et jours fériés s'adaptent automatiquement
           selon le pays sélectionné.
@@ -616,47 +831,107 @@
     <h2 class="press-title" id="presse-title" data-lift data-i18n="press.title">Apparu sur</h2>
     <div class="press-list" data-stagger>
       <a class="press-source" href="https://www.lejdj.ch/articles/a-saint-imier-il-oublie-son-disque-bleu-et-cree-une-application-pour-eviter-les-amendes-100885" target="_blank" rel="noopener noreferrer" aria-label="Lire l'article du Journal du Jura" data-i18n-aria-label="press.sources.0" data-lift>
-        <img class="press-source__logo press-source__logo--jdj" src="assets/img/press/le-journal-du-jura.svg" width="1243" height="200" alt="Le Journal du Jura">
+        <img class="press-source__logo press-source__logo--jdj" src="assets/img/press/le-journal-du-jura.svg" width="1243" height="200" loading="lazy" decoding="async" alt="Le Journal du Jura">
         <span class="press-source__action" data-i18n="press.action">Lire l'article ↗</span>
       </a>
       <a class="press-source" href="https://www.arcinfo.ch/neuchatel-canton/montagnes/la-chaux-de-fonds/un-ex-chaux-de-fonnier-installe-a-saint-imier-oublie-son-disque-il-cree-une-application-pour-eviter-les-amendes-1510801" target="_blank" rel="noopener noreferrer" aria-label="Lire l'article d'ArcInfo" data-i18n-aria-label="press.sources.1" data-lift>
-        <img class="press-source__logo press-source__logo--arcinfo" src="assets/img/press/arcinfo.svg" width="135" height="32" alt="ArcInfo">
+        <img class="press-source__logo press-source__logo--arcinfo" src="assets/img/press/arcinfo.svg" width="135" height="32" loading="lazy" decoding="async" alt="ArcInfo">
         <span class="press-source__action" data-i18n="press.action">Lire l'article ↗</span>
       </a>
       <a class="press-source" href="https://www.watson.ch/fr/suisse/transports/633299012-l-application-disque-bleu-ravira-les-automobilistes-suisses" target="_blank" rel="noopener noreferrer" aria-label="Lire l'article de Watson" data-i18n-aria-label="press.sources.2" data-lift>
-        <img class="press-source__logo press-source__logo--watson" src="assets/img/press/watson.svg" width="454" height="143" alt="Watson">
+        <img class="press-source__logo press-source__logo--watson" src="assets/img/press/watson.svg" width="454" height="143" loading="lazy" decoding="async" alt="Watson">
         <span class="press-source__action" data-i18n="press.action">Lire l'article ↗</span>
       </a>
       <a class="press-source" href="https://www.lenouvelliste.ch/suisse/vous-oubliez-souvent-de-tourner-votre-disque-ce-romand-a-cree-une-application-pour-eviter-les-amendes-1511033" target="_blank" rel="noopener noreferrer" aria-label="Lire l'article du Nouvelliste" data-i18n-aria-label="press.sources.3" data-lift>
-        <img class="press-source__logo press-source__logo--nouvelliste" src="assets/img/press/le-nouvelliste.svg" width="217" height="32" alt="Le Nouvelliste">
+        <img class="press-source__logo press-source__logo--nouvelliste" src="assets/img/press/le-nouvelliste.svg" width="217" height="32" loading="lazy" decoding="async" alt="Le Nouvelliste">
         <span class="press-source__action" data-i18n="press.action">Lire l'article ↗</span>
       </a>
       <a class="press-source" href="https://www.lacote.ch/suisse/vous-oubliez-souvent-de-tourner-votre-disque-ce-romand-a-cree-une-application-pour-eviter-les-amendes-1511033" target="_blank" rel="noopener noreferrer" aria-label="Lire l'article de La Côte" data-i18n-aria-label="press.sources.4" data-lift>
-        <img class="press-source__logo press-source__logo--lacote" src="assets/img/press/la-cote.svg" width="126" height="32" alt="La Côte">
+        <img class="press-source__logo press-source__logo--lacote" src="assets/img/press/la-cote.svg" width="126" height="32" loading="lazy" decoding="async" alt="La Côte">
         <span class="press-source__action" data-i18n="press.action">Lire l'article ↗</span>
       </a>
     </div>
   </div>
 </section>
 
+<!-- ==================================================== QUESTIONS ===== -->
+
+<!-- Replié comme l'historique : la page reste courte, et le détail est là pour
+     qui le cherche. -->
+<section class="leaf leaf--slim" id="questions" aria-labelledby="questions-title">
+  <div class="hold">
+    <details class="feature-history feature-history--flush">
+      <summary class="feature-history__summary">
+        <span class="feature-history__summary-title">
+          <strong id="questions-title" data-i18n="faq.title">Questions fréquentes</strong>
+        </span>
+        <span class="feature-history__toggle" aria-hidden="true"></span>
+      </summary>
+
+      <div class="feature-history__content" aria-labelledby="questions-title">
+        <div class="faq" data-stagger>
+          <article class="faq__item" data-lift>
+            <h3 class="faq__question" data-i18n="faq.items.0.question">Qu'est-ce que Disque Bleu ?</h3>
+            <p class="faq__answer" data-i18n="faq.items.0.answer">Disque Bleu est une application iPhone et Android qui calcule l'heure à afficher sur votre disque de stationnement, lance un compte à rebours et vous prévient avant l'échéance. Elle couvre la Suisse, la France, l'Allemagne, l'Italie, la Belgique et le Luxembourg.</p>
+          </article>
+          <article class="faq__item" data-lift>
+            <h3 class="faq__question" data-i18n="faq.items.1.question">Comment l'heure à afficher est-elle calculée ?</h3>
+            <p class="faq__answer" data-i18n="faq.items.1.answer">L'application arrondit votre heure d'arrivée selon la règle du pays sélectionné. En Suisse, une arrivée à 08h47 se note 09:00 sur le disque, et le stationnement court jusqu'à 10:00 dans une zone d'une heure.</p>
+          </article>
+          <article class="faq__item" data-lift>
+            <h3 class="faq__question" data-i18n="faq.items.2.question">L'application remplace-t-elle le disque physique ?</h3>
+            <p class="faq__answer" data-i18n="faq.items.2.answer">Non. C'est une aide au conducteur : le disque officiel doit rester apposé derrière le pare-brise, visible depuis l'extérieur. Disque Bleu vous évite l'erreur de calcul et l'oubli, pas l'obligation légale.</p>
+          </article>
+          <article class="faq__item" data-lift>
+            <h3 class="faq__question" data-i18n="faq.items.3.question">Comment la règle de midi suisse est-elle traitée ?</h3>
+            <p class="faq__answer" data-i18n="faq.items.3.answer">Dans une zone bleue suisse, un véhicule garé pendant la pause de midi peut rester plus longtemps que la durée affichée. L'application applique cette règle automatiquement, comme la pause déjeuner française et les autres plages particulières.</p>
+          </article>
+          <article class="faq__item" data-lift>
+            <h3 class="faq__question" data-i18n="faq.items.4.question">Les jours fériés sont-ils pris en compte ?</h3>
+            <p class="faq__answer" data-i18n="faq.items.4.answer">Oui. Disque Bleu connaît les jours fériés nationaux et régionaux du canton, de la région ou du Land sélectionné, y compris les cas particuliers comme l'Alsace-Moselle. Le stationnement est prolongé lorsque la réglementation le prévoit.</p>
+          </article>
+          <article class="faq__item" data-lift>
+            <h3 class="faq__question" data-i18n="faq.items.5.question">Qu'est-ce que la Brötchentaste en Allemagne ?</h3>
+            <p class="faq__answer" data-i18n="faq.items.5.answer">C'est l'arrêt court gratuit, d'une trentaine de minutes, proposé dans certaines communes allemandes. L'application propose ce réglage lorsque l'Allemagne est le pays sélectionné.</p>
+          </article>
+          <article class="faq__item" data-lift>
+            <h3 class="faq__question" data-i18n="faq.items.6.question">Comment suis-je prévenu avant la fin du stationnement ?</h3>
+            <p class="faq__answer" data-i18n="faq.items.6.answer">Une notification part au délai que vous avez choisi. Sur iPhone, le temps restant s'affiche également sur l'écran verrouillé, dans la Dynamic Island et dans un widget.</p>
+          </article>
+          <article class="faq__item" data-lift>
+            <h3 class="faq__question" data-i18n="faq.items.7.question">Combien coûte l'application ?</h3>
+            <p class="faq__answer" data-i18n="faq.items.7.answer">Disque Bleu coûte 1 CHF sur l'App Store et sur Google Play. Une amende de stationnement coûte environ quarante fois plus.</p>
+          </article>
+          <article class="faq__item" data-lift>
+            <h3 class="faq__question" data-i18n="faq.items.8.question">L'application aide-t-elle à retrouver ma voiture et une place ?</h3>
+            <p class="faq__answer" data-i18n="faq.items.8.answer">Oui. La position du véhicule est mémorisée au moment où vous vous garez, avec une photo de repère, le niveau ou le numéro de place si vous le souhaitez. La carte indique les places à proximité et vous pouvez signaler une erreur, qui repart vers les contributeurs d'OpenStreetMap.</p>
+          </article>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+
 <!-- =================================================== INSTALLER ====== -->
-<section class="leaf" id="installer">
+<section class="leaf" id="installer" aria-labelledby="installer-title">
   <div class="hold">
     <header class="leaf__head">
       <div>
-        <h2 class="display display--l" data-lift data-i18n="install.title">Tout simplement.</h2>
+        <h2 class="display display--l" id="installer-title" data-lift data-i18n="install.title">Tout simplement.</h2>
         <p class="say say--dim" data-lift style="margin-top:20px" data-i18n="install.text">
           L'app coûte 1 CHF. Une amende, 40 fois plus.
         </p>
         <div class="stores" data-lift style="margin-top:32px">
           <a class="store" data-store="ios" rel="noopener"
              aria-label="Télécharger dans l'App Store" data-i18n-aria-label="stores.appleLabel">
-            <img src="assets/img/app-store-fr.svg" alt="Télécharger dans l'App Store" height="52"
+            <img src="assets/img/app-store-fr.svg" alt="Télécharger dans l'App Store"
+                 width="165" height="52" loading="lazy" decoding="async"
                  data-i18n-src="stores.appleBadge" data-i18n-alt="stores.appleLabel">
           </a>
           <a class="store" data-store="android" rel="noopener"
              aria-label="Disponible sur Google Play" data-i18n-aria-label="stores.googleLabel">
-            <img src="assets/img/google-play-fr.png" alt="Disponible sur Google Play" height="52"
+            <img src="assets/img/google-play-fr.png" alt="Disponible sur Google Play"
+                 width="134" height="52" loading="lazy" decoding="async"
                  data-i18n-src="stores.googleBadge" data-i18n-alt="stores.googleLabel">
           </a>
         </div>
@@ -678,6 +953,7 @@
         <ul>
           <li><a class="foot__link" href="#fonctions" data-i18n="nav.features">Fonctions</a></li>
           <li><a class="foot__link" href="#pays" data-i18n="footer.countries">Pays couverts</a></li>
+          <li><a class="foot__link" href="#questions" data-i18n="footer.faq">Questions fréquentes</a></li>
         </ul>
       </div>
       <div>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Gabarit de l'image de partage</title>
+<!--
+  Gabarit de `assets/img/og-cover.png`, l'image que reprennent les réseaux et
+  les moteurs. Elle n'est pas générée à la volée : on la rend une fois, à
+  1200 × 630, et on versionne le PNG.
+
+      chromium --headless --disable-gpu --hide-scrollbars \
+               --force-device-scale-factor=1 --window-size=1200,630 \
+               --screenshot=assets/img/og-cover.png \
+               tools/og-cover.html
+
+  La fenêtre sans interface est plus courte que la capture : un fond posé sur
+  un bloc s'arrêterait donc au bas de la zone visible, laissant une bande
+  blanche. Le ciel est peint sur `html`, dont l'arrière-plan se propage à toute
+  la surface capturée ; `.sheet` ne fait que tenir la mise en page sur 630 px.
+
+  Mêmes couleurs et même croissant que le site : c'est la même identité qui
+  arrive dans un fil de discussion.
+-->
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    width: 1200px;
+    height: 630px;
+    background: linear-gradient(160deg, #0a56b0 0%, #1573d8 58%, #4ea3ee 100%);
+  }
+
+  body { width: 1200px; height: 630px; }
+
+  .sheet {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 1200px;
+    height: 630px;
+    padding: 0 76px;
+    overflow: hidden;
+    color: #f7f5f0;
+    font-family: "Inter", "Liberation Sans", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Le croissant du disque, débordant à droite comme dans la scène du site. */
+  .mark {
+    position: absolute;
+    top: -66px;
+    right: -178px;
+    width: 820px;
+    color: #ffffff;
+    opacity: 0.94;
+    transform: rotate(-14deg);
+  }
+
+  /* Le voile reprend celui de la page : il tient le texte au-dessus du ciel. */
+  .veil {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      120% 92% at 0% 104%,
+      rgba(3, 24, 62, 0.9) 0%,
+      rgba(3, 24, 62, 0.58) 38%,
+      rgba(3, 24, 62, 0) 74%
+    );
+  }
+
+  .copy { position: relative; max-width: 660px; }
+
+  .kicker {
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #bfe0ff;
+  }
+
+  h1 {
+    margin-top: 26px;
+    font-size: 104px;
+    font-weight: 700;
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+    text-shadow: 0 2px 30px rgba(3, 20, 52, 0.5);
+  }
+
+  p {
+    margin-top: 28px;
+    max-width: 560px;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1.32;
+    color: rgba(255, 255, 255, 0.94);
+    text-shadow: 0 1px 16px rgba(3, 20, 52, 0.6);
+  }
+
+  .countries {
+    margin-top: 40px;
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <svg class="mark" viewBox="-74 25 148 80" fill="currentColor" aria-hidden="true">
+    <path d="M -30.21 29.18 A 42 42 0 0 0 30.21 29.18 L 69 72.38
+             A 100 100 0 0 1 -69 72.38 Z"/>
+  </svg>
+
+  <div class="veil"></div>
+
+  <div class="copy">
+    <div class="kicker">iPhone &nbsp;·&nbsp; Android</div>
+    <h1>Disque<br>Bleu</h1>
+    <p>L'heure à afficher sur votre disque de stationnement, calculée et rappelée avant l'échéance.</p>
+    <div class="countries">CH &nbsp;·&nbsp; FR &nbsp;·&nbsp; DE &nbsp;·&nbsp; IT &nbsp;·&nbsp; BE &nbsp;·&nbsp; LU</div>
+  </div>
+</div>
+</body>
+</html>

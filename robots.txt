@@ -1,0 +1,5 @@
+# Le site est une vitrine : tout est indexable.
+User-agent: *
+Allow: /
+
+Sitemap: https://brunopaiva15.github.io/disquebleuwebsitev2/sitemap.xml
