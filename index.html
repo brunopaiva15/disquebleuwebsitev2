@@ -151,88 +151,6 @@
         "availability": "https://schema.org/InStock",
         "url": "https://brunopaiva15.github.io/disquebleuwebsitev2/"
       }
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://brunopaiva15.github.io/disquebleuwebsitev2/#faq",
-      "inLanguage": "fr",
-      "isPartOf": {
-        "@id": "https://brunopaiva15.github.io/disquebleuwebsitev2/#page"
-      },
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Qu'est-ce que Disque Bleu ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Disque Bleu est une application iPhone et Android qui calcule l'heure à afficher sur votre disque de stationnement, lance un compte à rebours et vous prévient avant l'échéance. Elle couvre la Suisse, la France, l'Allemagne, l'Italie, la Belgique et le Luxembourg."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment l'heure à afficher est-elle calculée ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "L'application arrondit votre heure d'arrivée selon la règle du pays sélectionné. En Suisse, une arrivée à 08h47 se note 09:00 sur le disque, et le stationnement court jusqu'à 10:00 dans une zone d'une heure."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "L'application remplace-t-elle le disque physique ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Non. C'est une aide au conducteur : le disque officiel doit rester apposé derrière le pare-brise, visible depuis l'extérieur. Disque Bleu vous évite l'erreur de calcul et l'oubli, pas l'obligation légale."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment la règle de midi suisse est-elle traitée ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Dans une zone bleue suisse, un véhicule garé pendant la pause de midi peut rester plus longtemps que la durée affichée. L'application applique cette règle automatiquement, comme la pause déjeuner française et les autres plages particulières."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Les jours fériés sont-ils pris en compte ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui. Disque Bleu connaît les jours fériés nationaux et régionaux du canton, de la région ou du Land sélectionné, y compris les cas particuliers comme l'Alsace-Moselle. Le stationnement est prolongé lorsque la réglementation le prévoit."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Qu'est-ce que la Brötchentaste en Allemagne ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "C'est l'arrêt court gratuit, d'une trentaine de minutes, proposé dans certaines communes allemandes. L'application propose ce réglage lorsque l'Allemagne est le pays sélectionné."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Comment suis-je prévenu avant la fin du stationnement ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Une notification part au délai que vous avez choisi. Sur iPhone, le temps restant s'affiche également sur l'écran verrouillé, dans la Dynamic Island et dans un widget."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Combien coûte l'application ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Disque Bleu coûte 1 CHF sur l'App Store et sur Google Play. Une amende de stationnement coûte environ quarante fois plus."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "L'application aide-t-elle à retrouver ma voiture et une place ?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Oui. La position du véhicule est mémorisée au moment où vous vous garez, avec une photo de repère, le niveau ou le numéro de place si vous le souhaitez. La carte indique les places à proximité et vous pouvez signaler une erreur, qui repart vers les contributeurs d'OpenStreetMap."
-          }
-        }
-      ]
     }
   ]
 }
@@ -265,7 +183,6 @@
     <nav class="masthead__nav" aria-label="Sections" data-i18n-aria-label="accessibility.sections">
       <a class="masthead__link" href="#fonctions" data-i18n="nav.features">Fonctions</a>
       <a class="masthead__link" href="#pays" data-i18n="nav.countries">Pays</a>
-      <a class="masthead__link" href="#questions" data-i18n="nav.faq">Questions</a>
     </nav>
     <label class="language-picker">
       <span class="sr-only" data-i18n="language.label">Langue</span>
@@ -854,64 +771,6 @@
   </div>
 </section>
 
-<!-- ==================================================== QUESTIONS ===== -->
-
-<!-- Replié comme l'historique : la page reste courte, et le détail est là pour
-     qui le cherche. -->
-<section class="leaf leaf--slim" id="questions" aria-labelledby="questions-title">
-  <div class="hold">
-    <details class="feature-history feature-history--flush">
-      <summary class="feature-history__summary">
-        <span class="feature-history__summary-title">
-          <strong id="questions-title" data-i18n="faq.title">Questions fréquentes</strong>
-        </span>
-        <span class="feature-history__toggle" aria-hidden="true"></span>
-      </summary>
-
-      <div class="feature-history__content" aria-labelledby="questions-title">
-        <div class="faq" data-stagger>
-          <article class="faq__item" data-lift>
-            <h3 class="faq__question" data-i18n="faq.items.0.question">Qu'est-ce que Disque Bleu ?</h3>
-            <p class="faq__answer" data-i18n="faq.items.0.answer">Disque Bleu est une application iPhone et Android qui calcule l'heure à afficher sur votre disque de stationnement, lance un compte à rebours et vous prévient avant l'échéance. Elle couvre la Suisse, la France, l'Allemagne, l'Italie, la Belgique et le Luxembourg.</p>
-          </article>
-          <article class="faq__item" data-lift>
-            <h3 class="faq__question" data-i18n="faq.items.1.question">Comment l'heure à afficher est-elle calculée ?</h3>
-            <p class="faq__answer" data-i18n="faq.items.1.answer">L'application arrondit votre heure d'arrivée selon la règle du pays sélectionné. En Suisse, une arrivée à 08h47 se note 09:00 sur le disque, et le stationnement court jusqu'à 10:00 dans une zone d'une heure.</p>
-          </article>
-          <article class="faq__item" data-lift>
-            <h3 class="faq__question" data-i18n="faq.items.2.question">L'application remplace-t-elle le disque physique ?</h3>
-            <p class="faq__answer" data-i18n="faq.items.2.answer">Non. C'est une aide au conducteur : le disque officiel doit rester apposé derrière le pare-brise, visible depuis l'extérieur. Disque Bleu vous évite l'erreur de calcul et l'oubli, pas l'obligation légale.</p>
-          </article>
-          <article class="faq__item" data-lift>
-            <h3 class="faq__question" data-i18n="faq.items.3.question">Comment la règle de midi suisse est-elle traitée ?</h3>
-            <p class="faq__answer" data-i18n="faq.items.3.answer">Dans une zone bleue suisse, un véhicule garé pendant la pause de midi peut rester plus longtemps que la durée affichée. L'application applique cette règle automatiquement, comme la pause déjeuner française et les autres plages particulières.</p>
-          </article>
-          <article class="faq__item" data-lift>
-            <h3 class="faq__question" data-i18n="faq.items.4.question">Les jours fériés sont-ils pris en compte ?</h3>
-            <p class="faq__answer" data-i18n="faq.items.4.answer">Oui. Disque Bleu connaît les jours fériés nationaux et régionaux du canton, de la région ou du Land sélectionné, y compris les cas particuliers comme l'Alsace-Moselle. Le stationnement est prolongé lorsque la réglementation le prévoit.</p>
-          </article>
-          <article class="faq__item" data-lift>
-            <h3 class="faq__question" data-i18n="faq.items.5.question">Qu'est-ce que la Brötchentaste en Allemagne ?</h3>
-            <p class="faq__answer" data-i18n="faq.items.5.answer">C'est l'arrêt court gratuit, d'une trentaine de minutes, proposé dans certaines communes allemandes. L'application propose ce réglage lorsque l'Allemagne est le pays sélectionné.</p>
-          </article>
-          <article class="faq__item" data-lift>
-            <h3 class="faq__question" data-i18n="faq.items.6.question">Comment suis-je prévenu avant la fin du stationnement ?</h3>
-            <p class="faq__answer" data-i18n="faq.items.6.answer">Une notification part au délai que vous avez choisi. Sur iPhone, le temps restant s'affiche également sur l'écran verrouillé, dans la Dynamic Island et dans un widget.</p>
-          </article>
-          <article class="faq__item" data-lift>
-            <h3 class="faq__question" data-i18n="faq.items.7.question">Combien coûte l'application ?</h3>
-            <p class="faq__answer" data-i18n="faq.items.7.answer">Disque Bleu coûte 1 CHF sur l'App Store et sur Google Play. Une amende de stationnement coûte environ quarante fois plus.</p>
-          </article>
-          <article class="faq__item" data-lift>
-            <h3 class="faq__question" data-i18n="faq.items.8.question">L'application aide-t-elle à retrouver ma voiture et une place ?</h3>
-            <p class="faq__answer" data-i18n="faq.items.8.answer">Oui. La position du véhicule est mémorisée au moment où vous vous garez, avec une photo de repère, le niveau ou le numéro de place si vous le souhaitez. La carte indique les places à proximité et vous pouvez signaler une erreur, qui repart vers les contributeurs d'OpenStreetMap.</p>
-          </article>
-        </div>
-      </div>
-    </details>
-  </div>
-</section>
-
 <!-- =================================================== INSTALLER ====== -->
 <section class="leaf" id="installer" aria-labelledby="installer-title">
   <div class="hold">
@@ -953,7 +812,6 @@
         <ul>
           <li><a class="foot__link" href="#fonctions" data-i18n="nav.features">Fonctions</a></li>
           <li><a class="foot__link" href="#pays" data-i18n="footer.countries">Pays couverts</a></li>
-          <li><a class="foot__link" href="#questions" data-i18n="footer.faq">Questions fréquentes</a></li>
         </ul>
       </div>
       <div>

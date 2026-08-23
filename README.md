@@ -75,15 +75,15 @@ Le site est une page unique servie en quatre langues, distinguées par `?lang=`.
 Chaque version porte donc sa propre adresse canonique et ses `hreflang` ; c'est
 `assets/js/seo.js` qui les calcule, et `i18n.js` qui les applique au changement
 de langue, avec le graphe JSON-LD (`WebSite`, `Organization`, `WebPage`,
-`MobileApplication`, `FAQPage`).
+`MobileApplication`).
 
 La version française de ce graphe est figée dans `index.html` : un robot qui
 n'exécute pas le script doit la lire quand même. `tools/check-structured-data.mjs`
 vérifie qu'elle correspond toujours au catalogue, et la régénère avec `--write`.
 
-Les réponses de la FAQ vivent dans le catalogue comme le reste des textes. Elles
-sont repliées derrière un dépliant, à la manière de l'historique des versions :
-la page reste courte, le contenu reste dans le HTML.
+Le graphe ne décrit que ce que la page montre. Baliser un contenu absent de
+l'écran est proscrit par les moteurs : toute entité ajoutée ici doit avoir sa
+contrepartie visible dans la page.
 
 L'image de partage n'est pas générée à la volée. Le gabarit est
 `tools/og-cover.html` ; `python3 tools/make-og-cover.py` la rend en 1200 × 630

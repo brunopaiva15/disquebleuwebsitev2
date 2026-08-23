@@ -6,6 +6,9 @@
    données structurées. Tout est calculé ici, à partir du catalogue de
    traduction : aucune phrase n'est réécrite à deux endroits.
 
+   Le graphe ne décrit que ce que la page montre : baliser un contenu absent
+   de l'écran est proscrit par les moteurs, et sans effet.
+
    Le même module sert au navigateur (i18n.js, au changement de langue) et à
    la vérification hors ligne (tools/check-structured-data.mjs, qui compare le
    bloc JSON-LD figé dans index.html à ce que produit le catalogue français).
@@ -106,17 +109,6 @@ export function buildStructuredData(language, catalog, languages) {
           availability: 'https://schema.org/InStock',
           url: SITE_URL,
         },
-      },
-      {
-        '@type': 'FAQPage',
-        '@id': `${url}#faq`,
-        inLanguage: language,
-        isPartOf: { '@id': page },
-        mainEntity: catalog.faq.items.map((item) => ({
-          '@type': 'Question',
-          name: item.question,
-          acceptedAnswer: { '@type': 'Answer', text: item.answer },
-        })),
       },
     ],
   };

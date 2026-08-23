@@ -59,9 +59,6 @@ SUPPORTED_LANGUAGES.forEach((language) => {
   if (catalog.countries.names.length !== 6) {
     errors.push(`${language}: 6 pays attendus`);
   }
-  if (catalog.faq.items.length !== 9) {
-    errors.push(`${language}: 9 questions fréquentes attendues`);
-  }
 });
 
 const dateCount = (html.match(/data-i18n-date/g) || []).length;

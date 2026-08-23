@@ -29,7 +29,7 @@ export const TRANSLATIONS = {
       windshield: 'Une voiture vue de face avec un disque de stationnement posé derrière le pare-brise',
     },
     language: { label: 'Langue' },
-    nav: { features: 'Fonctions', countries: 'Pays', faq: 'Questions' },
+    nav: { features: 'Fonctions', countries: 'Pays' },
     hero: { title: "Stationnez<br>l'esprit tranquille." },
     calculate: {
       title: 'Plus besoin<br>de calculer.',
@@ -165,47 +165,6 @@ export const TRANSLATIONS = {
         "Lire l'article de La Côte",
       ],
     },
-    faq: {
-      title: "Questions fréquentes",
-      items: [
-        {
-          question: "Qu'est-ce que Disque Bleu ?",
-          answer: "Disque Bleu est une application iPhone et Android qui calcule l'heure à afficher sur votre disque de stationnement, lance un compte à rebours et vous prévient avant l'échéance. Elle couvre la Suisse, la France, l'Allemagne, l'Italie, la Belgique et le Luxembourg.",
-        },
-        {
-          question: "Comment l'heure à afficher est-elle calculée ?",
-          answer: "L'application arrondit votre heure d'arrivée selon la règle du pays sélectionné. En Suisse, une arrivée à 08h47 se note 09:00 sur le disque, et le stationnement court jusqu'à 10:00 dans une zone d'une heure.",
-        },
-        {
-          question: "L'application remplace-t-elle le disque physique ?",
-          answer: "Non. C'est une aide au conducteur : le disque officiel doit rester apposé derrière le pare-brise, visible depuis l'extérieur. Disque Bleu vous évite l'erreur de calcul et l'oubli, pas l'obligation légale.",
-        },
-        {
-          question: "Comment la règle de midi suisse est-elle traitée ?",
-          answer: "Dans une zone bleue suisse, un véhicule garé pendant la pause de midi peut rester plus longtemps que la durée affichée. L'application applique cette règle automatiquement, comme la pause déjeuner française et les autres plages particulières.",
-        },
-        {
-          question: "Les jours fériés sont-ils pris en compte ?",
-          answer: "Oui. Disque Bleu connaît les jours fériés nationaux et régionaux du canton, de la région ou du Land sélectionné, y compris les cas particuliers comme l'Alsace-Moselle. Le stationnement est prolongé lorsque la réglementation le prévoit.",
-        },
-        {
-          question: "Qu'est-ce que la Brötchentaste en Allemagne ?",
-          answer: "C'est l'arrêt court gratuit, d'une trentaine de minutes, proposé dans certaines communes allemandes. L'application propose ce réglage lorsque l'Allemagne est le pays sélectionné.",
-        },
-        {
-          question: "Comment suis-je prévenu avant la fin du stationnement ?",
-          answer: "Une notification part au délai que vous avez choisi. Sur iPhone, le temps restant s'affiche également sur l'écran verrouillé, dans la Dynamic Island et dans un widget.",
-        },
-        {
-          question: "Combien coûte l'application ?",
-          answer: "Disque Bleu coûte 1 CHF sur l'App Store et sur Google Play. Une amende de stationnement coûte environ quarante fois plus.",
-        },
-        {
-          question: "L'application aide-t-elle à retrouver ma voiture et une place ?",
-          answer: "Oui. La position du véhicule est mémorisée au moment où vous vous garez, avec une photo de repère, le niveau ou le numéro de place si vous le souhaitez. La carte indique les places à proximité et vous pouvez signaler une erreur, qui repart vers les contributeurs d'OpenStreetMap.",
-        },
-      ],
-    },
     install: {
       title: 'Tout simplement.',
       text: "L'app coûte 1 CHF. Une amende, 40 fois plus.",
@@ -214,7 +173,6 @@ export const TRANSLATIONS = {
       description: 'Aide au stationnement à durée limitée.',
       site: 'Le site',
       countries: 'Pays couverts',
-      faq: 'Questions fréquentes',
       install: 'Installer',
     },
     stores: {
@@ -240,7 +198,7 @@ export const TRANSLATIONS = {
       windshield: 'Front view of a car with a parking disc placed behind the windscreen',
     },
     language: { label: 'Language' },
-    nav: { features: 'Features', countries: 'Countries', faq: 'FAQ' },
+    nav: { features: 'Features', countries: 'Countries' },
     hero: { title: 'Park<br>with peace of mind.' },
     calculate: {
       title: 'No more<br>calculations.',
@@ -376,47 +334,6 @@ export const TRANSLATIONS = {
         'Read the article from La Côte',
       ],
     },
-    faq: {
-      title: "Frequently asked questions",
-      items: [
-        {
-          question: "What is Disque Bleu?",
-          answer: "Disque Bleu is an iPhone and Android app that works out the time to set on your parking disc, runs a countdown and alerts you before it expires. It covers Switzerland, France, Germany, Italy, Belgium and Luxembourg.",
-        },
-        {
-          question: "How is the time to display calculated?",
-          answer: "The app rounds your arrival time according to the rule of the selected country. In Switzerland, arriving at 08:47 means setting 09:00 on the disc, and parking then runs until 10:00 in a one-hour zone.",
-        },
-        {
-          question: "Does the app replace the physical disc?",
-          answer: "No. It is a driving aid: the official disc must stay behind the windscreen, visible from outside. Disque Bleu spares you the arithmetic and the forgetting, not the legal obligation.",
-        },
-        {
-          question: "How is the Swiss midday rule handled?",
-          answer: "In a Swiss blue zone, a vehicle left over the midday break may stay longer than the posted duration. The app applies that rule automatically, as it does the French lunch break and the other special time bands.",
-        },
-        {
-          question: "Are public holidays taken into account?",
-          answer: "Yes. Disque Bleu knows the national and regional public holidays of the selected canton, region or Land, including special cases such as Alsace-Moselle. Parking is extended wherever the regulations provide for it.",
-        },
-        {
-          question: "What is the German Brötchentaste?",
-          answer: "It is the free short stop, around thirty minutes, offered by some German municipalities. The app suggests that setting when Germany is the selected country.",
-        },
-        {
-          question: "How am I warned before parking ends?",
-          answer: "A notification is sent at the lead time you choose. On iPhone, the remaining time also appears on the Lock Screen, in the Dynamic Island and in a widget.",
-        },
-        {
-          question: "How much does the app cost?",
-          answer: "Disque Bleu costs CHF 1 on the App Store and on Google Play. A parking fine costs about forty times more.",
-        },
-        {
-          question: "Does the app help me find my car and a space?",
-          answer: "Yes. Your vehicle's position is saved when you park, with a landmark photo, the level or the bay number if you want. The map shows spaces nearby, and you can report a mistake, which goes back to the OpenStreetMap contributors.",
-        },
-      ],
-    },
     install: {
       title: 'Simple as that.',
       text: 'The app costs CHF 1. A fine costs 40 times more.',
@@ -425,7 +342,6 @@ export const TRANSLATIONS = {
       description: 'Assistance for time-limited parking.',
       site: 'The site',
       countries: 'Countries covered',
-      faq: 'Frequently asked questions',
       install: 'Install',
     },
     stores: {
@@ -451,7 +367,7 @@ export const TRANSLATIONS = {
       windshield: 'Frontansicht eines Autos mit einer Parkscheibe hinter der Windschutzscheibe',
     },
     language: { label: 'Sprache' },
-    nav: { features: 'Funktionen', countries: 'Länder', faq: 'Fragen' },
+    nav: { features: 'Funktionen', countries: 'Länder' },
     hero: { title: 'Entspannt<br>parken.' },
     calculate: {
       title: 'Kein<br>Nachrechnen.',
@@ -587,47 +503,6 @@ export const TRANSLATIONS = {
         'Artikel von La Côte lesen',
       ],
     },
-    faq: {
-      title: "Häufige Fragen",
-      items: [
-        {
-          question: "Was ist Disque Bleu?",
-          answer: "Disque Bleu ist eine App für iPhone und Android, die die auf der Parkscheibe einzustellende Zeit berechnet, einen Countdown startet und vor Ablauf der Parkzeit erinnert. Abgedeckt sind die Schweiz, Frankreich, Deutschland, Italien, Belgien und Luxemburg.",
-        },
-        {
-          question: "Wie wird die einzustellende Zeit berechnet?",
-          answer: "Die App rundet Ihre Ankunftszeit nach der Regel des ausgewählten Landes. In der Schweiz wird eine Ankunft um 08:47 Uhr als 09:00 Uhr eingestellt, und in einer Einstundenzone läuft das Parkieren bis 10:00 Uhr.",
-        },
-        {
-          question: "Ersetzt die App die physische Parkscheibe?",
-          answer: "Nein. Sie ist eine Fahrhilfe: Die offizielle Parkscheibe muss hinter der Windschutzscheibe bleiben und von aussen sichtbar sein. Disque Bleu erspart Ihnen das Rechnen und das Vergessen, nicht die gesetzliche Pflicht.",
-        },
-        {
-          question: "Wie wird die Schweizer Mittagsregel behandelt?",
-          answer: "In einer Schweizer blauen Zone darf ein über die Mittagspause abgestelltes Fahrzeug länger stehen bleiben als die angeschriebene Dauer. Die App wendet diese Regel automatisch an, ebenso die französische Mittagspause und weitere Sonderzeiten.",
-        },
-        {
-          question: "Werden Feiertage berücksichtigt?",
-          answer: "Ja. Disque Bleu kennt die nationalen und regionalen Feiertage des ausgewählten Kantons, der Region oder des Bundeslandes, samt Sonderfällen wie Elsass-Mosel. Die Parkzeit wird verlängert, wo die Vorschriften das vorsehen.",
-        },
-        {
-          question: "Was ist die Brötchentaste?",
-          answer: "Das ist der kostenlose Kurzhalt von rund dreissig Minuten, den einzelne deutsche Gemeinden anbieten. Die App bietet diese Einstellung an, wenn Deutschland als Land ausgewählt ist.",
-        },
-        {
-          question: "Wie werde ich vor Ablauf der Parkzeit gewarnt?",
-          answer: "Eine Mitteilung geht zur von Ihnen gewählten Vorlaufzeit raus. Auf dem iPhone erscheint die Restzeit zusätzlich auf dem Sperrbildschirm, in der Dynamic Island und in einem Widget.",
-        },
-        {
-          question: "Was kostet die App?",
-          answer: "Disque Bleu kostet 1 CHF im App Store und bei Google Play. Eine Parkbusse kostet rund vierzigmal mehr.",
-        },
-        {
-          question: "Hilft die App, mein Auto und einen Parkplatz zu finden?",
-          answer: "Ja. Die Position des Fahrzeugs wird beim Parkieren gespeichert, auf Wunsch mit Erinnerungsfoto, Etage oder Platznummer. Die Karte zeigt Parkplätze in der Nähe, und Sie können einen Fehler melden, der zurück an die Mitwirkenden von OpenStreetMap geht.",
-        },
-      ],
-    },
     install: {
       title: 'So einfach.',
       text: 'Die App kostet 1 CHF. Eine Busse 40-mal mehr.',
@@ -636,7 +511,6 @@ export const TRANSLATIONS = {
       description: 'Hilfe beim zeitlich begrenzten Parkieren.',
       site: 'Die Website',
       countries: 'Unterstützte Länder',
-      faq: 'Häufige Fragen',
       install: 'Installieren',
     },
     stores: {
@@ -662,7 +536,7 @@ export const TRANSLATIONS = {
       windshield: "Vista frontale di un'auto con un disco orario posizionato dietro il parabrezza",
     },
     language: { label: 'Lingua' },
-    nav: { features: 'Funzioni', countries: 'Paesi', faq: 'Domande' },
+    nav: { features: 'Funzioni', countries: 'Paesi' },
     hero: { title: 'Parcheggia<br>senza pensieri.' },
     calculate: {
       title: 'Niente più<br>calcoli.',
@@ -798,47 +672,6 @@ export const TRANSLATIONS = {
         "Leggi l'articolo pubblicato da La Côte",
       ],
     },
-    faq: {
-      title: "Domande frequenti",
-      items: [
-        {
-          question: "Che cos'è Disque Bleu?",
-          answer: "Disque Bleu è un'app per iPhone e Android che calcola l'ora da impostare sul disco orario, avvia un conto alla rovescia e ti avvisa prima della scadenza. Copre Svizzera, Francia, Germania, Italia, Belgio e Lussemburgo.",
-        },
-        {
-          question: "Come viene calcolata l'ora da impostare?",
-          answer: "L'app arrotonda l'ora di arrivo secondo la regola del paese selezionato. In Svizzera un arrivo alle 08:47 si imposta sulle 09:00 e la sosta prosegue fino alle 10:00 in una zona di un'ora.",
-        },
-        {
-          question: "L'app sostituisce il disco fisico?",
-          answer: "No. È un ausilio per il conducente: il disco ufficiale deve restare dietro il parabrezza, visibile dall'esterno. Disque Bleu ti evita il calcolo e la dimenticanza, non l'obbligo di legge.",
-        },
-        {
-          question: "Come viene gestita la regola svizzera di mezzogiorno?",
-          answer: "In una zona blu svizzera, un veicolo lasciato durante la pausa di mezzogiorno può restare più a lungo della durata indicata. L'app applica la regola automaticamente, come la pausa pranzo francese e le altre fasce particolari.",
-        },
-        {
-          question: "I giorni festivi sono considerati?",
-          answer: "Sì. Disque Bleu conosce i giorni festivi nazionali e regionali del cantone, della regione o del Land selezionato, compresi i casi particolari come l'Alsazia-Mosella. La sosta è prolungata quando la normativa lo prevede.",
-        },
-        {
-          question: "Che cos’è la Brötchentaste tedesca?",
-          answer: "È la sosta breve gratuita, di una trentina di minuti, proposta in alcuni comuni tedeschi. L'app propone questa impostazione quando il paese selezionato è la Germania.",
-        },
-        {
-          question: "Come vengo avvisato prima della fine della sosta?",
-          answer: "Una notifica parte con l’anticipo che hai scelto. Su iPhone il tempo rimanente compare anche sulla schermata di blocco, nella Dynamic Island e in un widget.",
-        },
-        {
-          question: "Quanto costa l'app?",
-          answer: "Disque Bleu costa 1 CHF su App Store e su Google Play. Una multa per sosta costa circa quaranta volte tanto.",
-        },
-        {
-          question: "L'app aiuta a ritrovare l'auto e un posto?",
-          answer: "Sì. La posizione del veicolo viene memorizzata quando parcheggi, con una foto di riferimento, il piano o il numero del posto se lo desideri. La mappa indica i posti nelle vicinanze e puoi segnalare un errore, che torna ai contributori di OpenStreetMap.",
-        },
-      ],
-    },
     install: {
       title: 'Semplicemente.',
       text: "L'app costa 1 CHF. Una multa, 40 volte di più.",
@@ -847,7 +680,6 @@ export const TRANSLATIONS = {
       description: 'Assistenza per il parcheggio a tempo limitato.',
       site: 'Il sito',
       countries: 'Paesi supportati',
-      faq: 'Domande frequenti',
       install: 'Installa',
     },
     stores: {
