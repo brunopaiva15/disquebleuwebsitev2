@@ -53,8 +53,8 @@ SUPPORTED_LANGUAGES.forEach((language) => {
   if (catalog.features.items.length !== 9) {
     errors.push(`${language}: 9 fonctionnalités attendues`);
   }
-  if (catalog.changelog.versions.length !== 12) {
-    errors.push(`${language}: 12 versions attendues`);
+  if (catalog.changelog.versions.length !== 13) {
+    errors.push(`${language}: 13 versions attendues`);
   }
   if (catalog.countries.names.length !== 6) {
     errors.push(`${language}: 6 pays attendus`);
@@ -62,7 +62,7 @@ SUPPORTED_LANGUAGES.forEach((language) => {
 });
 
 const dateCount = (html.match(/data-i18n-date/g) || []).length;
-if (dateCount !== 12) errors.push(`${dateCount} dates localisées au lieu de 12`);
+if (dateCount !== 13) errors.push(`${dateCount} dates localisées au lieu de 13`);
 
 if (errors.length) {
   console.error('Traductions incomplètes :');
@@ -70,4 +70,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`${SUPPORTED_LANGUAGES.length} langues, ${htmlKeys.size} clés HTML et 12 dates vérifiées.`);
+console.log(`${SUPPORTED_LANGUAGES.length} langues, ${htmlKeys.size} clés HTML et 13 dates vérifiées.`);

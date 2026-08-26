@@ -96,6 +96,10 @@ export const TRANSLATIONS = {
       action: 'Voir le changelog complet',
       versions: [
         {
+          title: 'Notifications corrigées sur Android',
+          text: "Correction de l'affichage des notifications sur Android : l'alerte avant l'échéance n'apparaissait pas sur tous les appareils.",
+        },
+        {
           title: 'Italie, Belgique, Luxembourg, carte communautaire et Mon véhicule',
           text: "Ajout de l'Italie, de la Belgique et du Luxembourg, avec leurs règles de stationnement et leurs jours fériés. Ajout de la carte communautaire pour signaler ou proposer une place à destination d'OpenStreetMap. « Mon véhicule » permet désormais d'ajouter une photo de repère, le niveau, le numéro de place et une note, conservés sur l'appareil.",
         },
@@ -264,6 +268,10 @@ export const TRANSLATIONS = {
     changelog: {
       action: 'View the full changelog',
       versions: [
+        {
+          title: 'Android notification fix',
+          text: 'Fixed the display of notifications on Android: the reminder before the deadline did not appear on every device.',
+        },
         {
           title: 'Italy, Belgium, Luxembourg, community map and My vehicle',
           text: 'Added Italy, Belgium and Luxembourg, including their parking rules and public holidays. Added the community map for reporting or suggesting a parking space for OpenStreetMap. “My vehicle” can now store a reference photo, floor, space number and note on the device.',
@@ -434,6 +442,10 @@ export const TRANSLATIONS = {
       action: 'Vollständiges Änderungsprotokoll anzeigen',
       versions: [
         {
+          title: 'Korrigierte Benachrichtigungen unter Android',
+          text: 'Die Anzeige der Benachrichtigungen unter Android wurde korrigiert: Die Erinnerung vor Ablauf erschien nicht auf allen Geräten.',
+        },
+        {
           title: 'Italien, Belgien, Luxemburg, Community-Karte und Mein Fahrzeug',
           text: 'Italien, Belgien und Luxemburg mit ihren Parkregeln und Feiertagen wurden hinzugefügt. Die Community-Karte ermöglicht Meldungen und Vorschläge von Parkplätzen für OpenStreetMap. Unter «Mein Fahrzeug» lassen sich neu ein Orientierungsfoto, das Stockwerk, die Platznummer und eine lokal gespeicherte Notiz hinzufügen.',
         },
@@ -602,6 +614,10 @@ export const TRANSLATIONS = {
     changelog: {
       action: 'Mostra il changelog completo',
       versions: [
+        {
+          title: 'Notifiche corrette su Android',
+          text: "Corretta la visualizzazione delle notifiche su Android: l'avviso prima della scadenza non compariva su tutti i dispositivi.",
+        },
         {
           title: 'Italia, Belgio, Lussemburgo, mappa della comunità e Il mio veicolo',
           text: "Aggiunti Italia, Belgio e Lussemburgo, con le rispettive regole di parcheggio e i giorni festivi. Aggiunta la mappa della comunità per segnalare o proporre un posto destinato a OpenStreetMap. «Il mio veicolo» consente ora di aggiungere una foto di riferimento, il piano, il numero del posto e una nota, conservati sul dispositivo.",
