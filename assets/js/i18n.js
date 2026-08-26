@@ -167,6 +167,7 @@ export const TRANSLATIONS = {
         "Lire l'article de Watson",
         "Lire l'article du Nouvelliste",
         "Lire l'article de La Côte",
+        "Lire l'article d'ajour",
       ],
     },
     install: {
@@ -340,6 +341,7 @@ export const TRANSLATIONS = {
         'Read the Watson article',
         'Read the Nouvelliste article',
         'Read the article from La Côte',
+        'Read the ajour article',
       ],
     },
     install: {
@@ -513,6 +515,7 @@ export const TRANSLATIONS = {
         'Artikel bei Watson lesen',
         'Artikel im Nouvelliste lesen',
         'Artikel von La Côte lesen',
+        'Artikel bei ajour lesen',
       ],
     },
     install: {
@@ -686,6 +689,7 @@ export const TRANSLATIONS = {
         "Leggi l'articolo di Watson",
         "Leggi l'articolo del Nouvelliste",
         "Leggi l'articolo pubblicato da La Côte",
+        "Leggi l'articolo di ajour",
       ],
     },
     install: {
