@@ -2,10 +2,9 @@
    Disque Bleu, feuille de style unique.
 
    Architecture visuelle : une scène WebGL fixe (ciel + disque) sur laquelle
-   glissent des sections. Par-dessus, une grille de filets d'un pixel, des
-   marques de repère aux intersections, un serif de titrage et des micro-
-   étiquettes en chasse fixe. Aucun dégradé décoratif, aucune ombre portée :
-   tout le relief vient de l'image et du vide.
+   glissent des sections. Le reste reprend l'onboarding de l'application :
+   le bleu à plat, des fonds froids presque noirs ou presque blancs, des
+   cartes aux grands arrondis et des titres gras en casse normale.
    =========================================================================== */
 
 /* ------------------------------------------------------------- JETONS -- */
@@ -16,25 +15,32 @@
   --sky: #0b60c4;
   --sky-flat: #1565c0;   /* le bleu à plat de l'application */
   --sky-deep: #04398a;
-  --press: #0b0a09;
-  --press-soft: #171614;
-  --paper: #f2f1ed;
-  --ink: #1d1c19;
-  --ink-soft: #55534c;
+  /* Fonds et encres de l'onboarding (onboarding_style.dart) : presque noir
+     et presque blanc, tirés vers le bleu plutôt que vers le chaud. */
+  --press: #0e1420;
+  --press-soft: #1b2433;
+  --paper: #f6f8fc;
+  --card: #ffffff;
+  --ink: #101828;
+  --ink-soft: #4b5565;
 
   --amber: #ff8a1e;   /* l'orange du compte à rebours */
   --icon: #6aa9f0;    /* bleu clair des pictogrammes */
-  --on-dark: #f7f5f0;
-  --on-dark-dim: #b9b5ab;
+  --on-dark: #ffffff;
+  --on-dark-dim: #b4bcc9;
 
-  /* Filets et repères : toujours translucides, jamais opaques. */
-  --rule-dark: #ffffff40;
-  --rule-light: #1d1c1926;
+  /* Filets : toujours translucides, jamais opaques. */
+  --rule-dark: #ffffff26;
+  --rule-light: #1018281f;
   --cross-dark: #ffffff9e;
-  --cross-light: #1d1c1966;
+  --cross-light: #10182866;
+
+  /* Les arrondis de l'onboarding : la feuille, les boutons. */
+  --radius-sheet: 28px;
+  --radius: 14px;
 
   /* Une seule famille de texte : Inter, celle de l'application, serrée au
-     titrage. DM Mono ne sert qu'aux micro-étiquettes et aux chiffres. */
+     titrage. DM Mono ne sert plus qu'aux chiffres des versions. */
   --title: "Inter", "Helvetica Neue", Arial, sans-serif;
   --text: "Inter", "Helvetica Neue", Arial, sans-serif;
   --code: "DM Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -112,9 +118,8 @@ ul { list-style: none; }
   padding: 12px 18px;
   color: var(--ink);
   background: var(--paper);
-  font: 500 11px / 1 var(--code);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  border-radius: var(--radius);
+  font: 600 14px / 1 var(--text);
   transform: translateY(-160%);
   transition: transform 0.2s var(--ease);
 }
@@ -261,10 +266,8 @@ body.is-light .masthead {
 }
 
 .masthead__link {
-  font: 400 11px / 1 var(--code);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  opacity: 0.72;
+  font: 600 14px / 1 var(--text);
+  opacity: 0.8;
   transition: opacity 0.3s linear;
 }
 
@@ -292,13 +295,13 @@ body.is-light .masthead {
   min-width: 58px;
   padding: 8px 27px 8px 10px;
   color: inherit;
-  background: rgba(11, 10, 9, 0.14);
+  background: rgba(14, 20, 32, 0.18);
   border: 1px solid currentColor;
-  border-radius: 0;
+  border-radius: 999px;
   outline: 0;
   appearance: none;
-  font: 500 10px / 1 var(--code);
-  letter-spacing: 0.13em;
+  font: 600 12px / 1 var(--text);
+  letter-spacing: 0.04em;
   cursor: pointer;
 }
 
@@ -358,21 +361,19 @@ body.is-light .language-picker select { background: #ffffff3d; }
 
 .display {
   font-family: var(--title);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.02;
   letter-spacing: -0.035em;
   text-wrap: balance;
 }
 
-/* Les grandes affirmations passent en capitales grasses : c'est la voix des
-   visuels de l'application. Les titres de section, plus longs, restent en
-   casse normale, des capitales sur trois lignes ne se lisent plus. */
+/* Les grandes affirmations sont grasses et serrées, en casse normale :
+   c'est la voix des titres de l'onboarding (« Réglez votre disque »). */
 .display--xl,
 .display--l {
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  line-height: 0.98;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
 }
 
 .display--xl { font-size: clamp(2.4rem, 5.8vw, 5.6rem); }
@@ -451,8 +452,10 @@ body.is-light .language-picker select { background: #ffffff3d; }
   width: 13px;
   height: 13px;
   translate: -50% -50%;
+  display: none;
   background: var(--cross-dark);
-  /* Étoile à quatre branches : le repère de calage de la grille. */
+  /* Étoile à quatre branches : le repère de calage de la grille, retiré
+     avec le passage au style de l'onboarding. */
   clip-path: polygon(
     50% 0%, 57% 43%, 100% 50%, 57% 57%,
     50% 100%, 43% 57%, 0% 50%, 43% 43%
@@ -485,9 +488,7 @@ body.is-light .language-picker select { background: #ffffff3d; }
 
 .section-kicker {
   margin-bottom: 18px;
-  font: 500 10px / 1 var(--code);
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font: 600 14px / 1 var(--text);
   color: var(--icon);
 }
 
@@ -582,11 +583,10 @@ body.is-light .language-picker select { background: #ffffff3d; }
 
 .rank__version {
   flex: none;
-  padding: 5px 7px;
-  border: 1px solid currentColor;
-  font: 500 9px / 1 var(--code);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(106, 169, 240, 0.14);
+  font: 600 12px / 1 var(--text);
   color: var(--icon);
   white-space: nowrap;
 }
@@ -606,7 +606,11 @@ body.is-light .language-picker select { background: #ffffff3d; }
    le reste de la page, avec une grille, des filets et des repères techniques. */
 .countries {
   display: grid;
-  border-block: 1px solid var(--rule-dark);
+  padding-inline: clamp(22px, 3.2vw, 38px);
+  background: var(--press-soft);
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius-sheet);
+  overflow: hidden;
 }
 
 .country {
@@ -648,6 +652,7 @@ body.is-light .language-picker select { background: #ffffff3d; }
   max-width: 100%;
   height: auto;
   max-height: 100%;
+  border-radius: 4px;
   outline: 1px solid rgba(255, 255, 255, 0.24);
 }
 
@@ -700,8 +705,12 @@ body.is-light .language-picker select { background: #ffffff3d; }
   display: grid;
   justify-items: start;
   gap: 12px;
-  padding: 20px 26px 22px;
-  border-left: 2px solid rgba(255, 255, 255, 0.55);
+  padding: 22px 28px 24px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius-sheet);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
 }
 
 .readout__label {
@@ -755,7 +764,7 @@ body.is-light .language-picker select { background: #ffffff3d; }
   .scene--calculation .readout {
     width: 100%;
     gap: 8px;
-    padding: 14px 0 16px 18px;
+    padding: 16px 20px 18px;
   }
 
   .scene--calculation .readout__time {
@@ -780,9 +789,10 @@ body.is-light .language-picker select { background: #ffffff3d; }
 
 /* La mention légale doit se lire, pas se décorer : fond papier, filets. */
 .notice {
-  border-top: 1px solid var(--rule-light);
-  border-bottom: 1px solid var(--rule-light);
-  padding-block: clamp(34px, 6vh, 60px);
+  padding: clamp(28px, 5vw, 60px);
+  background: var(--card);
+  border: 1px solid var(--rule-light);
+  border-radius: var(--radius-sheet);
 }
 
 .notice__grid {
@@ -814,7 +824,9 @@ body.is-light .language-picker select { background: #ffffff3d; }
 
 .feature-layout {
   background: var(--press-soft);
-  border-block: 1px solid var(--rule-dark);
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius-sheet);
+  overflow: hidden;
 }
 
 .feature-list {
@@ -837,7 +849,9 @@ body.is-light .language-picker select { background: #ffffff3d; }
 .feature-history {
   margin-top: clamp(70px, 11vh, 118px);
   background: var(--press-soft);
-  border-block: 1px solid var(--rule-dark);
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius-sheet);
+  overflow: hidden;
 }
 
 .feature-history__summary {
@@ -871,6 +885,7 @@ body.is-light .language-picker select { background: #ffffff3d; }
   width: 28px;
   height: 28px;
   border: 1px solid var(--rule-dark);
+  border-radius: 50%;
 }
 
 .feature-history__toggle::before,
@@ -921,7 +936,8 @@ body.is-light .language-picker select { background: #ffffff3d; }
   top: 22px;
   bottom: 22px;
   left: 0;
-  width: 2px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
   background: var(--icon);
   transform: scaleY(0);
   transform-origin: center;
@@ -956,10 +972,7 @@ body.is-light .language-picker select { background: #ffffff3d; }
 }
 
 .version-row__meta time {
-  font-size: 9px;
-  line-height: 1.4;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font: 500 12px / 1.4 var(--text);
   color: var(--on-dark-dim);
 }
 
@@ -1021,9 +1034,7 @@ body.is-light .language-picker select { background: #ffffff3d; }
 
 .press-title {
   margin-bottom: clamp(28px, 5vh, 52px);
-  font: 500 11px / 1 var(--code);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  font: 600 15px / 1 var(--text);
   color: var(--on-dark-dim);
 }
 
@@ -1061,9 +1072,7 @@ body.is-light .language-picker select { background: #ffffff3d; }
 .press-source__logo--ajour { width: min(100%, 200px); }
 
 .press-source__action {
-  font: 500 10px / 1.4 var(--code);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font: 600 14px / 1.4 var(--text);
   color: var(--icon);
   transition: transform 0.35s var(--ease), color 0.25s linear;
 }
@@ -1088,6 +1097,17 @@ body.is-light .language-picker select { background: #ffffff3d; }
   .press-source__logo { max-width: min(78vw, 320px); }
 }
 
+/* ------------------------------------------------------------ INSTALLER -- */
+
+/* La dernière invitation reprend les pages bleues de l'onboarding : le bleu
+   à plat de l'application, le texte blanc. */
+.leaf--blue {
+  background: var(--sky-flat);
+  color: var(--on-dark);
+}
+
+.leaf--blue .say--dim { color: rgba(255, 255, 255, 0.82); }
+
 /* ------------------------------------------------------- PIED DE PAGE -- */
 
 .foot {
@@ -1110,9 +1130,7 @@ body.is-light .language-picker select { background: #ffffff3d; }
 
 .foot h4 {
   margin-bottom: 16px;
-  font: 400 11px / 1 var(--code);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  font: 600 14px / 1 var(--text);
   color: var(--on-dark-dim);
 }
 
@@ -1133,9 +1151,7 @@ body.is-light .language-picker select { background: #ffffff3d; }
   gap: 12px 30px;
   padding-top: 26px;
   border-top: 1px solid var(--rule-dark);
-  font: 400 11px / 1.6 var(--code);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font: 500 13px / 1.6 var(--text);
   color: var(--on-dark-dim);
 }
 
