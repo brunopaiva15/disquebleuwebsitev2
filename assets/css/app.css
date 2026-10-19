@@ -812,10 +812,32 @@ body.is-light .language-picker select { background: #ffffff3d; }
 
 .notice__art { margin: 0; }
 
+/* La photo de l'onboarding (disclaimer_dialog.dart) : même cadre en 16:10,
+   même zoom lent vers le disque, coupé si « Réduire les animations ». */
 .windshield {
   width: 100%;
-  max-width: 480px;
-  height: auto;
+  max-width: 520px;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.windshield img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 49.5% 62.5%;
+  transform-origin: 49.5% 62.5%;
+  animation: windshield-zoom 5s ease-in-out infinite alternate;
+}
+
+@keyframes windshield-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.12); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .windshield img { animation: none; }
 }
 
 .notice p + p { margin-top: 14px; }
