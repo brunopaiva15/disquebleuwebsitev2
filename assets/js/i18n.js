@@ -1,5 +1,9 @@
 /* ===========================================================================
    i18n.js. Catalogue unique et changement de langue sans dupliquer la page.
+
+   Les quatre textes de la présentation reprennent ceux de l'onboarding de
+   l'application (lib/l10n/app_strings.dart), mot pour mot : le site et l'app
+   parlent de la même façon.
    =========================================================================== */
 
 import { buildStructuredData, languageUrl } from './seo.js';
@@ -17,28 +21,80 @@ export const TRANSLATIONS = {
   fr: {
     meta: {
       title: "Disque Bleu, l'application du disque de stationnement en zone bleue",
-      description: "Calculez l'heure à afficher sur votre disque de stationnement et recevez une alerte avant l'échéance. Suisse, France, Allemagne, Italie, Belgique, Luxembourg.",
-      socialDescription: "Six pays, six réglementations, un seul bouton. L'application calcule l'heure à afficher sur votre disque et vous prévient avant l'échéance.",
-      socialImageAlt: "Un disque de stationnement bleu devant un ciel, avec le nom Disque Bleu",
+      description: "Disque Bleu calcule l'heure à régler sur votre disque de stationnement en zone bleue et vous prévient avant l'échéance. Suisse, France, Allemagne, Italie, Belgique, Luxembourg et Pays-Bas.",
+      socialDescription: "Sept pays, sept réglementations. L'application calcule l'heure à régler sur votre disque et vous prévient avant l'échéance.",
+      socialImageAlt: "Le disque bleu de l'application, avec sa fenêtre et sa flèche, et le nom Disque Bleu",
       locale: 'fr_CH',
     },
     accessibility: {
       skip: 'Aller au contenu',
       home: 'Disque Bleu, retour en haut',
       sections: 'Sections',
-      windshield: 'Une voiture vue de face avec un disque de stationnement posé derrière le pare-brise',
+      chapters: 'Étapes de la présentation',
+      windshield: "Un disque de stationnement posé derrière le pare-brise d'une voiture",
     },
-    language: { label: 'Langue' },
-    nav: { features: 'Fonctions', countries: 'Pays' },
-    hero: { title: "Stationnez<br>l'esprit tranquille." },
-    calculate: {
-      title: 'Plus besoin<br>de calculer.',
-      arrivalLabel: "Heure d'arrivée",
-      example: "Arrivée 08h47, stationnement jusqu'à",
+    language: {
+      label: 'Langue',
     },
-    alert: {
-      title: 'Fini<br>les amendes.',
-      text: "Vous recevez une alerte avant l'échéance de votre disque. Plus d'oubli possible !",
+    nav: {
+      features: 'Fonctions',
+      countries: 'Pays',
+      download: 'Télécharger',
+    },
+    intro: {
+      next: 'Continuer',
+      chapters: [
+        {
+          title: 'Bienvenue sur Disque Bleu',
+          text: "L'application qui vous indique sur quelle heure régler votre disque, en Suisse et dans six autres pays d'Europe.",
+        },
+        {
+          title: 'Réglez votre disque',
+          text: "L'application calcule l'heure à régler sur votre disque. Elle vous indique aussi jusqu'à quand vous pouvez rester.",
+        },
+        {
+          title: "Recevez un rappel avant l'échéance",
+          text: 'Une notification vous prévient quelques minutes avant la fin de votre temps de stationnement. Vous pouvez choisir ce délai dans les réglages.',
+        },
+        {
+          title: 'Trouvez une place en zone bleue',
+          text: 'La carte affiche les places en zone bleue autour de vous ou dans une autre ville. Elle montre aussi où votre voiture est garée.',
+        },
+      ],
+    },
+    countries: {
+      title: 'Sept pays, une seule application.',
+      text: "Les règles du disque changent d'un pays à l'autre : durée, horaires et jours fériés. L'application applique celles du pays choisi.",
+      items: [
+        {
+          name: 'Suisse',
+          rule: '1 h · arrondi à la demi-heure suivante',
+        },
+        {
+          name: 'France',
+          rule: '1 h 30 · arrondi à la demi-heure suivante',
+        },
+        {
+          name: 'Allemagne',
+          rule: '2 h · arrondi à la demi-heure suivante',
+        },
+        {
+          name: 'Italie',
+          rule: "Durée du panneau · heure réelle d'arrivée",
+        },
+        {
+          name: 'Belgique',
+          rule: '2 h par défaut · arrondi à la demi-heure suivante',
+        },
+        {
+          name: 'Luxembourg',
+          rule: 'Durée du panneau · arrondi à la demi-heure suivante',
+        },
+        {
+          name: 'Pays-Bas',
+          rule: "Durée du panneau · arrondi à l'heure ou à la demi-heure suivante",
+        },
+      ],
     },
     features: {
       title: 'Fonctionnalités',
@@ -90,11 +146,37 @@ export const TRANSLATIONS = {
           link: "contributeurs d'OpenStreetMap",
           afterLink: 'et profite à tout le monde.',
         },
+        {
+          title: 'Tablettes et pliables',
+          version: 'Depuis 3.0.0',
+          text: "Sur tablette et téléphone pliable, l'application s'affiche en deux panneaux côte à côte.",
+        },
+      ],
+    },
+    notice: {
+      title: "L'application ne remplace pas le disque physique.",
+      text: "C'est une aide au conducteur. Le disque officiel doit rester apposé derrière le pare-brise, visible depuis l'extérieur.",
+    },
+    press: {
+      title: 'Apparu sur',
+      action: "Lire l'article ↗",
+      sources: [
+        "Lire l'article du Journal du Jura",
+        "Lire l'article d'ArcInfo",
+        "Lire l'article de Watson",
+        "Lire l'article du Nouvelliste",
+        "Lire l'article de La Côte",
+        "Lire l'article d'ajour",
       ],
     },
     changelog: {
+      title: 'Nouveautés',
       action: 'Voir le changelog complet',
       versions: [
+        {
+          title: 'Pays-Bas et grands écrans',
+          text: 'Ajout des Pays-Bas. Interface optimisée pour les téléphones pliables Android et les tablettes, avec une disposition à deux panneaux sur les grands écrans. Amélioration du calcul des horaires de stationnement.',
+        },
         {
           title: 'Notifications corrigées sur Android',
           text: "Correction de l'affichage des notifications sur Android : l'alerte avant l'échéance n'apparaissait pas sur tous les appareils.",
@@ -149,27 +231,6 @@ export const TRANSLATIONS = {
         },
       ],
     },
-    countries: {
-      title: 'Six pays,<br>une seule application.',
-      text: "Les horaires, arrondis et jours fériés s'adaptent automatiquement selon le pays sélectionné.",
-      names: ['Suisse', 'France', 'Allemagne', 'Italie', 'Belgique', 'Luxembourg'],
-    },
-    notice: {
-      title: "L'application ne remplace pas le disque physique.",
-      text: "C'est une aide au conducteur. Le disque officiel doit rester apposé derrière le pare-brise, visible depuis l'extérieur.",
-    },
-    press: {
-      title: 'Apparu sur',
-      action: "Lire l'article ↗",
-      sources: [
-        "Lire l'article du Journal du Jura",
-        "Lire l'article d'ArcInfo",
-        "Lire l'article de Watson",
-        "Lire l'article du Nouvelliste",
-        "Lire l'article de La Côte",
-        "Lire l'article d'ajour",
-      ],
-    },
     install: {
       title: 'Tout simplement.',
       text: "L'app coûte 3 CHF. Une amende, au moins 40.",
@@ -190,29 +251,81 @@ export const TRANSLATIONS = {
 
   en: {
     meta: {
-      title: "Disque Bleu, the parking disc app for blue zones",
-      description: "Work out the time to set on your parking disc and get an alert before it expires. Switzerland, France, Germany, Italy, Belgium and Luxembourg.",
-      socialDescription: "Six countries, six sets of rules, one button. The app calculates the time to display on your disc and alerts you before it expires.",
-      socialImageAlt: "A blue parking disc against a sky, with the name Disque Bleu",
+      title: 'Disque Bleu, the parking disc app for blue zones',
+      description: 'Disque Bleu works out the time to set on your parking disc in blue zones and reminds you before it expires. Switzerland, France, Germany, Italy, Belgium, Luxembourg and the Netherlands.',
+      socialDescription: 'Seven countries, seven sets of rules. The app works out the time to set on your disc and reminds you before it expires.',
+      socialImageAlt: "The app's blue disc, with its window and arrow, and the name Disque Bleu",
       locale: 'en_GB',
     },
     accessibility: {
       skip: 'Skip to content',
       home: 'Disque Bleu, back to top',
       sections: 'Sections',
-      windshield: 'Front view of a car with a parking disc placed behind the windscreen',
+      chapters: 'Steps of the introduction',
+      windshield: 'A parking disc placed behind the windscreen of a car',
     },
-    language: { label: 'Language' },
-    nav: { features: 'Features', countries: 'Countries' },
-    hero: { title: 'Park<br>with peace of mind.' },
-    calculate: {
-      title: 'No more<br>calculations.',
-      arrivalLabel: 'Arrival time',
-      example: 'Arrived at 08:47, parking allowed until',
+    language: {
+      label: 'Language',
     },
-    alert: {
-      title: 'No more<br>fines.',
-      text: 'You receive an alert before your parking disc expires. No more forgetting!',
+    nav: {
+      features: 'Features',
+      countries: 'Countries',
+      download: 'Download',
+    },
+    intro: {
+      next: 'Continue',
+      chapters: [
+        {
+          title: 'Welcome to Disque Bleu',
+          text: 'The app that tells you what time to set on your parking disc, in Switzerland and six other European countries.',
+        },
+        {
+          title: 'Set your disc',
+          text: 'The app works out what time to set on your disc. It also shows you how long you can stay.',
+        },
+        {
+          title: 'Get a reminder before time runs out',
+          text: 'A notification reminds you a few minutes before your parking time ends. You can choose how early in the settings.',
+        },
+        {
+          title: 'Find a blue zone space',
+          text: 'The map shows blue zone spaces near you or in another city. It also shows where your car is parked.',
+        },
+      ],
+    },
+    countries: {
+      title: 'Seven countries, one app.',
+      text: 'Parking disc rules change from one country to another: duration, hours and public holidays. The app applies the rules of the country you choose.',
+      items: [
+        {
+          name: 'Switzerland',
+          rule: '1 hour · rounded up to the next half hour',
+        },
+        {
+          name: 'France',
+          rule: '1 hour 30 · rounded up to the next half hour',
+        },
+        {
+          name: 'Germany',
+          rule: '2 hours · rounded up to the next half hour',
+        },
+        {
+          name: 'Italy',
+          rule: 'Duration on the sign · actual arrival time',
+        },
+        {
+          name: 'Belgium',
+          rule: '2 hours by default · rounded up to the next half hour',
+        },
+        {
+          name: 'Luxembourg',
+          rule: 'Duration on the sign · rounded up to the next half hour',
+        },
+        {
+          name: 'Netherlands',
+          rule: 'Duration on the sign · rounded up to the next hour or half hour',
+        },
+      ],
     },
     features: {
       title: 'Features',
@@ -264,11 +377,37 @@ export const TRANSLATIONS = {
           link: 'OpenStreetMap contributors',
           afterLink: 'and benefits everyone.',
         },
+        {
+          title: 'Tablets and foldables',
+          version: 'Since 3.0.0',
+          text: 'On tablets and foldable phones, the app shows two panels side by side.',
+        },
+      ],
+    },
+    notice: {
+      title: 'The app does not replace the physical parking disc.',
+      text: 'It is a driving aid. The official disc must remain displayed behind the windscreen and visible from outside.',
+    },
+    press: {
+      title: 'Featured in',
+      action: 'Read the article ↗',
+      sources: [
+        'Read the Journal du Jura article',
+        'Read the ArcInfo article',
+        'Read the Watson article',
+        'Read the Nouvelliste article',
+        'Read the article from La Côte',
+        'Read the ajour article',
       ],
     },
     changelog: {
+      title: "What's new",
       action: 'View the full changelog',
       versions: [
+        {
+          title: 'The Netherlands and larger screens',
+          text: 'Added support for the Netherlands. Optimised interface for Android foldable phones and tablets, with a two-panel layout on larger screens. Improved parking time calculations.',
+        },
         {
           title: 'Android notification fix',
           text: 'Fixed the display of notifications on Android: the reminder before the deadline did not appear on every device.',
@@ -323,27 +462,6 @@ export const TRANSLATIONS = {
         },
       ],
     },
-    countries: {
-      title: 'Six countries,<br>one app.',
-      text: 'Times, rounding and public holidays adapt automatically to the selected country.',
-      names: ['Switzerland', 'France', 'Germany', 'Italy', 'Belgium', 'Luxembourg'],
-    },
-    notice: {
-      title: 'The app does not replace the physical parking disc.',
-      text: 'It is a driving aid. The official disc must remain displayed behind the windscreen and visible from outside.',
-    },
-    press: {
-      title: 'Featured in',
-      action: 'Read the article ↗',
-      sources: [
-        'Read the Journal du Jura article',
-        'Read the ArcInfo article',
-        'Read the Watson article',
-        'Read the Nouvelliste article',
-        'Read the article from La Côte',
-        'Read the ajour article',
-      ],
-    },
     install: {
       title: 'Simple as that.',
       text: 'The app costs CHF 3. A fine, at least CHF 40.',
@@ -364,29 +482,81 @@ export const TRANSLATIONS = {
 
   de: {
     meta: {
-      title: "Disque Bleu, die Parkscheiben-App für die blaue Zone",
-      description: "Berechnen Sie die Zeit für Ihre Parkscheibe und werden Sie vor Ablauf der Parkzeit erinnert. Schweiz, Frankreich, Deutschland, Italien, Belgien und Luxemburg.",
-      socialDescription: "Sechs Länder, sechs Regelwerke, eine Taste. Die App berechnet die einzustellende Zeit und erinnert Sie vor Ablauf der Parkzeit.",
-      socialImageAlt: "Eine blaue Parkscheibe vor einem Himmel, mit dem Namen Disque Bleu",
+      title: 'Disque Bleu, die Parkscheiben-App für die blaue Zone',
+      description: 'Disque Bleu berechnet die Uhrzeit für Ihre Parkscheibe in der blauen Zone und erinnert Sie vor Ablauf der Parkzeit. Schweiz, Frankreich, Deutschland, Italien, Belgien, Luxemburg und die Niederlande.',
+      socialDescription: 'Sieben Länder, sieben Regelwerke. Die App berechnet die Uhrzeit für Ihre Parkscheibe und erinnert Sie vor Ablauf der Parkzeit.',
+      socialImageAlt: 'Die blaue Scheibe der App mit Fenster und Pfeil und dem Namen Disque Bleu',
       locale: 'de_CH',
     },
     accessibility: {
       skip: 'Zum Inhalt springen',
       home: 'Disque Bleu, zurück nach oben',
       sections: 'Bereiche',
-      windshield: 'Frontansicht eines Autos mit einer Parkscheibe hinter der Windschutzscheibe',
+      chapters: 'Schritte der Einführung',
+      windshield: 'Eine Parkscheibe hinter der Windschutzscheibe eines Autos',
     },
-    language: { label: 'Sprache' },
-    nav: { features: 'Funktionen', countries: 'Länder' },
-    hero: { title: 'Entspannt<br>parken.' },
-    calculate: {
-      title: 'Kein<br>Nachrechnen.',
-      arrivalLabel: 'Ankunftszeit',
-      example: 'Ankunft 08:47 Uhr, Parkzeit bis',
+    language: {
+      label: 'Sprache',
     },
-    alert: {
-      title: 'Keine<br>Bussen mehr.',
-      text: 'Sie erhalten vor Ablauf Ihrer Parkzeit eine Erinnerung. So geht die Parkscheibe nicht mehr vergessen!',
+    nav: {
+      features: 'Funktionen',
+      countries: 'Länder',
+      download: 'Laden',
+    },
+    intro: {
+      next: 'Weiter',
+      chapters: [
+        {
+          title: 'Willkommen bei Disque Bleu',
+          text: 'Die App, die Ihnen sagt, auf welche Uhrzeit Sie Ihre Parkscheibe stellen, in der Schweiz und in sechs weiteren Ländern Europas.',
+        },
+        {
+          title: 'Stellen Sie Ihre Parkscheibe ein',
+          text: 'Die App berechnet die Uhrzeit für Ihre Parkscheibe. Sie zeigt Ihnen auch, bis wann Sie parken dürfen.',
+        },
+        {
+          title: 'Lassen Sie sich vor Ablauf erinnern',
+          text: 'Einige Minuten vor Ende Ihrer Parkzeit erinnert Sie eine Mitteilung. Die Vorlaufzeit wählen Sie in den Einstellungen.',
+        },
+        {
+          title: 'Finden Sie einen Parkplatz in der blauen Zone',
+          text: 'Die Karte zeigt Parkplätze in der blauen Zone in Ihrer Nähe oder in einer anderen Stadt. Sie zeigt auch, wo Ihr Auto steht.',
+        },
+      ],
+    },
+    countries: {
+      title: 'Sieben Länder, eine App.',
+      text: 'Die Regeln für die Parkscheibe sind in jedem Land anders: Parkdauer, Uhrzeiten und Feiertage. Die App wendet die Regeln des gewählten Landes an.',
+      items: [
+        {
+          name: 'Schweiz',
+          rule: '1 Std. · Aufrunden auf die nächste halbe Stunde',
+        },
+        {
+          name: 'Frankreich',
+          rule: '1 Std. 30 · Aufrunden auf die nächste halbe Stunde',
+        },
+        {
+          name: 'Deutschland',
+          rule: '2 Std. · Aufrunden auf die nächste halbe Stunde',
+        },
+        {
+          name: 'Italien',
+          rule: 'Dauer laut Schild · tatsächliche Ankunftszeit',
+        },
+        {
+          name: 'Belgien',
+          rule: 'Standardmässig 2 Std. · Aufrunden auf die nächste halbe Stunde',
+        },
+        {
+          name: 'Luxemburg',
+          rule: 'Dauer laut Schild · Aufrunden auf die nächste halbe Stunde',
+        },
+        {
+          name: 'Niederlande',
+          rule: 'Dauer laut Schild · Aufrunden auf die nächste volle oder halbe Stunde',
+        },
+      ],
     },
     features: {
       title: 'Funktionen',
@@ -438,11 +608,37 @@ export const TRANSLATIONS = {
           link: 'Mitwirkenden von OpenStreetMap',
           afterLink: 'weitergeleitet und kommt allen zugute.',
         },
+        {
+          title: 'Tablets und Faltgeräte',
+          version: 'Seit 3.0.0',
+          text: 'Auf Tablets und faltbaren Smartphones zeigt die App zwei Bereiche nebeneinander.',
+        },
+      ],
+    },
+    notice: {
+      title: 'Die App ersetzt die physische Parkscheibe nicht.',
+      text: 'Sie dient als Fahrhilfe. Die offizielle Parkscheibe muss weiterhin hinter der Windschutzscheibe angebracht und von aussen gut sichtbar sein.',
+    },
+    press: {
+      title: 'Bekannt aus',
+      action: 'Artikel lesen ↗',
+      sources: [
+        'Artikel im Journal du Jura lesen',
+        'Artikel bei ArcInfo lesen',
+        'Artikel bei Watson lesen',
+        'Artikel im Nouvelliste lesen',
+        'Artikel von La Côte lesen',
+        'Artikel bei ajour lesen',
       ],
     },
     changelog: {
+      title: 'Neuerungen',
       action: 'Vollständiges Änderungsprotokoll anzeigen',
       versions: [
+        {
+          title: 'Niederlande und grosse Bildschirme',
+          text: 'Unterstützung für die Niederlande hinzugefügt. Optimierte Oberfläche für faltbare Android-Smartphones und Tablets, mit einem Zwei-Spalten-Layout auf grossen Bildschirmen. Verbesserte Berechnung der Parkzeiten.',
+        },
         {
           title: 'Korrigierte Benachrichtigungen unter Android',
           text: 'Die Anzeige der Benachrichtigungen unter Android wurde korrigiert: Die Erinnerung vor Ablauf erschien nicht auf allen Geräten.',
@@ -497,27 +693,6 @@ export const TRANSLATIONS = {
         },
       ],
     },
-    countries: {
-      title: 'Sechs Länder,<br>eine App.',
-      text: 'Zeiten, Rundungen und Feiertage passen sich automatisch an das ausgewählte Land an.',
-      names: ['Schweiz', 'Frankreich', 'Deutschland', 'Italien', 'Belgien', 'Luxemburg'],
-    },
-    notice: {
-      title: 'Die App ersetzt die physische Parkscheibe nicht.',
-      text: 'Sie dient als Fahrhilfe. Die offizielle Parkscheibe muss weiterhin hinter der Windschutzscheibe angebracht und von aussen gut sichtbar sein.',
-    },
-    press: {
-      title: 'Bekannt aus',
-      action: 'Artikel lesen ↗',
-      sources: [
-        'Artikel im Journal du Jura lesen',
-        'Artikel bei ArcInfo lesen',
-        'Artikel bei Watson lesen',
-        'Artikel im Nouvelliste lesen',
-        'Artikel von La Côte lesen',
-        'Artikel bei ajour lesen',
-      ],
-    },
     install: {
       title: 'So einfach.',
       text: 'Die App kostet 3 CHF. Eine Busse mindestens 40.',
@@ -539,28 +714,80 @@ export const TRANSLATIONS = {
   it: {
     meta: {
       title: "Disque Bleu, l'app del disco orario per la zona blu",
-      description: "Calcola l'ora da impostare sul disco orario e ricevi un avviso prima della scadenza. Svizzera, Francia, Germania, Italia, Belgio e Lussemburgo.",
-      socialDescription: "Sei paesi, sei regolamenti, un solo pulsante. L'app calcola l'ora da impostare sul disco e ti avvisa prima della scadenza.",
-      socialImageAlt: "Un disco orario blu davanti a un cielo, con il nome Disque Bleu",
+      description: "Disque Bleu calcola l'ora da impostare sul disco orario in zona blu e ti avvisa prima della scadenza. Svizzera, Francia, Germania, Italia, Belgio, Lussemburgo e Paesi Bassi.",
+      socialDescription: "Sette paesi, sette regolamenti. L'app calcola l'ora da impostare sul disco e ti avvisa prima della scadenza.",
+      socialImageAlt: "Il disco blu dell'app, con la finestra e la freccia, e il nome Disque Bleu",
       locale: 'it_CH',
     },
     accessibility: {
       skip: 'Vai al contenuto',
       home: "Disque Bleu, torna all'inizio",
       sections: 'Sezioni',
-      windshield: "Vista frontale di un'auto con un disco orario posizionato dietro il parabrezza",
+      chapters: 'Passaggi della presentazione',
+      windshield: "Un disco orario posizionato dietro il parabrezza di un'auto",
     },
-    language: { label: 'Lingua' },
-    nav: { features: 'Funzioni', countries: 'Paesi' },
-    hero: { title: 'Parcheggia<br>senza pensieri.' },
-    calculate: {
-      title: 'Niente più<br>calcoli.',
-      arrivalLabel: "Ora d'arrivo",
-      example: 'Arrivo alle 08:47, sosta consentita fino alle',
+    language: {
+      label: 'Lingua',
     },
-    alert: {
-      title: 'Niente più<br>multe.',
-      text: 'Ricevi un avviso prima della scadenza del disco orario. Impossibile dimenticarsene!',
+    nav: {
+      features: 'Funzioni',
+      countries: 'Paesi',
+      download: 'Scarica',
+    },
+    intro: {
+      next: 'Continua',
+      chapters: [
+        {
+          title: 'Benvenuto su Disque Bleu',
+          text: "L'app che ti dice su che ora regolare il disco orario, in Svizzera e in altri sei paesi europei.",
+        },
+        {
+          title: 'Regola il tuo disco',
+          text: "L'app calcola l'ora da impostare sul disco. Ti dice anche fino a quando puoi restare.",
+        },
+        {
+          title: 'Ricevi un promemoria prima della scadenza',
+          text: "Una notifica ti avvisa qualche minuto prima della fine della sosta. Puoi scegliere l'anticipo nelle impostazioni.",
+        },
+        {
+          title: 'Trova un parcheggio in zona blu',
+          text: "La mappa mostra i parcheggi in zona blu vicino a te o in un'altra città. Mostra anche dove hai parcheggiato l'auto.",
+        },
+      ],
+    },
+    countries: {
+      title: "Sette paesi, un'unica app.",
+      text: "Le regole del disco orario cambiano da un paese all'altro: durata, orari e giorni festivi. L'app applica quelle del paese scelto.",
+      items: [
+        {
+          name: 'Svizzera',
+          rule: "1 ora · arrotondamento alla mezz'ora successiva",
+        },
+        {
+          name: 'Francia',
+          rule: "1 ora e 30 · arrotondamento alla mezz'ora successiva",
+        },
+        {
+          name: 'Germania',
+          rule: "2 ore · arrotondamento alla mezz'ora successiva",
+        },
+        {
+          name: 'Italia',
+          rule: 'Durata del cartello · ora effettiva di arrivo',
+        },
+        {
+          name: 'Belgio',
+          rule: "2 ore di base · arrotondamento alla mezz'ora successiva",
+        },
+        {
+          name: 'Lussemburgo',
+          rule: "Durata del cartello · arrotondamento alla mezz'ora successiva",
+        },
+        {
+          name: 'Paesi Bassi',
+          rule: "Durata del cartello · arrotondamento all'ora o alla mezz'ora successiva",
+        },
+      ],
     },
     features: {
       title: 'Funzionalità',
@@ -612,18 +839,44 @@ export const TRANSLATIONS = {
           link: 'collaboratori di OpenStreetMap',
           afterLink: 'e va a beneficio di tutti.',
         },
+        {
+          title: 'Tablet e pieghevoli',
+          version: 'Dalla 3.0.0',
+          text: "Su tablet e smartphone pieghevoli l'app mostra due pannelli affiancati.",
+        },
+      ],
+    },
+    notice: {
+      title: "L'app non sostituisce il disco orario fisico.",
+      text: "È un ausilio per il conducente. Il disco ufficiale deve restare esposto dietro il parabrezza e visibile dall'esterno.",
+    },
+    press: {
+      title: 'Hanno parlato di noi',
+      action: "Leggi l'articolo ↗",
+      sources: [
+        "Leggi l'articolo del Journal du Jura",
+        "Leggi l'articolo di ArcInfo",
+        "Leggi l'articolo di Watson",
+        "Leggi l'articolo del Nouvelliste",
+        "Leggi l'articolo pubblicato da La Côte",
+        "Leggi l'articolo di ajour",
       ],
     },
     changelog: {
+      title: 'Novità',
       action: 'Mostra il changelog completo',
       versions: [
+        {
+          title: 'Paesi Bassi e schermi grandi',
+          text: 'Aggiunto il supporto per i Paesi Bassi. Interfaccia ottimizzata per smartphone Android pieghevoli e tablet, con un layout a due pannelli sugli schermi di grandi dimensioni. Miglioramento del calcolo degli orari di parcheggio.',
+        },
         {
           title: 'Notifiche corrette su Android',
           text: "Corretta la visualizzazione delle notifiche su Android: l'avviso prima della scadenza non compariva su tutti i dispositivi.",
         },
         {
           title: 'Italia, Belgio, Lussemburgo, mappa della comunità e Il mio veicolo',
-          text: "Aggiunti Italia, Belgio e Lussemburgo, con le rispettive regole di parcheggio e i giorni festivi. Aggiunta la mappa della comunità per segnalare o proporre un posto destinato a OpenStreetMap. «Il mio veicolo» consente ora di aggiungere una foto di riferimento, il piano, il numero del posto e una nota, conservati sul dispositivo.",
+          text: 'Aggiunti Italia, Belgio e Lussemburgo, con le rispettive regole di parcheggio e i giorni festivi. Aggiunta la mappa della comunità per segnalare o proporre un posto destinato a OpenStreetMap. «Il mio veicolo» consente ora di aggiungere una foto di riferimento, il piano, il numero del posto e una nota, conservati sul dispositivo.',
         },
         {
           title: 'Correzioni dei giorni festivi',
@@ -669,27 +922,6 @@ export const TRANSLATIONS = {
           title: 'Prima versione',
           text: 'Calcolo delle regole svizzere, conto alla rovescia, avvisi, quattro lingue, cantoni e giorni festivi, memorizzazione della posizione del veicolo e ricerca delle zone blu nelle vicinanze.',
         },
-      ],
-    },
-    countries: {
-      title: "Sei paesi,<br>un'unica app.",
-      text: 'Orari, arrotondamenti e giorni festivi si adattano automaticamente al paese selezionato.',
-      names: ['Svizzera', 'Francia', 'Germania', 'Italia', 'Belgio', 'Lussemburgo'],
-    },
-    notice: {
-      title: "L'app non sostituisce il disco orario fisico.",
-      text: "È un ausilio per il conducente. Il disco ufficiale deve restare esposto dietro il parabrezza e visibile dall'esterno.",
-    },
-    press: {
-      title: 'Hanno parlato di noi',
-      action: "Leggi l'articolo ↗",
-      sources: [
-        "Leggi l'articolo del Journal du Jura",
-        "Leggi l'articolo di ArcInfo",
-        "Leggi l'articolo di Watson",
-        "Leggi l'articolo del Nouvelliste",
-        "Leggi l'articolo pubblicato da La Côte",
-        "Leggi l'articolo di ajour",
       ],
     },
     install: {
@@ -814,8 +1046,9 @@ export function setLanguage(language, options = {}) {
   setTranslatedText(next);
   applyLanguageMetadata(next);
 
-  const select = document.getElementById('language-select');
-  if (select) select.value = next;
+  document.querySelectorAll('[data-lang]').forEach((button) => {
+    button.setAttribute('aria-pressed', String(button.dataset.lang === next));
+  });
 
   if (options.persist !== false) {
     try {
@@ -831,11 +1064,9 @@ export function setLanguage(language, options = {}) {
 }
 
 export function initI18n() {
-  const select = document.getElementById('language-select');
-  if (select && !select.dataset.i18nBound) {
-    select.dataset.i18nBound = 'true';
-    select.addEventListener('change', (event) => setLanguage(event.target.value));
-  }
+  document.querySelectorAll('[data-lang]').forEach((button) => {
+    button.addEventListener('click', () => setLanguage(button.dataset.lang));
+  });
 
   window.addEventListener('popstate', () => {
     const query = new URLSearchParams(window.location.search).get('lang');

@@ -16,12 +16,15 @@ de raison d'en ajouter une pour couper des lignes de pixels.
 """
 
 import argparse
+import functools
+import http.server
 import pathlib
 import shutil
 import struct
 import subprocess
 import sys
 import tempfile
+import threading
 import zlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -166,16 +169,33 @@ def main() -> int:
     args = parser.parse_args()
 
     browser = find_chromium(args.chromium)
-    with tempfile.TemporaryDirectory() as work:
-        shot = pathlib.Path(work) / "shot.png"
-        subprocess.run(
-            [browser, "--headless", "--disable-gpu", "--no-sandbox", "--hide-scrollbars",
-             "--force-device-scale-factor=1",
-             f"--window-size={WIDTH},{HEIGHT + CHROME_HEIGHT}",
-             f"--screenshot={shot}", TEMPLATE.as_uri()],
-            check=True, capture_output=True,
-        )
-        width, height, step, rows = read_png(shot.read_bytes())
+
+    # Le gabarit importe disc.js, un module : Chromium les refuse en file://.
+    # Le dépôt est donc servi le temps de la capture.
+    class Quiet(http.server.SimpleHTTPRequestHandler):
+        def log_message(self, *_):
+            pass
+
+    handler = functools.partial(Quiet, directory=str(ROOT))
+    server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), handler)
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    url = f"http://127.0.0.1:{server.server_address[1]}/{TEMPLATE.relative_to(ROOT).as_posix()}"
+
+    try:
+        with tempfile.TemporaryDirectory() as work:
+            shot = pathlib.Path(work) / "shot.png"
+            subprocess.run(
+                [browser, "--headless", "--disable-gpu", "--no-sandbox", "--hide-scrollbars",
+                 "--force-device-scale-factor=1",
+                 # Laisse le module attendre la police et peindre.
+                 "--virtual-time-budget=8000",
+                 f"--window-size={WIDTH},{HEIGHT + CHROME_HEIGHT}",
+                 f"--screenshot={shot}", url],
+                check=True, capture_output=True,
+            )
+            width, height, step, rows = read_png(shot.read_bytes())
+    finally:
+        server.shutdown()
 
     if width != WIDTH or height < HEIGHT:
         raise SystemExit(f"capture inattendue : {width} × {height}")

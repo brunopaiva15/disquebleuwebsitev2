@@ -29,6 +29,14 @@ const htmlKeys = new Set(
     .map((match) => match[1]),
 );
 
+const count = (pattern) => (html.match(pattern) || []).length;
+const counts = {
+  chapters: count(/class="chapter" data-chapter=/g),
+  countries: count(/class="country" /g),
+  features: count(/class="feature" /g),
+  versions: count(/data-version-row /g),
+};
+
 const reference = new Set(leafPaths(TRANSLATIONS.fr));
 SUPPORTED_LANGUAGES.forEach((language) => {
   const catalog = TRANSLATIONS[language];
@@ -50,19 +58,24 @@ SUPPORTED_LANGUAGES.forEach((language) => {
     }
   });
 
-  if (catalog.features.items.length !== 9) {
-    errors.push(`${language}: 9 fonctionnalités attendues`);
-  }
-  if (catalog.changelog.versions.length !== 13) {
-    errors.push(`${language}: 13 versions attendues`);
-  }
-  if (catalog.countries.names.length !== 6) {
-    errors.push(`${language}: 6 pays attendus`);
-  }
+  // Les listes ont autant d'entrées que la page a de lignes pour elles.
+  [
+    ['intro.chapters', counts.chapters],
+    ['countries.items', counts.countries],
+    ['features.items', counts.features],
+    ['changelog.versions', counts.versions],
+  ].forEach(([path, expected]) => {
+    const length = lookup(catalog, path)?.length;
+    if (length !== expected) {
+      errors.push(`${language}: ${path} compte ${length} entrées, la page ${expected}`);
+    }
+  });
 });
 
 const dateCount = (html.match(/data-i18n-date/g) || []).length;
-if (dateCount !== 13) errors.push(`${dateCount} dates localisées au lieu de 13`);
+if (dateCount !== counts.versions) {
+  errors.push(`${dateCount} dates localisées pour ${counts.versions} versions`);
+}
 
 if (errors.length) {
   console.error('Traductions incomplètes :');
@@ -70,4 +83,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`${SUPPORTED_LANGUAGES.length} langues, ${htmlKeys.size} clés HTML et 13 dates vérifiées.`);
+console.log(`${SUPPORTED_LANGUAGES.length} langues, ${htmlKeys.size} clés HTML, ${counts.versions} versions et leurs dates vérifiées.`);

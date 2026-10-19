@@ -1,13 +1,13 @@
 {
   "name": "Disque Bleu",
   "short_name": "Disque Bleu",
-  "description": "Aide au stationnement à durée limitée en Suisse, France, Allemagne, Italie, Belgique et Luxembourg.",
+  "description": "Aide au stationnement à durée limitée en Suisse, France, Allemagne, Italie, Belgique, Luxembourg et aux Pays-Bas.",
   "lang": "fr",
   "start_url": "./",
   "scope": "./",
   "display": "browser",
-  "background_color": "#0b60c4",
-  "theme_color": "#0b60c4",
+  "background_color": "#1565c0",
+  "theme_color": "#1565c0",
   "icons": [
     {
       "src": "assets/img/app-icon-180.png",

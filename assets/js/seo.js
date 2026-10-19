@@ -24,12 +24,12 @@ export const STORES = {
 };
 
 /** Version publiée, reprise en tête de l'historique dans index.html. */
-export const APP_VERSION = '2.1.3';
-export const APP_RELEASE_DATE = '2026-08-26';
+export const APP_VERSION = '3.0.0';
+export const APP_RELEASE_DATE = '2026-10-16';
 export const APP_FIRST_RELEASE = '2025-12-15';
 
 /** Pays couverts, en codes ISO : la même liste que la section « Pays ». */
-export const COUNTRIES = ['CH', 'FR', 'DE', 'IT', 'BE', 'LU'];
+export const COUNTRIES = ['CH', 'FR', 'DE', 'IT', 'BE', 'LU', 'NL'];
 
 /** Le français est servi à l'adresse nue ; les autres portent `?lang=`. */
 export function languageUrl(language) {

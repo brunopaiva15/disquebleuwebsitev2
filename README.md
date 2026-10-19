@@ -4,10 +4,10 @@ En ligne : https://disquebleusuisse.ch/
 
 Site vitrine de l'application [Disque Bleu](https://github.com/brunopaiva15/disquebleu),
 l'aide au stationnement à durée limitée en Suisse, France, Allemagne, Italie,
-Belgique et Luxembourg.
+Belgique, Luxembourg et aux Pays-Bas.
 
-Site statique, sans étape de compilation. Ouvrir `index.html` suffit, ou servir
-la racine :
+Site statique, sans étape de compilation. Les scripts sont des modules, que les
+navigateurs refusent d'ouvrir depuis le disque : il faut servir la racine.
 
 ```bash
 python3 -m http.server 8000
@@ -20,11 +20,11 @@ index.html                      la page
 robots.txt, sitemap.xml         ce que lisent les robots
 site.webmanifest                nom et icônes de l'application web
 assets/css/app.css              feuille de style unique
-assets/js/scene.js              la scène WebGL (ciel tramé, disque en volume)
-assets/js/dial.js               le cadran des heures, peint dans un canvas
+assets/js/disc.js               le couvercle : fenêtre, cadran, plan, dessinés en canvas
+assets/js/cover.js              la présentation : chapitres, défilement, étiquettes
 assets/js/i18n.js               les textes français, anglais, allemands et italiens
 assets/js/seo.js                adresses, fiches des magasins, données structurées
-assets/js/app.js                caméra au scroll, apparitions, horloge
+assets/js/app.js                mise en route, barre du haut, apparitions
 tools/check-assets.py           contrôle des fichiers référencés
 tools/check-i18n.mjs            contrôle la parité entre les quatre langues
 tools/check-structured-data.mjs contrôle le JSON-LD, les alternates et le sitemap
@@ -32,36 +32,41 @@ tools/og-cover.html             gabarit de l'image de partage
 tools/make-og-cover.py          rend cette image en 1200 × 630
 ```
 
-La langue suit le choix enregistré ou celle du navigateur. Elle peut être
-changée depuis le bandeau ; le paramètre `?lang=fr|en|de|it` permet de partager
-directement une version linguistique.
+La langue suit le choix enregistré ou celle du navigateur. Elle se change
+depuis la barre du haut (FR DE IT EN) ; le paramètre `?lang=fr|en|de|it`
+permet de partager directement une version linguistique.
 
-## Le disque
+## Le principe
 
-Le fond n'est pas une vidéo mais une scène WebGL calculée à chaque image. Un
-seul fragment shader dessine le ciel et intersecte la fenêtre en croissant du
-disque, sans maillage : la forme reste nette à toute résolution et rien de
-lourd n'est téléchargé.
+Le site est l'onboarding de l'application en grand, et en reprend tout :
+couleurs, tailles, arrondis et textes.
 
-La géométrie n'est pas inventée. Elle décalque `_CoverPainter` et
-`_HoursPainter` de `lib/widgets/parking_disc_painter.dart` dans le dépôt de
-l'application :
+- **Le couvercle.** Tout l'écran est le disque bleu, percé de sa fenêtre en
+  croissant. Le défilement remplace le doigt : un écran de défilement par
+  chapitre (accueil, réglage, rappel, plan), et la position entre deux
+  chapitres mélange leurs états, comme `_along` entre deux pages de l'app.
+- **La feuille.** À la fin de la présentation, une feuille claire aux coins
+  arrondis monte sur le disque, comme les pages de réglage de l'onboarding.
+  Elle porte les pays, les fonctions, l'avertissement, la presse, les
+  nouveautés et l'invitation à installer.
 
-- arc intérieur de la fenêtre au rayon 0.42 R, ouvert de ±46° autour de l'axe
-- bord extérieur donné par le cercle blanc du disque, rayon R
-- côtés droits, de TVL vers BVL et de TVR vers BVR
-- graduations de 0.52 R à 0.42 R, heures 1 à 12 au rayon 0.69 R, heures 13 à 24
-  au rayon 0.87 R
+Les sources dans le dépôt de l'application :
 
-Si le disque change dans l'application, ce sont ces valeurs qu'il faut reprendre,
-dans `dial.js` pour l'impression et dans le shader de `scene.js` pour la découpe.
+- `lib/screens/onboarding/onboarding_objects.dart` : `CoverGeometry` et
+  `_CoverPainter` (fenêtre, ombre, cadran, plan, flèche), `TimeTag` ;
+- `lib/screens/onboarding/onboarding_style.dart` : les couleurs, en clair et
+  en sombre ;
+- `lib/screens/onboarding_screen.dart` : les mises en page portrait et
+  paysage, l'animation du disque entre les pages ;
+- `lib/l10n/app_strings.dart` : les textes des quatre chapitres, repris mot
+  pour mot.
 
-Le ciel et les nuages passent par une trame ordonnée de Bayer 8×8. Les nuages
-deviennent des amas de points plutôt que des dégradés lisses, ce qui évite aussi
-les cassures de dégradé sur les grands aplats bleus.
+Si l'onboarding change dans l'app, ce sont `disc.js`, `cover.js` et les jetons
+en tête de `app.css` qu'il faut reprendre.
 
-Quand WebGL n'est pas disponible, le canvas garde son dégradé CSS et la page
-reste entièrement lisible.
+Sans JavaScript, la présentation s'affiche en texte sur le bleu, chapitre par
+chapitre. Avec « Réduire les animations », le disque n'arrive pas en tournant,
+les titres ne se lèvent pas et la photo de l'avertissement reste fixe.
 
 ## Liens de téléchargement
 
