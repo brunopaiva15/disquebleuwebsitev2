@@ -355,6 +355,9 @@ ul { list-style: none; }
   height: 1px;
   top: calc(var(--i) * 100svh);
   scroll-snap-align: start;
+  /* Annule la réserve de la barre (scroll-padding-top) : un chapitre se pose
+     sur son écran entier, sans quoi le défilement s'arrête 76 px trop tôt. */
+  scroll-margin-top: calc(-1 * (var(--bar) + 12px));
 }
 
 .js .cover__frame {
