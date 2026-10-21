@@ -233,7 +233,7 @@ export const TRANSLATIONS = {
     },
     install: {
       title: 'Tout simplement.',
-      text: "L'app coûte 3 CHF. Une amende, au moins 40.",
+      text: "L'app coûte 1 CHF. Une amende, au moins 40.",
     },
     footer: {
       description: 'Aide au stationnement à durée limitée.',
@@ -464,7 +464,7 @@ export const TRANSLATIONS = {
     },
     install: {
       title: 'Simple as that.',
-      text: 'The app costs CHF 3. A fine, at least CHF 40.',
+      text: 'The app costs CHF 1. A fine, at least CHF 40.',
     },
     footer: {
       description: 'Assistance for time-limited parking.',
@@ -695,7 +695,7 @@ export const TRANSLATIONS = {
     },
     install: {
       title: 'So einfach.',
-      text: 'Die App kostet 3 CHF. Eine Busse mindestens 40.',
+      text: 'Die App kostet 1 CHF. Eine Busse mindestens 40.',
     },
     footer: {
       description: 'Hilfe beim zeitlich begrenzten Parkieren.',
@@ -926,7 +926,7 @@ export const TRANSLATIONS = {
     },
     install: {
       title: 'Semplicemente.',
-      text: "L'app costa 3 CHF. Una multa, almeno 40.",
+      text: "L'app costa 1 CHF. Una multa, almeno 40.",
     },
     footer: {
       description: 'Assistenza per il parcheggio a tempo limitato.',

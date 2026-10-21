@@ -104,7 +104,7 @@ export function buildStructuredData(language, catalog, languages) {
         publisher: { '@id': publisher },
         offers: {
           '@type': 'Offer',
-          price: '3.00',
+          price: '1.00',
           priceCurrency: 'CHF',
           availability: 'https://schema.org/InStock',
           url: SITE_URL,
